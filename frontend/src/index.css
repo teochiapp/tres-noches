@@ -1,5 +1,5 @@
 :root {
-  --primary: #6366f1;
+  --primary: #EF511D;
   --primary-dark: #4f46e5;
   --secondary: #ec4899;
   --bg-dark: #0f172a;
@@ -34,7 +34,12 @@ code {
     monospace;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
 }
@@ -51,4 +56,3 @@ button {
   background: none;
   font-family: inherit;
 }
-
