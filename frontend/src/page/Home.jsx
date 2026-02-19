@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Hero from '../components/home/Hero';
 import About from '../components/home/About';
+import ParallaxSection from '../components/home/ParallaxSection';
 import Header from '../components/common/header';
 import Footer from '../components/common/footer';
 
@@ -16,6 +17,7 @@ const Home = () => {
             <Header />
             <Hero />
             <About />
+            <ParallaxSection />
             <Footer />
         </HomeContainer>
     );

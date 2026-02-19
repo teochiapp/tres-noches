@@ -1,9 +1,9 @@
 :root {
   --primary: #EF511D;
-  --primary-dark: #4f46e5;
+  --primary-dark: #EF511D;
   --secondary: #ec4899;
-  --bg-dark: #0f172a;
-  --bg-darker: #020617;
+  --bg-dark: #0F0F0F;
+  --bg-darker: #0F0F0F;
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --glass: rgba(255, 255, 255, 0.03);
@@ -21,7 +21,7 @@
 body {
   margin: 0;
   font-family: var(--font-main);
-  background-color: var(--bg-darker);
+  background-color: var(--bg-dark);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
