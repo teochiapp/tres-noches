@@ -1,101 +1,177 @@
-import React from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import styled from "styled-components";
+import { Parallax } from 'react-scroll-parallax';
 
-const AboutSection = styled.section`
-  padding: 100px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 40px;
-  }
-`;
-
-const Content = styled.div`
+// Container principal
+const Section = styled.section`
+  background-color: var(--bg-darker);
+  color: var(--text-primary);
+  padding: 6rem 4rem;
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-`;
-
-const Tag = styled.span`
-  color: var(--primary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.875rem;
-`;
-
-const Title = styled.h2`
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1.2;
-`;
-
-const Text = styled.p`
-  color: var(--text-secondary);
-  font-size: 1.125rem;
-  line-height: 1.7;
-`;
-
-const ImageContainer = styled(motion.div)`
+  justify-content: space-between;
   position: relative;
-  border-radius: 24px;
   overflow: hidden;
-  aspect-ratio: 4/5;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.8;
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    padding: 4rem 2rem;
+    min-height: auto;
+    gap: 4rem;
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    padding: 3rem 1.5rem;
+    gap: 3rem;
   }
 `;
 
-const About = () => {
-    return (
-        <AboutSection id="about">
-            <ImageContainer
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-            >
-                {/* Usar un placeholder o generar imagen luego */}
-                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)' }}>
-                    [Imagen de Empresa]
-                </div>
-            </ImageContainer>
+// Texto principal grande
+const Headline = styled.h1`
+  font-family: var(--font-main);
+  font-size: 3.1vw;
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1em;
+  letter-spacing: 0px;
+  max-width: 50%;
+  margin: 0;
+  color: #ffffff; /* Blanco puro para contraste máximo como en la imagen */
 
-            <Content>
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <Tag>Nosotros</Tag>
-                    <Title>Pasión por la perfección digital</Title>
-                    <Text>
-                        En Tres Noches, no solo creamos sitios web; construimos experiencias que
-                        conectan marcas con personas. Nuestro enfoque combina diseño de vanguardia
-                        con una ejecución técnica impecable.
-                    </Text>
-                    <Text>
-                        Creemos en la simplicidad, la velocidad y el impacto visual como pilares
-                        fundamentales de cualquier éxito digital.
-                    </Text>
-                </motion.div>
-            </Content>
-        </AboutSection>
-    );
-};
+  /* Tablet */
+  @media (max-width: 1024px) {
+    font-size: 4rem;
+    max-width: 100%;
+  }
 
-export default About;
+  /* Mobile */
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+    line-height: 1;
+  }
+`;
+
+// Contenedor inferior (About, Textos, Link)
+const BottomContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 4rem;
+
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+`;
+
+// Etiqueta "ABOUT" a la izquierda
+const Label = styled.span`
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  align-self: flex-start; /* Se mantiene arriba en el bloque inferior */
+`;
+
+// Contenedor de la derecha con los párrafos y el link
+const ContentRight = styled.div`
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    max-width: 80%;
+    margin-left: auto; /* Alinear a la derecha en tablet si se desea, o resetear */
+  }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    margin-left: 0;
+  }
+`;
+
+const Paragraph = styled.p`
+  font-family: 'Courier New', Courier, monospace; /* Monospace para ese look técnico de la imagen */
+  font-size: 18px;
+  line-height: 1.2em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0px;
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+  }
+`;
+
+const ActionLink = styled.a`
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 1rem;
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+`;
+
+// Wrapper para el contenido derecho para asegurar que el Parallax no rompa el layout
+const ParallaxRightWrapper = styled.div`
+    width: 45%;
+    
+    @media (max-width: 1024px) {
+        width: 80%;
+        margin-left: auto;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+        margin-left: 0;
+    }
+`;
+
+export default function AboutUS() {
+  return (
+    <Section>
+      <Parallax speed={-5}>
+        <Headline>
+          SOMOS UNA PRODUCTORA QUE TRANSFORMA NARRATIVAS EN PROYECTOS DE IMPACTO TERRITORIAL
+        </Headline>
+      </Parallax>
+
+      <BottomContainer>
+        <Label>About</Label>
+
+        {/* Usamos un wrapper personalizado para manejar el ancho del Parallax en flexbox */}
+        <ParallaxRightWrapper as={Parallax} speed={5}>
+          <ContentRight style={{ maxWidth: '100%' }}>
+            <Paragraph>
+              Cada película que hacemos abre la puerta a proyectos más grandes. Documentales que se convierten en infraestructura cultural.
+            </Paragraph>
+            <Paragraph>
+              Narrativas que movilizan a toda una comunidad. Historias que construyen futuro. Producimos contenido, experiencias y cambio real.
+            </Paragraph>
+
+            <ActionLink href="#">
+              Get in touch
+            </ActionLink>
+          </ContentRight>
+        </ParallaxRightWrapper>
+      </BottomContainer>
+    </Section>
+  );
+}
