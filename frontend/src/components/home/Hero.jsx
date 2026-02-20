@@ -1,142 +1,138 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-
-const HeroSection = styled.section`
-  padding: 120px 20px 80px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: -10%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
-    z-index: -1;
-  }
-`;
-
-const Badge = styled(motion.span)`
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  padding: 8px 16px;
-  border-radius: 99px;
-  font-size: 0.875rem;
-  color: var(--primary);
-  margin-bottom: 24px;
-  display: inline-block;
-`;
-
-const Title = styled(motion.h1)`
-  font-size: clamp(3rem, 8vw, 5rem);
-  max-width: 900px;
-  margin-bottom: 24px;
-  background: linear-gradient(to right, #fff, #94a3b8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1.1;
-`;
-
-const Subtitle = styled(motion.p)`
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  max-width: 600px;
-  margin-bottom: 40px;
-`;
-
-const ButtonGroup = styled(motion.div)`
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-
-  @media (max-width: 640px) {
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-  }
-`;
-
-const PrimaryButton = styled.button`
-  background: var(--primary);
-  color: white;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: transform 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
-    background: var(--primary-dark);
-  }
-`;
-
-const SecondaryButton = styled.button`
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  color: white;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-weight: 600;
-
-  &:hover {
-    background: var(--glass-border);
-  }
-`;
+import { Parallax } from 'react-scroll-parallax';
+import SplitText from "../common/SplitText";
 
 const Hero = () => {
-    return (
-        <HeroSection>
-            <Badge
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-            >
-                Bienvenido a Tres Noches
-            </Badge>
 
-            <Title
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-            >
-                Construyendo el futuro digital de tu marca
-            </Title>
-
-            <Subtitle
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-            >
-                Desarrollo web de alto impacto, diseño premium y soluciones integrales
-                para potenciar tu presencia en el mundo digital.
-            </Subtitle>
-
-            <ButtonGroup
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-            >
-                <PrimaryButton>
-                    Empezar Proyecto <ArrowRight size={20} />
-                </PrimaryButton>
-                <SecondaryButton>
-                    Ver Portafolio
-                </SecondaryButton>
-            </ButtonGroup>
-        </HeroSection>
-    );
+  return (
+    <HeroSection>
+      <ContentSection>
+        <Parallax speed={-5} style={{ alignSelf: 'flex-start' }}>
+          <LeftText
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            Productora Audiovisual<br />
+            +<br />
+            Impacto
+          </LeftText>
+        </Parallax>
+        <Parallax speed={5} style={{ alignSelf: 'flex-start' }}>
+          <RightText
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <SplitText
+              text="EMPEZAMOS DOCUMENTANDO HISTORIAS, TERMINAMOS TRANSFORMANDO TERRITORIOS."
+              delay={30}
+              duration={1}
+              splitType="chars"
+              from={{ opacity: 0, y: 40 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              textAlign="left"
+            />
+          </RightText>
+        </Parallax>
+      </ContentSection>
+      <ImageSection
+        initial={{ opacity: 0, scale: 1.05 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2 }}
+      >
+        <Parallax speed={-10} style={{ width: '100%', height: '115%', marginTop: '-5%' }}>
+          <HeroImage
+            src="/content/hero-image.png"
+            alt="Carnival Expression"
+          />
+        </Parallax>
+        <ImageOverlay />
+      </ImageSection>
+    </HeroSection>
+  );
 };
 
 export default Hero;
+
+const HeroSection = styled.section`
+  background: black;
+  color: white;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+`;
+
+const ContentSection = styled.div`
+  display: grid;
+  grid-template-columns: 1.5fr 2.5fr;
+  align-items: flex-start;
+  height: auto;
+  min-height: 35vh;
+  padding: 200px 50px 0;
+  max-width: 1800px;
+  width: 100%;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 24px 32px;
+    gap: 32px;
+  }
+`;
+
+const LeftText = styled(motion.div)`
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.4;
+  color: #888;
+  letter-spacing: 0.05em;
+  text-transform: none;
+`;
+
+const RightText = styled(motion.h1)`
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+  max-width: 1200px;
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+  }
+`;
+
+const ImageSection = styled(motion.div)`
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin-top: 20px;
+  height: 64vh;
+`;
+
+const HeroImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1);
+  display: block;
+`;
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, black 0%, transparent 15%, transparent 85%, black 100%);
+  pointer-events: none;
+`;

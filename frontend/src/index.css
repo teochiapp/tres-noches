@@ -1,3 +1,35 @@
+@font-face {
+  font-family: 'Elza Thin';
+  src: url('./assets/fonts/fonnts.com-ElzaTrial-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza';
+  src: url('./assets/fonts/fonnts.com-ElzaTrial-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Semibold';
+  src: url('./assets/fonts/fonnts.com-ElzaTrial-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Bold';
+  src: url('./assets/fonts/fonnts.com-ElzaTrial-NarrowBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --primary: #EF511D;
   --primary-dark: #EF511D;
@@ -9,7 +41,10 @@
   --glass: rgba(255, 255, 255, 0.03);
   --glass-border: rgba(255, 255, 255, 0.08);
   --accent-gradient: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
-  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-main: 'Elza', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-bold: 'Elza Bold', 'Segoe UI Bold', 'Arial Bold', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-semibold: 'Elza Semibold', 'Segoe UI Semibold', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-thin: 'Elza Thin', 'Segoe UI Light', 'HelveticaNeue-Light', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 * {
