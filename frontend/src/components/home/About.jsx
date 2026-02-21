@@ -172,7 +172,7 @@ const Paragraph = styled.p`
   letter-spacing: 0px;
 
   @media (max-width: 768px) {
-    font-size: 0.7rem;
+    font-size: 1.1rem;
   }
 `;
 

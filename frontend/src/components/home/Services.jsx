@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { motion } from 'framer-motion';
 const categories = [
     {
         title: "PELÍCULAS",
@@ -15,22 +15,34 @@ const categories = [
     },
 ];
 
+
+const fadeRight = {
+    initial: { opacity: 0, x: 80 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.8, ease: "easeOut" }
+};
+
 export default function Services() {
     return (
         <Section>
+            <Label>Proyectos</Label>
 
-            <Content>
-                {categories.map((cat) => (
-                    <CategoryBlock key={cat.title}>
-                        <CategoryTitle>{cat.title}</CategoryTitle>
-                        <ItemList>
-                            {cat.items.map((item) => (
-                                <Item key={item}>{item}</Item>
-                            ))}
-                        </ItemList>
-                    </CategoryBlock>
-                ))}
+            <Content >
+                <motion.div {...fadeRight}>
+                    {categories.map((cat) => (
+                        <CategoryBlock key={cat.title}>
+                            <CategoryTitle>{cat.title}</CategoryTitle>
+                            <ItemList>
+                                {cat.items.map((item) => (
+                                    <Item key={item}>{item}</Item>
+                                ))}
+                            </ItemList>
+                        </CategoryBlock>
+                    ))}
+                </motion.div>
             </Content>
+
         </Section>
     );
 }
@@ -38,30 +50,61 @@ export default function Services() {
 /* ─── Styled Components ─────────────────────────────────────────── */
 
 const Section = styled.section`
-  background-color: #000;
-  min-height: 100vh;
-  padding: 3rem 4rem 6rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
+    background-color: #000;
+    min-height: 100vh;
+    padding: 3rem 4rem 6rem;
+    position: relative;
+    display: flex;
+
+  @media (max-width: 1440px) {
+    padding: 2.5rem 1.5rem 4rem;
+  }
+  @media (max-width: 768px) {
+    min-height: 80vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  @media (max-width: 425px) {
+    min-height: 50vh;
+  }
+`;
+const Label = styled.span`
+  font-family: var(--font-alt);
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: none;
+  margin-bottom: 3rem;
+  display: block;
 
   @media (max-width: 768px) {
-    padding: 2.5rem 1.5rem 4rem;
+   
+  font-size: 1.5rem;
   }
 `;
 
-
 const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  max-width: 680px;
-  margin: 0 auto;
-  width: 100%;
-  align-self: center;
-
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 680px;
+    margin: 0 auto;
+    width: 100%;
+    align-self: center;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 110px;
   @media (max-width: 768px) {
-    max-width: 100%;
+    padding-left: 0;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 235px;
+
   }
 `;
 
@@ -70,7 +113,7 @@ const CategoryBlock = styled.div`
 `;
 
 const CategoryTitle = styled.h2`
-  font-family: var(--font-bold);
+  font-family: var(--font-alt);
   font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 900;
   color: #fff;
@@ -86,12 +129,12 @@ const ItemList = styled.ul`
   margin: 0 0 0.6rem 0;
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 0.75rem;
 `;
 
 const Item = styled.li`
-  font-family: var(--font-main);
-  font-size: clamp(0.75rem, 1.4vw, 0.92rem);
+    font-family: var(--font-alt);
+  font-size: clamp(1rem, 1.5vw, 2.5rem);
   font-weight: 400;
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.75);
