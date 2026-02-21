@@ -5,9 +5,9 @@ import { Parallax } from 'react-scroll-parallax';
 const Section = styled.section`
   background-color: var(--bg-darker);
   color: var(--text-primary);
-  padding: 6rem 4rem;
+  padding: 200px 30px;
   width: 100%;
-  min-height: 100vh;
+  gap: 170px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -30,13 +30,13 @@ const Section = styled.section`
 
 // Texto principal grande
 const Headline = styled.h1`
-  font-family: var(--font-main);
-  font-size: 3.1vw;
+  font-family: var(--font-bold);
+  font-size: 96px;
   font-weight: 800;
   text-transform: uppercase;
-  line-height: 1em;
+  line-height: 80px;
   letter-spacing: 0px;
-  max-width: 50%;
+  max-width: 65%;
   margin: 0;
   color: #ffffff; /* Blanco puro para contraste máximo como en la imagen */
 
@@ -61,11 +61,18 @@ const BottomContainer = styled.div`
   width: 100%;
   margin-top: auto;
   padding-top: 4rem;
+  padding-right: 50px;
 
   @media (max-width: 1024px) {
     flex-direction: column;
     align-items: flex-start;
-    gap: 3rem;
+    gap: 2rem;
+    padding-right: 0;
+  }
+  @media (max-width: 425px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 `;
 
@@ -114,7 +121,7 @@ const Paragraph = styled.p`
 
 const ActionLink = styled.a`
   font-family: 'Courier New', Courier, monospace;
-  font-size: 0.8rem;
+  font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text-primary);
@@ -127,20 +134,19 @@ const ActionLink = styled.a`
     text-decoration: underline;
     text-underline-offset: 4px;
   }
+
+  @media (max-width: 425px) {
+    font-size: 18px;
+  }
 `;
 
 // Wrapper para el contenido derecho para asegurar que el Parallax no rompa el layout
 const ParallaxRightWrapper = styled.div`
-    width: 45%;
+    width: 60%;
+
     
     @media (max-width: 1024px) {
-        width: 80%;
-        margin-left: auto;
-    }
-
-    @media (max-width: 768px) {
         width: 100%;
-        margin-left: 0;
     }
 `;
 
@@ -149,12 +155,12 @@ export default function AboutUS() {
     <Section>
       <Parallax speed={-5}>
         <Headline>
-          SOMOS UNA PRODUCTORA QUE TRANSFORMA NARRATIVAS EN PROYECTOS DE IMPACTO TERRITORIAL
+          SOMOS UNA PRODUCTORA QUE TRANSFORMA NARRATIVAS EN PROYECTOS DE IMPACTO TERRITORIAL.
         </Headline>
       </Parallax>
 
       <BottomContainer>
-        <Label>About</Label>
+        <Label></Label>
 
         {/* Usamos un wrapper personalizado para manejar el ancho del Parallax en flexbox */}
         <ParallaxRightWrapper as={Parallax} speed={5}>
@@ -167,7 +173,7 @@ export default function AboutUS() {
             </Paragraph>
 
             <ActionLink href="#">
-              Get in touch
+              Hacemos que las cosas pasen.
             </ActionLink>
           </ContentRight>
         </ParallaxRightWrapper>
