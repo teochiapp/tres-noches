@@ -12,16 +12,19 @@ const HomeContainer = styled.div`
   min-height: 100vh;
 `;
 
+const fadeIn = {
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.8, ease: "easeOut" }
+};
+
 const Home = () => {
     return (
         <HomeContainer>
             <Header />
             <Hero />
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-            >
+            <motion.div {...fadeIn}>
                 <About />
             </motion.div>
             <ParallaxSection />

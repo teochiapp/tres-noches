@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, {
     stiffness: 100,
@@ -19,16 +19,20 @@ const Header = () => {
   const logoFontSize = useTransform(
     smoothScrollY,
     [0, 250],
-    isMobile ? ['4rem', '2.5rem'] : ['5.6rem', '3rem']
+    isMobile ?
+      (window.innerWidth <= 768 ? ['3.5rem', '2rem'] : ['4.5rem', '2.5rem']) :
+      ['5.6rem', '3rem']
   );
   const logoTop = useTransform(
     smoothScrollY,
-    [0, 250], 
-    isMobile ? ['0px', '-5px'] : ['10px', '-10px']
+    [0, 250],
+    isMobile ?
+      (window.innerWidth <= 768 ? ['0px', '-2px'] : ['5px', '-5px']) :
+      ['10px', '-10px']
   );
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -93,16 +97,15 @@ const Header = () => {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
           >
-            <MobileMenuBtn
-              style={{ position: 'absolute', top: '24px', right: '24px' }}
+            <CloseBtn
               onClick={() => setIsMenuOpen(false)}
             >
               <X size={32} />
-            </MobileMenuBtn>
+            </CloseBtn>
 
             {navItems.map(item => (
               <NavLink
-                style={{ fontSize: '1.5rem' }}
+                style={{ fontSize: '1.8rem', padding: '10px' }}
                 key={item.name}
                 to={item.path}
                 onClick={() => setIsMenuOpen(false)}
@@ -137,29 +140,23 @@ const Nav = styled.nav`
   justify-content: flex-end;
   align-items: center;
   position: relative;
-  height: 50px;
+  height: 60px;
 `;
 
 const Logo = styled(motion(Link))`
   position: absolute;
   left: 0;
-  top: -10px;
   display: flex;
   flex-direction: column;
   font-weight: 900;
   line-height: 0.8;
   color: white;
   text-transform: uppercase;
-  letter-spacing: -1px;
+  letter-spacing: -2px;
   z-index: 10;
   
   span {
     padding-left: 0.8em;
-  }
-  
-  @media (max-width: 768px) {
-    font-size: 2.5rem;
-    top: -5px;
   }
 `;
 
@@ -168,16 +165,17 @@ const NavLinks = styled.div`
   gap: 30px;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 `;
 
 const NavLink = styled(Link)`
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   color: var(--primary);
+  letter-spacing: 1px;
 
   &:hover {
     color: white;
@@ -187,10 +185,20 @@ const NavLink = styled(Link)`
 const MobileMenuBtn = styled.button`
   display: none;
   color: white;
+  padding: 10px;
+  z-index: 1001;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: block;
   }
+`;
+
+const CloseBtn = styled.button`
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: white;
+  padding: 10px;
 `;
 
 const MobileOverlay = styled(motion.div)`
@@ -199,11 +207,12 @@ const MobileOverlay = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100vh;
-  background: var(--bg-darker);
+  background: rgba(15, 15, 15, 0.98);
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 32px;
-  z-index: 999;
+  z-index: 2000;
 `;
