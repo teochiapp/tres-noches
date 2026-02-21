@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Menu, X, Rocket } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+  const location = useLocation();
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, {
     stiffness: 100,
@@ -35,7 +36,7 @@ const Header = () => {
 
   const logoOpacity = useTransform(
     smoothScrollY,
-    [0, (pageHeight - 1200), (pageHeight - 800)],
+    [0, (pageHeight - window.innerHeight - 300), (pageHeight - window.innerHeight - 50)],
     [1, 1, 0]
   );
 
@@ -54,15 +55,15 @@ const Header = () => {
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
 
-    // Check height again after a short delay to account for dynamic content
-    const timer = setTimeout(updateHeight, 1000);
+    // Check height again after a short delay to account for dynamic content and route changes
+    const timer = setTimeout(updateHeight, 500);
 
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       clearTimeout(timer);
     };
-  }, []);
+  }, [location.pathname]);
 
   const navItems = [
     { name: 'Inicio', path: '/' },

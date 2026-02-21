@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { Parallax } from 'react-scroll-parallax';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -10,30 +13,54 @@ const Footer = () => {
   };
 
   return (
-    <FooterContainer>
-      <BigLogoSection>
-        TRES <br />NOCHES
-      </BigLogoSection>
+    <FooterContainer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <Parallax speed={-15}>
+        <BigLogoSection
+          initial={{ y: 100, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          TRES <br />NOCHES
+        </BigLogoSection>
+      </Parallax>
 
-      <FooterContent>
-        <NavColumns>
-          <Column>
-            <FooterLink to="/" onClick={scrollToTop}>INICIO</FooterLink>
-            <FooterLink to="/quienes-somos" onClick={scrollToTop}>QUIENES SOMOS</FooterLink>
-            <FooterLink to="/proyectos" onClick={scrollToTop}>PROYECTOS</FooterLink>
-          </Column>
-          <Column>
-            <ExternalLink href="mailto:hola@tresnoches.com">EMAIL</ExternalLink>
-            <ExternalLink href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM</ExternalLink>
-            <ExternalLink href="https://twitter.com" target="_blank" rel="noopener noreferrer">TWITTER</ExternalLink>
-          </Column>
-        </NavColumns>
-      </FooterContent>
+      <Parallax speed={5}>
+        <FooterContent
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <NavColumns>
+            <Column>
+              <FooterLink to="/" onClick={scrollToTop}>INICIO</FooterLink>
+              <FooterLink to="/quienes-somos" onClick={scrollToTop}>QUIENES SOMOS</FooterLink>
+              <FooterLink to="/proyectos" onClick={scrollToTop}>PROYECTOS</FooterLink>
+            </Column>
+            <Column>
+              <ExternalLink href="mailto:hola@tresnoches.com">EMAIL</ExternalLink>
+              <ExternalLink href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM</ExternalLink>
+              <ExternalLink href="https://twitter.com" target="_blank" rel="noopener noreferrer">TWITTER</ExternalLink>
+            </Column>
+          </NavColumns>
+        </FooterContent>
+      </Parallax>
 
-      <BottomBar>
+      <BottomBar
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+      >
         <Copyright>TRES NOCHES {currentYear} - Todos los derechos reservados ©</Copyright>
         <Copyright>
-          Desarrollado por <CreditLink href="https://surcodes.com" target="_blank" rel="noopener noreferrer">SurCodes</CreditLink>
+          Desarrollado por <CreditLink href="https://surcodes.com" target="_blank" rel="noopener noreferrer">SurCodes <ArrowUpRight size={14} /></CreditLink>
         </Copyright>
         <BackToTop onClick={scrollToTop}>VOLVER ARRIBA</BackToTop>
       </BottomBar>
@@ -43,7 +70,7 @@ const Footer = () => {
 
 export default Footer;
 
-const FooterContainer = styled.footer`
+const FooterContainer = styled(motion.footer)`
   background: #000;
   color: #fff;
   padding: 100px 4vw 40px;
@@ -51,9 +78,10 @@ const FooterContainer = styled.footer`
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 `;
 
-const BigLogoSection = styled.div`
+const BigLogoSection = styled(motion.div)`
   font-family: var(--font-bold);
   font-size: clamp(8rem, 20vw, 18rem);
   font-weight: 900;
@@ -71,7 +99,7 @@ const BigLogoSection = styled.div`
   }
 `;
 
-const FooterContent = styled.div`
+const FooterContent = styled(motion.div)`
   display: flex;
   justify-content: flex-start;
   margin-bottom: 100px;
@@ -83,17 +111,21 @@ const FooterContent = styled.div`
 
 const NavColumns = styled.div`
   display: flex;
-  gap: 120px;
+  gap: 20px;
+  width: 70%;
 
   @media (max-width: 768px) {
     gap: 40px;
+    width: 100%;
   }
 `;
 
 const Column = styled.div`
   display: flex;
+  font-size: 1.2rem;
   flex-direction: column;
   gap: 12px;
+  flex: 1;
 `;
 
 const FooterLink = styled(Link)`
@@ -113,7 +145,7 @@ const FooterLink = styled(Link)`
 
 const ExternalLink = styled.a`
   font-family: var(--font-alt);
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 500;
   color: #fff;
   text-decoration: none;
@@ -126,7 +158,7 @@ const ExternalLink = styled.a`
   }
 `;
 
-const BottomBar = styled.div`
+const BottomBar = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -147,13 +179,22 @@ const Copyright = styled.span`
   font-weight: 500;
   text-transform: uppercase;
   opacity: 0.5;
+  flex: 1;
+
+  &:nth-child(2) {
+    text-align: center;
+  }
 
   @media (max-width: 768px) {
     font-size: 0.7rem;
+    text-align: center !important;
   }
 `;
 
 const CreditLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   color: inherit;
   text-decoration: none;
   font-weight: 700;
@@ -177,6 +218,8 @@ const BackToTop = styled.button`
   text-transform: uppercase;
   opacity: 1;
   transition: opacity 0.3s ease;
+  flex: 1;
+  text-align: right;
 
   &:hover {
     opacity: 0.6;
@@ -185,5 +228,6 @@ const BackToTop = styled.button`
   @media (max-width: 768px) {
     width: 100%;
     margin-top: 10px;
+    text-align: center;
   }
 `;
