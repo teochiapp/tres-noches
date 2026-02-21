@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Hero from '../components/home/Hero';
 import About from '../components/home/About';
 import Services from '../components/home/Services';
+import Corsodromo from '../components/home/Corsodromo';
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -16,6 +17,7 @@ const Home = () => {
             <Hero />
             <About />
             <Services />
+            <Corsodromo />
         </HomeContainer>
     );
 };
