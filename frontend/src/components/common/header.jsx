@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Menu, X, Rocket } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
+  const location = useLocation();
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, {
     stiffness: 100,
@@ -31,18 +32,38 @@ const Header = () => {
       ['10px', '-10px']
   );
 
+  const [pageHeight, setPageHeight] = useState(0);
+
+  const logoOpacity = useTransform(
+    smoothScrollY,
+    [0, (pageHeight - window.innerHeight - 300), (pageHeight - window.innerHeight - 50)],
+    [1, 1, 0]
+  );
+
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+      setPageHeight(document.documentElement.scrollHeight);
+    };
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    const updateHeight = () => setPageHeight(document.documentElement.scrollHeight);
+
+    updateHeight();
+
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
+
+    // Check height again after a short delay to account for dynamic content and route changes
+    const timer = setTimeout(updateHeight, 500);
+
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
-  }, []);
+  }, [location.pathname]);
 
   const navItems = [
     { name: 'Inicio', path: '/' },
@@ -57,7 +78,7 @@ const Header = () => {
         <Nav>
           <Logo
             to="/"
-            style={{ fontSize: logoFontSize, top: logoTop }}
+            style={{ fontSize: logoFontSize, top: logoTop, opacity: logoOpacity }}
             initial={{ opacity: 0, x: -30, filter: "blur(5px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             whileHover={{

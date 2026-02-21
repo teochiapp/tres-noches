@@ -1,161 +1,233 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Rocket, Instagram, Twitter, Linkedin, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { Parallax } from 'react-scroll-parallax';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <FooterContainer>
-      <FooterGrid>
-        <FooterBrand>
-          <Logo to="/">
-            Tres Noches
-          </Logo>
-        </FooterBrand>
+    <FooterContainer
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8 }}
+    >
+      <Parallax speed={-15}>
+        <BigLogoSection
+          initial={{ y: 100, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          TRES <br />NOCHES
+        </BigLogoSection>
+      </Parallax>
 
-        <FooterColumn>
-          <h4>Navegación</h4>
-          <FooterLink to="/">Inicio</FooterLink>
-          <FooterLink to="/servicios">Servicios</FooterLink>
-          <FooterLink to="/proyectos">Proyectos</FooterLink>
-          <FooterLink to="/nosotros">Sobre nosotros</FooterLink>
-        </FooterColumn>
+      <Parallax speed={5}>
+        <FooterContent
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <NavColumns>
+            <Column>
+              <FooterLink to="/" onClick={scrollToTop}>INICIO</FooterLink>
+              <FooterLink to="/quienes-somos" onClick={scrollToTop}>QUIENES SOMOS</FooterLink>
+              <FooterLink to="/proyectos" onClick={scrollToTop}>PROYECTOS</FooterLink>
+            </Column>
+            <Column>
+              <ExternalLink href="mailto:hola@tresnoches.com">EMAIL</ExternalLink>
+              <ExternalLink href="https://instagram.com" target="_blank" rel="noopener noreferrer">INSTAGRAM</ExternalLink>
+              <ExternalLink href="https://twitter.com" target="_blank" rel="noopener noreferrer">TWITTER</ExternalLink>
+            </Column>
+          </NavColumns>
+        </FooterContent>
+      </Parallax>
 
-        <FooterColumn>
-          <h4>Servicios</h4>
-          <FooterLink to="#">Desarrollo Web</FooterLink>
-          <FooterLink to="#">Diseño UI/UX</FooterLink>
-          <FooterLink to="#">E-commerce</FooterLink>
-          <FooterLink to="#">Mantenimiento</FooterLink>
-        </FooterColumn>
-
-        <FooterColumn>
-          <h4>Legal</h4>
-          <FooterLink to="#">Privacidad</FooterLink>
-          <FooterLink to="#">Términos</FooterLink>
-          <FooterLink to="#">Cookies</FooterLink>
-        </FooterColumn>
-      </FooterGrid>
-
-      <Copyright>
-        <p>© {currentYear} Tres Noches. Todos los derechos reservados.</p>
-        <p>Diseñado con ❤️ en Argentina</p>
-      </Copyright>
+      <BottomBar
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+      >
+        <Copyright>TRES NOCHES {currentYear} - Todos los derechos reservados ©</Copyright>
+        <Copyright>
+          Desarrollado por <CreditLink href="https://surcodes.com" target="_blank" rel="noopener noreferrer">SurCodes <ArrowUpRight size={14} /></CreditLink>
+        </Copyright>
+        <BackToTop onClick={scrollToTop}>VOLVER ARRIBA</BackToTop>
+      </BottomBar>
     </FooterContainer>
   );
 };
 
 export default Footer;
 
-
-const FooterContainer = styled.footer`
-  background: var(--bg-darker);
-  border-top: 1px solid var(--glass-border);
-  padding: 80px 20px 40px;
+const FooterContainer = styled(motion.footer)`
+  background: #000;
+  color: #fff;
+  padding: 100px 4vw 40px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
 `;
 
-const FooterGrid = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
+const BigLogoSection = styled(motion.div)`
+  font-family: var(--font-bold);
+  font-size: clamp(8rem, 20vw, 18rem);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  margin-bottom: 80px;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+    font-size: clamp(4rem, 15vw, 8rem);
+    margin-bottom: 40px;
+  }
+`;
+
+const FooterContent = styled(motion.div)`
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 100px;
+
+  @media (max-width: 768px) {
+    margin-bottom: 60px;
+  }
+`;
+
+const NavColumns = styled.div`
+  display: flex;
+  gap: 20px;
+  width: 70%;
+
+  @media (max-width: 768px) {
     gap: 40px;
+    width: 100%;
   }
 `;
 
-const FooterBrand = styled.div`
+const Column = styled.div`
   display: flex;
+  font-size: 1.2rem;
   flex-direction: column;
-  gap: 20px;
-`;
-
-const Logo = styled(Link)`
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: white;
-  
-  svg {
-    color: var(--primary);
-  }
-`;
-
-const Description = styled.p`
-  color: var(--text-secondary);
-  line-height: 1.6;
-  max-width: 320px;
-`;
-
-const SocialLinks = styled.div`
-  display: flex;
-  gap: 16px;
-`;
-
-const SocialIcon = styled.a`
-  width: 40px;
-  height: 40px;
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
-    transform: translateY(-3px);
-  }
-`;
-
-const FooterColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  h4 {
-    color: white;
-    font-size: 1rem;
-    font-weight: 600;
-  }
+  gap: 12px;
+  flex: 1;
 `;
 
 const FooterLink = styled(Link)`
-  color: var(--text-secondary);
-  font-size: 0.9375rem;
+  font-family: var(--font-alt);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 0;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
 
   &:hover {
-    color: white;
-    padding-left: 5px;
+    opacity: 1;
   }
 `;
 
-const Copyright = styled.div`
-  max-width: 1200px;
-  margin: 80px auto 0;
-  padding-top: 40px;
-  border-top: 1px solid var(--glass-border);
+const ExternalLink = styled.a`
+  font-family: var(--font-alt);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+  padding: 2px 0;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const BottomBar = styled(motion.div)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 30px;
+  gap: 20px;
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
     flex-direction: column;
-    gap: 16px;
+    text-align: center;
+    gap: 15px;
+  }
+`;
+
+const Copyright = styled.span`
+  font-family: var(--font-alt);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  opacity: 0.5;
+  flex: 1;
+
+  &:nth-child(2) {
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 0.7rem;
+    text-align: center !important;
+  }
+`;
+
+const CreditLink = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 700;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+  }
+`;
+
+const BackToTop = styled.button`
+  font-family: var(--font-alt);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  flex: 1;
+  text-align: right;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-top: 10px;
     text-align: center;
   }
 `;
