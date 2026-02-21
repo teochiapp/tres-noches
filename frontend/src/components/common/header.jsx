@@ -31,16 +31,36 @@ const Header = () => {
       ['10px', '-10px']
   );
 
+  const [pageHeight, setPageHeight] = useState(0);
+
+  const logoOpacity = useTransform(
+    smoothScrollY,
+    [0, (pageHeight - 1200), (pageHeight - 800)],
+    [1, 1, 0]
+  );
+
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 1024);
+      setPageHeight(document.documentElement.scrollHeight);
+    };
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    const updateHeight = () => setPageHeight(document.documentElement.scrollHeight);
+
+    updateHeight();
+
     window.addEventListener('resize', handleResize);
     window.addEventListener('scroll', handleScroll);
+
+    // Check height again after a short delay to account for dynamic content
+    const timer = setTimeout(updateHeight, 1000);
+
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
   }, []);
 
@@ -57,7 +77,7 @@ const Header = () => {
         <Nav>
           <Logo
             to="/"
-            style={{ fontSize: logoFontSize, top: logoTop }}
+            style={{ fontSize: logoFontSize, top: logoTop, opacity: logoOpacity }}
             initial={{ opacity: 0, x: -30, filter: "blur(5px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             whileHover={{
