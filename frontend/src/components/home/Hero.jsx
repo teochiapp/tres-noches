@@ -83,7 +83,7 @@ const ContentSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 100px 24px 32px;
+    padding: 150px 24px 32px;
     gap: 32px;
   }
 `;
@@ -95,6 +95,10 @@ const LeftText = styled(motion.div)`
   color: #888;
   letter-spacing: 0.05em;
   text-transform: none;
+
+    @media (max-width: 768px) {
+    padding: 10px 0 20px 0;
+  }
 `;
 
 const RightText = styled(motion.h1)`
@@ -117,6 +121,10 @@ const ImageSection = styled(motion.div)`
   overflow: hidden;
   margin-top: 20px;
   height: 64vh;
+
+  @media (max-width: 768px) {
+    height: 45vh;
+  }
 `;
 
 const HeroImage = styled.img`

@@ -148,6 +148,7 @@ const Logo = styled(motion(Link))`
   left: 0;
   display: flex;
   flex-direction: column;
+  font-family: var(--font-semibold);
   font-weight: 900;
   line-height: 0.8;
   color: white;
