@@ -40,7 +40,11 @@ const Headline = styled.h1`
   margin: 0;
   color: #ffffff; /* Blanco puro para contraste máximo como en la imagen */
 
-  /* Tablet */
+ 
+  @media (max-width: 1440px) {
+    font-size: 80px;
+    max-width: 100%;
+  }
   @media (max-width: 1024px) {
     font-size: 4rem;
     max-width: 100%;
