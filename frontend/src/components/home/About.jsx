@@ -1,5 +1,58 @@
 import styled from "styled-components";
 import { Parallax } from 'react-scroll-parallax';
+import { motion } from 'framer-motion';
+
+const fadeIn = {
+  initial: { opacity: 0, x: -80 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, amount: 0.3 },
+  transition: { duration: 0.8, ease: "easeOut" }
+};
+
+const fadeRight = {
+  initial: { opacity: 0, x: 80 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, amount: 0.3 },
+  transition: { duration: 0.8, ease: "easeOut" }
+};
+
+
+export default function AboutUS() {
+  return (
+    <Section>
+      <Parallax speed={-5}>
+        <motion.div {...fadeIn}>
+          <Headline>
+            SOMOS UNA PRODUCTORA QUE TRANSFORMA NARRATIVAS EN PROYECTOS DE IMPACTO TERRITORIAL.
+          </Headline>
+        </motion.div>
+      </Parallax>
+
+      <BottomContainer>
+        <Label></Label>
+
+        {/* Usamos un wrapper personalizado para manejar el ancho del Parallax en flexbox */}
+        <ParallaxRightWrapper as={Parallax} speed={5}>
+          <motion.div {...fadeRight}>
+            <ContentRight style={{ maxWidth: '100%' }}>
+              <Paragraph>
+                Cada película que hacemos abre la puerta a proyectos más grandes. Documentales que se convierten en infraestructura cultural.
+              </Paragraph>
+              <Paragraph>
+                Narrativas que movilizan a toda una comunidad. Historias que construyen futuro. Producimos contenido, experiencias y cambio real.
+              </Paragraph>
+
+              <ActionLink href="#">
+                Hacemos que las cosas pasen.
+              </ActionLink>
+            </ContentRight>
+          </motion.div>
+        </ParallaxRightWrapper>
+      </BottomContainer>
+    </Section>
+  );
+}
+
 
 // Container principal
 const Section = styled.section`
@@ -153,35 +206,3 @@ const ParallaxRightWrapper = styled.div`
         width: 100%;
     }
 `;
-
-export default function AboutUS() {
-  return (
-    <Section>
-      <Parallax speed={-5}>
-        <Headline>
-          SOMOS UNA PRODUCTORA QUE TRANSFORMA NARRATIVAS EN PROYECTOS DE IMPACTO TERRITORIAL.
-        </Headline>
-      </Parallax>
-
-      <BottomContainer>
-        <Label></Label>
-
-        {/* Usamos un wrapper personalizado para manejar el ancho del Parallax en flexbox */}
-        <ParallaxRightWrapper as={Parallax} speed={5}>
-          <ContentRight style={{ maxWidth: '100%' }}>
-            <Paragraph>
-              Cada película que hacemos abre la puerta a proyectos más grandes. Documentales que se convierten en infraestructura cultural.
-            </Paragraph>
-            <Paragraph>
-              Narrativas que movilizan a toda una comunidad. Historias que construyen futuro. Producimos contenido, experiencias y cambio real.
-            </Paragraph>
-
-            <ActionLink href="#">
-              Hacemos que las cosas pasen.
-            </ActionLink>
-          </ContentRight>
-        </ParallaxRightWrapper>
-      </BottomContainer>
-    </Section>
-  );
-}

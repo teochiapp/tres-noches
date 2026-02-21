@@ -177,9 +177,26 @@ const NavLink = styled(Link)`
   text-transform: uppercase;
   color: var(--primary);
   letter-spacing: 1px;
+  position: relative;
+  padding: 5px 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+  }
 
   &:hover {
     color: white;
+    
+    &::after {
+      width: 100%;
+    }
   }
 `;
 

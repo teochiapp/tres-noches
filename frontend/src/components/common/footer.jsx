@@ -3,6 +3,53 @@ import styled from 'styled-components';
 import { Rocket, Instagram, Twitter, Linkedin, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <FooterContainer>
+      <FooterGrid>
+        <FooterBrand>
+          <Logo to="/">
+            Tres Noches
+          </Logo>
+        </FooterBrand>
+
+        <FooterColumn>
+          <h4>Navegación</h4>
+          <FooterLink to="/">Inicio</FooterLink>
+          <FooterLink to="/servicios">Servicios</FooterLink>
+          <FooterLink to="/proyectos">Proyectos</FooterLink>
+          <FooterLink to="/nosotros">Sobre nosotros</FooterLink>
+        </FooterColumn>
+
+        <FooterColumn>
+          <h4>Servicios</h4>
+          <FooterLink to="#">Desarrollo Web</FooterLink>
+          <FooterLink to="#">Diseño UI/UX</FooterLink>
+          <FooterLink to="#">E-commerce</FooterLink>
+          <FooterLink to="#">Mantenimiento</FooterLink>
+        </FooterColumn>
+
+        <FooterColumn>
+          <h4>Legal</h4>
+          <FooterLink to="#">Privacidad</FooterLink>
+          <FooterLink to="#">Términos</FooterLink>
+          <FooterLink to="#">Cookies</FooterLink>
+        </FooterColumn>
+      </FooterGrid>
+
+      <Copyright>
+        <p>© {currentYear} Tres Noches. Todos los derechos reservados.</p>
+        <p>Diseñado con ❤️ en Argentina</p>
+      </Copyright>
+    </FooterContainer>
+  );
+};
+
+export default Footer;
+
+
 const FooterContainer = styled.footer`
   background: var(--bg-darker);
   border-top: 1px solid var(--glass-border);
@@ -112,60 +159,3 @@ const Copyright = styled.div`
     text-align: center;
   }
 `;
-
-const Footer = () => {
-    const currentYear = new Date().getFullYear();
-
-    return (
-        <FooterContainer>
-            <FooterGrid>
-                <FooterBrand>
-                    <Logo to="/">
-                        <Rocket size={24} />
-                        Tres Noches
-                    </Logo>
-                    <Description>
-                        Transformamos tus ideas en experiencias digitales únicas.
-                        Especialistas en desarrollo web premium y soluciones innovadoras.
-                    </Description>
-                    <SocialLinks>
-                        <SocialIcon href="#" target="_blank"><Instagram size={20} /></SocialIcon>
-                        <SocialIcon href="#" target="_blank"><Twitter size={20} /></SocialIcon>
-                        <SocialIcon href="#" target="_blank"><Linkedin size={20} /></SocialIcon>
-                        <SocialIcon href="#" target="_blank"><Github size={20} /></SocialIcon>
-                    </SocialLinks>
-                </FooterBrand>
-
-                <FooterColumn>
-                    <h4>Navegación</h4>
-                    <FooterLink to="/">Inicio</FooterLink>
-                    <FooterLink to="/servicios">Servicios</FooterLink>
-                    <FooterLink to="/proyectos">Proyectos</FooterLink>
-                    <FooterLink to="/nosotros">Sobre nosotros</FooterLink>
-                </FooterColumn>
-
-                <FooterColumn>
-                    <h4>Servicios</h4>
-                    <FooterLink to="#">Desarrollo Web</FooterLink>
-                    <FooterLink to="#">Diseño UI/UX</FooterLink>
-                    <FooterLink to="#">E-commerce</FooterLink>
-                    <FooterLink to="#">Mantenimiento</FooterLink>
-                </FooterColumn>
-
-                <FooterColumn>
-                    <h4>Legal</h4>
-                    <FooterLink to="#">Privacidad</FooterLink>
-                    <FooterLink to="#">Términos</FooterLink>
-                    <FooterLink to="#">Cookies</FooterLink>
-                </FooterColumn>
-            </FooterGrid>
-
-            <Copyright>
-                <p>© {currentYear} Tres Noches. Todos los derechos reservados.</p>
-                <p>Diseñado con ❤️ en Argentina</p>
-            </Copyright>
-        </FooterContainer>
-    );
-};
-
-export default Footer;

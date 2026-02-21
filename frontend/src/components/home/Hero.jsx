@@ -16,7 +16,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             Productora Audiovisual<br />
-            +<br />
+            <Symbol>+</Symbol><br />
             Impacto
           </LeftText>
         </Parallax>
@@ -46,7 +46,7 @@ const Hero = () => {
       >
         <Parallax speed={-10} style={{ width: '100%', height: '115%', marginTop: '-5%' }}>
           <HeroImage
-            src="/content/hero-image.png"
+            src="/content/hero-image.webp"
             alt="Carnival Expression"
           />
         </Parallax>
@@ -83,7 +83,7 @@ const ContentSection = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 150px 24px 32px;
+    padding: 120px 24px 32px;
     gap: 32px;
   }
 `;
@@ -99,6 +99,14 @@ const LeftText = styled(motion.div)`
     @media (max-width: 768px) {
     padding: 10px 0 20px 0;
   }
+`;
+
+const Symbol = styled.span`
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+  display: inline-block;
+  margin: 5px 0;
 `;
 
 const RightText = styled(motion.h1)`
@@ -120,7 +128,7 @@ const ImageSection = styled(motion.div)`
   position: relative;
   overflow: hidden;
   margin-top: 20px;
-  height: 64vh;
+  height: 80vh;
 
   @media (max-width: 768px) {
     height: 45vh;

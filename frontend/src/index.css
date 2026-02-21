@@ -30,6 +30,8 @@
   font-display: swap;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
 :root {
   --primary: #EF511D;
   --primary-dark: #EF511D;
@@ -45,6 +47,7 @@
   --font-bold: 'Elza Bold', 'Segoe UI Bold', 'Arial Bold', 'Inter', system-ui, -apple-system, sans-serif;
   --font-semibold: 'Elza Semibold', 'Segoe UI Semibold', 'Inter', system-ui, -apple-system, sans-serif;
   --font-thin: 'Elza Thin', 'Segoe UI Light', 'HelveticaNeue-Light', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-alt: "IBM Plex Sans", sans-serif;
 }
 
 * {
