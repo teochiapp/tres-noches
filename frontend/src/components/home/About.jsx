@@ -3,18 +3,13 @@ import { Parallax } from 'react-scroll-parallax';
 import { motion } from 'framer-motion';
 
 const fadeIn = {
-  initial: { opacity: 0, x: -80 },
-  whileInView: { opacity: 1, x: 0 },
+  initial: { opacity: 0, y: 80 },
+  whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.3 },
   transition: { duration: 0.8, ease: "easeOut" }
 };
 
-const fadeRight = {
-  initial: { opacity: 0, x: 80 },
-  whileInView: { opacity: 1, x: 0 },
-  viewport: { once: true, amount: 0.3 },
-  transition: { duration: 0.8, ease: "easeOut" }
-};
+
 
 
 export default function AboutUS() {
@@ -33,7 +28,7 @@ export default function AboutUS() {
 
         {/* Usamos un wrapper personalizado para manejar el ancho del Parallax en flexbox */}
         <ParallaxRightWrapper as={Parallax} speed={5}>
-          <motion.div {...fadeRight}>
+          <motion.div {...fadeIn}>
             <ContentRight style={{ maxWidth: '100%' }}>
               <Paragraph>
                 Cada película que hacemos abre la puerta a proyectos más grandes. Documentales que se convierten en infraestructura cultural.

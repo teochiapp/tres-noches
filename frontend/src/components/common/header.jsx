@@ -74,11 +74,11 @@ const Header = () => {
 
   return (
     <>
-      <HeaderContainer $scrolled={scrolled}>
+      <LogoWrapper>
         <Nav>
           <Logo
             to="/"
-            style={{ fontSize: logoFontSize, top: logoTop, opacity: logoOpacity }}
+            style={{ pointerEvents: 'auto', fontSize: logoFontSize, top: logoTop, opacity: logoOpacity }}
             initial={{ opacity: 0, x: -30, filter: "blur(5px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             whileHover={{
@@ -97,7 +97,11 @@ const Header = () => {
               transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
             >Noches</motion.span>
           </Logo>
+        </Nav>
+      </LogoWrapper>
 
+      <HeaderContainer $scrolled={scrolled}>
+        <Nav>
           <NavLinks>
             {navItems.map(item => (
               <NavLink key={item.name} to={item.path}>{item.name}</NavLink>
@@ -142,6 +146,17 @@ const Header = () => {
 };
 
 export default Header;
+
+const LogoWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  z-index: 1001;
+  pointer-events: none;
+  mix-blend-mode: difference;
+`;
 
 const HeaderContainer = styled.header`
   position: fixed;

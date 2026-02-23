@@ -1,46 +1,69 @@
 import styled from "styled-components";
+import { motion } from 'framer-motion';
+export default function SeccionPelicula() {
+  const fadeRight = {
+    initial: { opacity: 0, x: 50 },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
-export default function Corsodromo() {
-    return (
-        <Section>
-            <Overlay />
+  const fadeIn = {
+    initial: { opacity: 0, x: -80 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-            {/* ── TOP ROW ────────────────────────────── */}
-            <TopRow>
-                <MainTitle>
-                    <span>TRES</span>
-                    <span>NOCHES</span>
-                </MainTitle>
-            </TopRow>
+  return (
+    <Section>
+      <Overlay />
 
-            {/* ── FILM LABEL ─────────────────────────── */}
-            <FilmLabel>
-                <FilmTitle>TRES NOCHES AL AÑO</FilmTitle>
-                <FilmSub>LARGOMETRAJE DOCUMENTAL</FilmSub>
-            </FilmLabel>
+      {/* ── TOP ROW ────────────────────────────── */}
+      <motion.div {...fadeIn}>
+        <TopRow>
+          <MainTitle>
+            <span>TRES</span>
+            <span>NOCHES</span>
+          </MainTitle>
+        </TopRow>
 
-            {/* ── BOTTOM ROW ─────────────────────────── */}
-            <BottomRow>
-                <BottomLeft>
-                    <ProjectSmall>EL CORSÓDROMO</ProjectSmall>
-                    <ProjectBig>LA FIESTA</ProjectBig>
-                </BottomLeft>
-
-                <BottomRight>
-                    <Description>
-                        Gran parte de la comunidad de algunas ciudades de Misiones como
-                        Concepción de la Sierra, San Javier y San Ignacio, se moviliza
-                        durante todo el año para disfrutar de las tres noches del Carnaval.
-                    </Description>
-                    <Description>
-                        Plumas, música, baile y alegría reflejan el esfuerzo, la
-                        perseverancia y, sobre todo, la inigualable pasión de los
-                        integrantes de las comparsas.
-                    </Description>
-                </BottomRight>
-            </BottomRow>
-        </Section>
-    );
+        {/* ── FILM LABEL ─────────────────────────── */}
+        <FilmLabel>
+          <FilmTitle>TRES NOCHES AL AÑO</FilmTitle>
+          <FilmSub>LARGOMETRAJE DOCUMENTAL</FilmSub>
+        </FilmLabel>
+      </motion.div>
+      {/* ── BOTTOM ROW ─────────────────────────── */}
+      <BottomRow>
+        <motion.div {...fadeIn}>
+          <BottomLeft>
+            <ProjectSmall>EL CORSÓDROMO</ProjectSmall>
+            <ProjectBig>LA FIESTA</ProjectBig>
+          </BottomLeft>
+        </motion.div>
+        <motion.div {...fadeRight}>
+          <BottomRight>
+            <Description>
+              Gran parte de la comunidad de algunas ciudades de Misiones como
+              Concepción de la Sierra, San Javier y San Ignacio, se moviliza
+              durante todo el año para disfrutar de las tres noches del Carnaval.
+            </Description>
+            <Description>
+              Plumas, música, baile y alegría reflejan el esfuerzo, la
+              perseverancia y, sobre todo, la inigualable pasión de los
+              integrantes de las comparsas.
+            </Description>
+          </BottomRight>
+        </motion.div>
+      </BottomRow>
+    </Section >
+  );
 }
 
 /* ─── Styled Components ─────────────────────────────────────────── */

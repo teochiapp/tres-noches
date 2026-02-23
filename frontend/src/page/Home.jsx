@@ -1,9 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
 import Hero from '../components/home/Hero';
 import About from '../components/home/About';
 import Services from '../components/home/Services';
-import Corsodromo from '../components/home/Corsodromo';
+import SeccionPelicula from '../components/home/SeccionPelicula';
+import SegundaSeccionPelicula from '../components/home/SegundaSeccionPelicula';
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -17,7 +17,8 @@ const Home = () => {
             <Hero />
             <About />
             <Services />
-            <Corsodromo />
+            <SeccionPelicula />
+            <SegundaSeccionPelicula />
         </HomeContainer>
     );
 };
