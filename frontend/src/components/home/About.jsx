@@ -14,7 +14,7 @@ const fadeIn = {
 
 export default function AboutUS() {
   return (
-    <Section>
+    <Section id="quienes-somos">
       <Parallax speed={-5}>
         <motion.div {...fadeIn}>
           <Headline>
@@ -79,7 +79,7 @@ const Section = styled.section`
 // Texto principal grande
 const Headline = styled.h1`
   font-family: var(--font-bold);
-  font-size: 96px;
+  font-size: 5rem;
   font-weight: 800;
   text-transform: uppercase;
   line-height: 80px;
