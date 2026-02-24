@@ -4,6 +4,7 @@ import About from '../components/home/About';
 import Services from '../components/home/Services';
 import SeccionPelicula from '../components/home/SeccionPelicula';
 import SegundaSeccionPelicula from '../components/home/SegundaSeccionPelicula';
+import Contact from '../components/home/Contact';
 
 const HomeContainer = styled.div`
   width: 100%;
@@ -19,6 +20,7 @@ const Home = () => {
             <Services />
             <SeccionPelicula />
             <SegundaSeccionPelicula />
+            <Contact />
         </HomeContainer>
     );
 };
