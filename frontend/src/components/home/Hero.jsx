@@ -39,11 +39,7 @@ const Hero = () => {
           </RightText>
         </Parallax>
       </ContentSection>
-      <ImageSection
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2 }}
-      >
+      <ImageSection>
         <Parallax speed={-10} style={{ width: '100%', height: '115%', marginTop: '-5%' }}>
           <HeroImage
             src="/content/hero-image.webp"
