@@ -74,6 +74,8 @@ const Section = styled.section`
   background-color: var(--bg-dark, #000);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 `;
 
 const ContentContainer = styled.div`
@@ -174,11 +176,18 @@ const BottomImage = styled.img`
 
 
 const ImageTop = styled.img`
-  width: 100%;
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 120px;
+  top: clamp(-80px, -8vw, -120px);
+  right: clamp(-20px, -4vw, -40px);
+  width: auto;
+  rotate: -20deg;
+  height: clamp(120px, 25vw, 400px);
   object-fit: contain;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    height: clamp(80px, 20vw, 150px);
+    top: -40px;
+    right: -10px;
+  }
 `;
