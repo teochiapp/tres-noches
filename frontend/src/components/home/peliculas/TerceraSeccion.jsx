@@ -132,7 +132,7 @@ const FilmLabel = styled.div`
 
 const FilmTitle = styled.p`
   font-family: var(--font-alt);
-  font-size: clamp(1.4rem, 3vw, 3rem);
+  font-size: clamp(1.4rem, 3vw, 3.5rem);
   font-weight: 900;
   color: var(--primary);
   text-transform: uppercase;

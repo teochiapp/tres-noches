@@ -3,70 +3,70 @@ import styled from "styled-components";
 import { motion, useScroll, useTransform } from 'framer-motion';
 
 export default function CuartaSeccionPelicula() {
-    const containerRef = useRef(null);
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
-    const yParallax = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const yParallax = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
-    const fadeRight = {
-        initial: { opacity: 0, x: 50 },
-        animate: {
-            opacity: 1,
-            x: 0,
-            transition: {
-                duration: 0.8,
-                ease: "easeOut",
-            },
-        },
-    };
+  const fadeRight = {
+    initial: { opacity: 0, x: 50 },
+    animate: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
-    const fadeIn = {
-        initial: { opacity: 0, x: -80 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: true, amount: 0.3 },
-        transition: { duration: 0.8, ease: "easeOut" }
-    };
+  const fadeIn = {
+    initial: { opacity: 0, x: -80 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-    const fadeUp = {
-        initial: { opacity: 0, y: 80 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.3 },
-        transition: { duration: 0.8, ease: "easeOut" }
-    };
+  const fadeUp = {
+    initial: { opacity: 0, y: 80 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.3 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-    return (
-        <Section ref={containerRef}>
-            <motion.div style={{ y: yParallax }}>
-                <ContentContainer>
-                    <ImageTop src="/content/decoration-single-heads.png" alt="Construcción del Sambódromo" />
-                    <Header>
-                        <motion.div {...fadeIn}>
-                            <MainTitle>DE UNA PELICULA A UN PAÍS</MainTitle>
-                            <SubTitle>EL BARRIO CANÁBICO</SubTitle>
-                        </motion.div>
-                    </Header>
-                    <TextSection>
-                        <motion.div {...fadeRight}>
-                            <Paragraph>
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                                Quo cumque exercitationem porro itaque est? Error alias consequatur officiis, ducimus quasi ipsam excepturi saepe sapiente id dolore ab, iste ipsa accusamus corrupti amet at.
-                            </Paragraph>
-                            <ButtonsContainer>
-                                <Button>SUMATE AL PROYECTO</Button>
-                                <Button>MÁS INFORMACIÓN</Button>
-                            </ButtonsContainer>
-                        </motion.div>
-                    </TextSection>
-                </ContentContainer>
+  return (
+    <Section ref={containerRef}>
+      <motion.div style={{ y: yParallax }}>
+        <ContentContainer>
+          <ImageTop src="/content/decoration-single-heads.png" alt="Construcción del Sambódromo" />
+          <Header>
+            <motion.div {...fadeIn}>
+              <MainTitle>DE UNA PELICULA A UN PAÍS</MainTitle>
+              <SubTitle>EL BARRIO CANÁBICO</SubTitle>
             </motion.div>
-            <motion.div {...fadeUp}>
-                <BottomImage src="/content/decoration-heads.png" alt="Construcción del Sambódromo" />
+          </Header>
+          <TextSection>
+            <motion.div {...fadeRight}>
+              <Paragraph>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Quo cumque exercitationem porro itaque est? Error alias consequatur officiis, ducimus quasi ipsam excepturi saepe sapiente id dolore ab, iste ipsa accusamus corrupti amet at.
+              </Paragraph>
+              <ButtonsContainer>
+                <Button>SUMATE AL PROYECTO</Button>
+                <Button>MÁS INFORMACIÓN</Button>
+              </ButtonsContainer>
             </motion.div>
-        </Section>
-    );
+          </TextSection>
+        </ContentContainer>
+      </motion.div>
+      <motion.div {...fadeUp}>
+        <BottomImage src="/content/decoration-heads.png" alt="Construcción del Sambódromo" />
+      </motion.div>
+    </Section>
+  );
 }
 
 const Section = styled.section`
@@ -75,6 +75,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 100svh;
   overflow: hidden;
 `;
 
