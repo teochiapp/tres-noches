@@ -10,6 +10,7 @@ export default function TerceraSeccionPelicula() {
   });
 
   const yParallax = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const yVideo = useTransform(scrollYProgress, [0, 1], [-50, 50]);
 
   const fadeRight = {
     initial: { opacity: 0, x: 50 },
@@ -32,7 +33,7 @@ export default function TerceraSeccionPelicula() {
 
   return (
     <Section ref={containerRef}>
-      <VideoBackground autoPlay muted loop playsInline>
+      <VideoBackground autoPlay muted loop playsInline style={{ y: yVideo }}>
         <source src="/content/video-pais-feliz.MP4" type="video/mp4" />
       </VideoBackground>
       <Overlay />
@@ -96,12 +97,12 @@ const Section = styled.section`
   }
 `;
 
-const VideoBackground = styled.video`
+const VideoBackground = styled(motion.video)`
   position: absolute;
-  top: 0;
+  top: -10%;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 120%;
   object-fit: cover;
   z-index: 0;
 

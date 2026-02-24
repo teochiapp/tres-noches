@@ -10,6 +10,8 @@ export default function CuartaSeccionPelicula() {
   });
 
   const yParallax = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const yImageTop = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const yImageBottom = useTransform(scrollYProgress, [0, 1], [40, -40]);
 
   const fadeRight = {
     initial: { opacity: 0, x: 50 },
@@ -41,7 +43,11 @@ export default function CuartaSeccionPelicula() {
     <Section ref={containerRef}>
       <motion.div style={{ y: yParallax }}>
         <ContentContainer>
-          <ImageTop src="/content/decoration-single-heads.png" alt="Construcción del Sambódromo" />
+          <ImageTop
+            src="/content/decoration-single-heads.png"
+            alt="Construcción del Sambódromo"
+            style={{ y: yImageTop }}
+          />
           <Header>
             <motion.div {...fadeIn}>
               <MainTitle>DE UNA PELICULA A UN PAÍS</MainTitle>
@@ -63,7 +69,11 @@ export default function CuartaSeccionPelicula() {
         </ContentContainer>
       </motion.div>
       <motion.div {...fadeUp}>
-        <BottomImage src="/content/decoration-heads.png" alt="Construcción del Sambódromo" />
+        <BottomImage
+          src="/content/decoration-heads.png"
+          alt="Construcción del Sambódromo"
+          style={{ y: yImageBottom }}
+        />
       </motion.div>
     </Section>
   );
@@ -172,7 +182,7 @@ const Button = styled.button`
   }
 `;
 
-const BottomImage = styled.img`
+const BottomImage = styled(motion.img)`
   width: 100%;
   height: 380px;
   margin: -120px 0 20px;
@@ -185,7 +195,7 @@ const BottomImage = styled.img`
 `;
 
 
-const ImageTop = styled.img`
+const ImageTop = styled(motion.img)`
   position: absolute;
   top: clamp(-80px, -8vw, -120px);
   right: clamp(-20px, -4vw, -40px);

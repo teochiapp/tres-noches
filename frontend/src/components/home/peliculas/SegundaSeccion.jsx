@@ -10,6 +10,7 @@ export default function SegundaSeccionPelicula() {
   });
 
   const yParallax = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const yImage = useTransform(scrollYProgress, [0, 1], [-80, 80]);
 
   const fadeRight = {
     initial: { opacity: 0, x: 50 },
@@ -64,10 +65,13 @@ export default function SegundaSeccionPelicula() {
           </TextSection>
         </ContentContainer>
       </motion.div>
-      <motion.div {...fadeUp} style={{ width: '100%' }}>
-
-        <BottomImage src="/content/corsodromo.webp" alt="Construcción del Sambódromo" />
-      </motion.div>
+      <ImageWrapper {...fadeUp}>
+        <BottomImage
+          src="/content/corsodromo.webp"
+          alt="Construcción del Sambódromo"
+          style={{ y: yImage }}
+        />
+      </ImageWrapper>
     </Section>
   );
 }
@@ -77,6 +81,7 @@ const Section = styled.section`
   background-color: var(--bg-dark, #000);
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const ContentContainer = styled.div`
@@ -168,9 +173,19 @@ const Button = styled.button`
   }
 `;
 
-const BottomImage = styled.img`
+const ImageWrapper = styled(motion.div)`
   width: 100%;
   height: 50vh;
+  overflow: hidden;
+  position: relative;
+`;
+
+const BottomImage = styled(motion.img)`
+  width: 100%;
+  height: 140%;
+  top: -20%;
+  left: 0;
+  position: absolute;
   object-fit: cover;
   filter: grayscale(100%);
 `;

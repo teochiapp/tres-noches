@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
 
 export default function Contact() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const yParallax = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const yBg = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+
   const [formState, setFormState] = useState({
     name: '',
     email: '',
@@ -45,132 +54,135 @@ export default function Contact() {
   };
 
   return (
-    <Section id="contacto">
+    <Section id="contacto" ref={containerRef}>
+      <BgParallax style={{ y: yBg }} />
       <Container>
-        <Layout>
-          {/* Left Column - Información */}
-          <InfoColumn
-            as={motion.div}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              initial: { opacity: 0 },
-              whileInView: { opacity: 1, transition: { staggerChildren: 0.2 } }
-            }}
-          >
-            <motion.div variants={fadeRight}>
-              <MainTitle>
-                CREEMOS<br />ALIANZAS
-              </MainTitle>
-              <SubTitle>TRASCIENDE LA PANTALLA</SubTitle>
-            </motion.div>
-
-            <motion.div variants={fadeRight}>
-              <Paragraph>
-                Buscamos visionarios, inversores y colaboradores que crean
-                en el poder transformador de la cultura. Sé parte de la construcción
-                del primer corsódromo y de proyectos que dejan huella.
-              </Paragraph>
-            </motion.div>
-
-            <ContactDetails>
+        <motion.div style={{ y: yParallax }}>
+          <Layout>
+            {/* Left Column - Información */}
+            <InfoColumn
+              as={motion.div}
+              initial="initial"
+              whileInView="whileInView"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                initial: { opacity: 0 },
+                whileInView: { opacity: 1, transition: { staggerChildren: 0.2 } }
+              }}
+            >
               <motion.div variants={fadeRight}>
-                <ContactItem>
-                  <IconWrapper><Mail size={24} /></IconWrapper>
-                  <ItemContent>
-                    <ItemLabel>Email</ItemLabel>
-                    <ItemText>contacto@tresnoches.com</ItemText>
-                  </ItemContent>
-                </ContactItem>
+                <MainTitle>
+                  CREEMOS<br />ALIANZAS
+                </MainTitle>
+                <SubTitle>TRASCIENDE LA PANTALLA</SubTitle>
               </motion.div>
 
               <motion.div variants={fadeRight}>
-                <ContactItem>
-                  <IconWrapper><Phone size={24} /></IconWrapper>
-                  <ItemContent>
-                    <ItemLabel>Teléfono</ItemLabel>
-                    <ItemText>+54 9 11 1234-5678</ItemText>
-                  </ItemContent>
-                </ContactItem>
+                <Paragraph>
+                  Buscamos visionarios, inversores y colaboradores que crean
+                  en el poder transformador de la cultura. Sé parte de la construcción
+                  del primer corsódromo y de proyectos que dejan huella.
+                </Paragraph>
               </motion.div>
 
-              <motion.div variants={fadeRight}>
-                <ContactItem>
-                  <IconWrapper><MapPin size={24} /></IconWrapper>
-                  <ItemContent>
-                    <ItemLabel>Locación</ItemLabel>
-                    <ItemText>San Telmo, Buenos Aires, Argentina</ItemText>
-                  </ItemContent>
-                </ContactItem>
-              </motion.div>
-            </ContactDetails>
-          </InfoColumn>
+              <ContactDetails>
+                <motion.div variants={fadeRight}>
+                  <ContactItem>
+                    <IconWrapper><Mail size={24} /></IconWrapper>
+                    <ItemContent>
+                      <ItemLabel>Email</ItemLabel>
+                      <ItemText>contacto@tresnoches.com</ItemText>
+                    </ItemContent>
+                  </ContactItem>
+                </motion.div>
 
-          {/* Right Column - Formulario */}
-          <FormColumn as={motion.div} {...fadeIn}>
-            <FormWrapper>
-              <FormTitle>ENVIANOS UN MENSAJE</FormTitle>
+                <motion.div variants={fadeRight}>
+                  <ContactItem>
+                    <IconWrapper><Phone size={24} /></IconWrapper>
+                    <ItemContent>
+                      <ItemLabel>Teléfono</ItemLabel>
+                      <ItemText>+54 9 11 1234-5678</ItemText>
+                    </ItemContent>
+                  </ContactItem>
+                </motion.div>
 
-              <StyledForm onSubmit={handleSubmit}>
-                <InputGroup>
-                  <Input
-                    type="text"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                  />
-                  <InputLabel className={formState.name ? 'active' : ''}>Nombre Completo</InputLabel>
-                  <InputLine />
-                </InputGroup>
+                <motion.div variants={fadeRight}>
+                  <ContactItem>
+                    <IconWrapper><MapPin size={24} /></IconWrapper>
+                    <ItemContent>
+                      <ItemLabel>Locación</ItemLabel>
+                      <ItemText>San Telmo, Buenos Aires, Argentina</ItemText>
+                    </ItemContent>
+                  </ContactItem>
+                </motion.div>
+              </ContactDetails>
+            </InfoColumn>
 
-                <InputGroup>
-                  <Input
-                    type="email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                  />
-                  <InputLabel className={formState.email ? 'active' : ''}>Correo Electrónico</InputLabel>
-                  <InputLine />
-                </InputGroup>
+            {/* Right Column - Formulario */}
+            <FormColumn as={motion.div} {...fadeIn}>
+              <FormWrapper>
+                <FormTitle>ENVIANOS UN MENSAJE</FormTitle>
 
-                <InputGroup>
-                  <Input
-                    type="text"
-                    name="subject"
-                    value={formState.subject}
-                    onChange={handleChange}
-                    required
-                  />
-                  <InputLabel className={formState.subject ? 'active' : ''}>Asunto / Organización</InputLabel>
-                  <InputLine />
-                </InputGroup>
+                <StyledForm onSubmit={handleSubmit}>
+                  <InputGroup>
+                    <Input
+                      type="text"
+                      name="name"
+                      value={formState.name}
+                      onChange={handleChange}
+                      required
+                    />
+                    <InputLabel className={formState.name ? 'active' : ''}>Nombre Completo</InputLabel>
+                    <InputLine />
+                  </InputGroup>
 
-                <InputGroup className="textarea-group">
-                  <TextArea
-                    name="message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    required
-                  />
-                  <InputLabel className={formState.message ? 'active' : ''}>Mensaje</InputLabel>
-                  <InputLine />
-                </InputGroup>
+                  <InputGroup>
+                    <Input
+                      type="email"
+                      name="email"
+                      value={formState.email}
+                      onChange={handleChange}
+                      required
+                    />
+                    <InputLabel className={formState.email ? 'active' : ''}>Correo Electrónico</InputLabel>
+                    <InputLine />
+                  </InputGroup>
 
-                <SubmitButton type="submit" disabled={isSubmitting}>
-                  <ButtonText>
-                    {isSubmitting ? 'ENVIANDO...' : isSuccess ? '¡ENVIADO CON ÉXITO!' : 'ENVIAR MENSAJE'}
-                  </ButtonText>
-                  <ArrowRight size={20} />
-                  <ButtonHoverEffect />
-                </SubmitButton>
-              </StyledForm>
-            </FormWrapper>
-          </FormColumn>
-        </Layout>
+                  <InputGroup>
+                    <Input
+                      type="text"
+                      name="subject"
+                      value={formState.subject}
+                      onChange={handleChange}
+                      required
+                    />
+                    <InputLabel className={formState.subject ? 'active' : ''}>Asunto / Organización</InputLabel>
+                    <InputLine />
+                  </InputGroup>
+
+                  <InputGroup className="textarea-group">
+                    <TextArea
+                      name="message"
+                      value={formState.message}
+                      onChange={handleChange}
+                      required
+                    />
+                    <InputLabel className={formState.message ? 'active' : ''}>Mensaje</InputLabel>
+                    <InputLine />
+                  </InputGroup>
+
+                  <SubmitButton type="submit" disabled={isSubmitting}>
+                    <ButtonText>
+                      {isSubmitting ? 'ENVIANDO...' : isSuccess ? '¡ENVIADO CON ÉXITO!' : 'ENVIAR MENSAJE'}
+                    </ButtonText>
+                    <ArrowRight size={20} />
+                    <ButtonHoverEffect />
+                  </SubmitButton>
+                </StyledForm>
+              </FormWrapper>
+            </FormColumn>
+          </Layout>
+        </motion.div>
       </Container>
     </Section>
   );
@@ -186,16 +198,29 @@ const Section = styled.section`
   align-items: center;
   position: relative;
   overflow: hidden;
+`;
+
+const BgParallax = styled(motion.div)`
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.03) 0%,
+    rgba(0, 0, 0, 0) 70%
+  );
 
   &::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    z-index: 0;
-    pointer-events: none;
+    inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 `;
 

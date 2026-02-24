@@ -10,6 +10,7 @@ export default function SeccionPelicula() {
   });
 
   const yParallax = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const yBg = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   const fadeRight = {
     initial: { opacity: 0, x: 50 },
@@ -32,6 +33,7 @@ export default function SeccionPelicula() {
 
   return (
     <Section ref={containerRef}>
+      <BackgroundImage style={{ y: yBg }} />
       <Overlay />
 
       <motion.div style={{ y: yParallax, zIndex: 1, position: 'relative', display: 'flex', flexDirection: 'column', height: '100%', justifyContent: 'space-between' }}>
@@ -80,10 +82,6 @@ const Section = styled.section`
   position: relative;
   width: 100%;
   height: 100svh;
-  background-image: url('/content/hero-image.webp');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -93,6 +91,22 @@ const Section = styled.section`
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
     min-height: 100svh;
+  }
+`;
+
+const BackgroundImage = styled(motion.div)`
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  background-image: url('/content/hero-image.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  z-index: 0;
+
+  @media (max-width: 768px) {
     background-position: 80% center;
   }
 `;
