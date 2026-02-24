@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import styled from "styled-components";
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useFetchProjects } from '../../hooks/useFetchProjects';
 
-const categories = [
+// Fallback static data
+const staticCategories = [
   {
     title: "PELÍCULAS",
     items: ["TRES NOCHES AL AÑO", "UN MUNDO MEJOR: MI PAÍS"],
@@ -27,6 +29,8 @@ const fadeRight = {
 
 export default function Services() {
   const containerRef = useRef(null);
+  const { categories, loading, error } = useFetchProjects();
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -34,13 +38,16 @@ export default function Services() {
 
   const yParallax = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
+  // Use dynamic categories if available, otherwise fallback to static
+  const displayCategories = categories.length > 0 ? categories : staticCategories;
+
   return (
     <Section ref={containerRef} id="proyectos">
       <Label>Proyectos</Label>
 
       <Content style={{ y: yParallax }}>
         <motion.div {...fadeRight}>
-          {categories.map((cat) => (
+          {displayCategories.map((cat) => (
             <CategoryBlock key={cat.title}>
               <CategoryTitle>{cat.title}</CategoryTitle>
               <ItemList>
