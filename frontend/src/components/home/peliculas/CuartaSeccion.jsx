@@ -77,6 +77,10 @@ const Section = styled.section`
   position: relative;
   height: 100svh;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -173,6 +177,11 @@ const BottomImage = styled.img`
   height: 380px;
   margin: -120px 0 20px;
   object-fit: contain;
+
+    @media (max-width: 768px) {
+    height: 250px;
+    margin: -80px 0 0px;
+  }
 `;
 
 
@@ -187,8 +196,8 @@ const ImageTop = styled.img`
   pointer-events: none;
 
   @media (max-width: 768px) {
-    height: clamp(80px, 20vw, 150px);
-    top: -40px;
+    height: clamp(120px, 20vw, 150px);
+    top: -50px;
     right: -10px;
   }
 `;

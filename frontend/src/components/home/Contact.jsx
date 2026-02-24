@@ -4,176 +4,176 @@ import { motion } from 'framer-motion';
 import { Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
 
 export default function Contact() {
-    const [formState, setFormState] = useState({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-    });
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    const handleChange = (e) => {
-        setFormState({ ...formState, [e.target.name]: e.target.value });
-    };
+  const handleChange = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        // Simular envío para demostración
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            setFormState({ name: '', email: '', subject: '', message: '' });
-            setTimeout(() => setIsSuccess(false), 5000);
-        }, 1500);
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simular envío para demostración
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSuccess(true);
+      setFormState({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setIsSuccess(false), 5000);
+    }, 1500);
+  };
 
-    const fadeIn = {
-        initial: { opacity: 0, y: 60 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.8, ease: "easeOut" }
-    };
+  const fadeIn = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-    const fadeRight = {
-        initial: { opacity: 0, x: -50 },
-        whileInView: { opacity: 1, x: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.8, ease: "easeOut" }
-    };
+  const fadeRight = {
+    initial: { opacity: 0, x: -50 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true, amount: 0.2 },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-    return (
-        <Section id="contacto">
-            <Container>
-                <Layout>
-                    {/* Left Column - Información */}
-                    <InfoColumn
-                        as={motion.div}
-                        initial="initial"
-                        whileInView="whileInView"
-                        viewport={{ once: true, amount: 0.2 }}
-                        variants={{
-                            initial: { opacity: 0 },
-                            whileInView: { opacity: 1, transition: { staggerChildren: 0.2 } }
-                        }}
-                    >
-                        <motion.div variants={fadeRight}>
-                            <MainTitle>
-                                CREEMOS<br />ALIANZAS
-                            </MainTitle>
-                            <SubTitle>TRASCIENDE LA PANTALLA</SubTitle>
-                        </motion.div>
+  return (
+    <Section id="contacto">
+      <Container>
+        <Layout>
+          {/* Left Column - Información */}
+          <InfoColumn
+            as={motion.div}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              initial: { opacity: 0 },
+              whileInView: { opacity: 1, transition: { staggerChildren: 0.2 } }
+            }}
+          >
+            <motion.div variants={fadeRight}>
+              <MainTitle>
+                CREEMOS<br />ALIANZAS
+              </MainTitle>
+              <SubTitle>TRASCIENDE LA PANTALLA</SubTitle>
+            </motion.div>
 
-                        <motion.div variants={fadeRight}>
-                            <Paragraph>
-                                Buscamos visionarios, inversores y colaboradores que crean
-                                en el poder transformador de la cultura. Sé parte de la construcción
-                                del primer corsódromo y de proyectos que dejan huella.
-                            </Paragraph>
-                        </motion.div>
+            <motion.div variants={fadeRight}>
+              <Paragraph>
+                Buscamos visionarios, inversores y colaboradores que crean
+                en el poder transformador de la cultura. Sé parte de la construcción
+                del primer corsódromo y de proyectos que dejan huella.
+              </Paragraph>
+            </motion.div>
 
-                        <ContactDetails>
-                            <motion.div variants={fadeRight}>
-                                <ContactItem>
-                                    <IconWrapper><Mail size={24} /></IconWrapper>
-                                    <ItemContent>
-                                        <ItemLabel>Email</ItemLabel>
-                                        <ItemText>contacto@tresnoches.com</ItemText>
-                                    </ItemContent>
-                                </ContactItem>
-                            </motion.div>
+            <ContactDetails>
+              <motion.div variants={fadeRight}>
+                <ContactItem>
+                  <IconWrapper><Mail size={24} /></IconWrapper>
+                  <ItemContent>
+                    <ItemLabel>Email</ItemLabel>
+                    <ItemText>contacto@tresnoches.com</ItemText>
+                  </ItemContent>
+                </ContactItem>
+              </motion.div>
 
-                            <motion.div variants={fadeRight}>
-                                <ContactItem>
-                                    <IconWrapper><Phone size={24} /></IconWrapper>
-                                    <ItemContent>
-                                        <ItemLabel>Teléfono</ItemLabel>
-                                        <ItemText>+54 9 11 1234-5678</ItemText>
-                                    </ItemContent>
-                                </ContactItem>
-                            </motion.div>
+              <motion.div variants={fadeRight}>
+                <ContactItem>
+                  <IconWrapper><Phone size={24} /></IconWrapper>
+                  <ItemContent>
+                    <ItemLabel>Teléfono</ItemLabel>
+                    <ItemText>+54 9 11 1234-5678</ItemText>
+                  </ItemContent>
+                </ContactItem>
+              </motion.div>
 
-                            <motion.div variants={fadeRight}>
-                                <ContactItem>
-                                    <IconWrapper><MapPin size={24} /></IconWrapper>
-                                    <ItemContent>
-                                        <ItemLabel>Locación</ItemLabel>
-                                        <ItemText>Misiones, Argentina</ItemText>
-                                    </ItemContent>
-                                </ContactItem>
-                            </motion.div>
-                        </ContactDetails>
-                    </InfoColumn>
+              <motion.div variants={fadeRight}>
+                <ContactItem>
+                  <IconWrapper><MapPin size={24} /></IconWrapper>
+                  <ItemContent>
+                    <ItemLabel>Locación</ItemLabel>
+                    <ItemText>San Telmo, Buenos Aires, Argentina</ItemText>
+                  </ItemContent>
+                </ContactItem>
+              </motion.div>
+            </ContactDetails>
+          </InfoColumn>
 
-                    {/* Right Column - Formulario */}
-                    <FormColumn as={motion.div} {...fadeIn}>
-                        <FormWrapper>
-                            <FormTitle>ENVIANOS UN MENSAJE</FormTitle>
+          {/* Right Column - Formulario */}
+          <FormColumn as={motion.div} {...fadeIn}>
+            <FormWrapper>
+              <FormTitle>ENVIANOS UN MENSAJE</FormTitle>
 
-                            <StyledForm onSubmit={handleSubmit}>
-                                <InputGroup>
-                                    <Input
-                                        type="text"
-                                        name="name"
-                                        value={formState.name}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <InputLabel className={formState.name ? 'active' : ''}>Nombre Completo</InputLabel>
-                                    <InputLine />
-                                </InputGroup>
+              <StyledForm onSubmit={handleSubmit}>
+                <InputGroup>
+                  <Input
+                    type="text"
+                    name="name"
+                    value={formState.name}
+                    onChange={handleChange}
+                    required
+                  />
+                  <InputLabel className={formState.name ? 'active' : ''}>Nombre Completo</InputLabel>
+                  <InputLine />
+                </InputGroup>
 
-                                <InputGroup>
-                                    <Input
-                                        type="email"
-                                        name="email"
-                                        value={formState.email}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <InputLabel className={formState.email ? 'active' : ''}>Correo Electrónico</InputLabel>
-                                    <InputLine />
-                                </InputGroup>
+                <InputGroup>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formState.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  <InputLabel className={formState.email ? 'active' : ''}>Correo Electrónico</InputLabel>
+                  <InputLine />
+                </InputGroup>
 
-                                <InputGroup>
-                                    <Input
-                                        type="text"
-                                        name="subject"
-                                        value={formState.subject}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <InputLabel className={formState.subject ? 'active' : ''}>Asunto / Organización</InputLabel>
-                                    <InputLine />
-                                </InputGroup>
+                <InputGroup>
+                  <Input
+                    type="text"
+                    name="subject"
+                    value={formState.subject}
+                    onChange={handleChange}
+                    required
+                  />
+                  <InputLabel className={formState.subject ? 'active' : ''}>Asunto / Organización</InputLabel>
+                  <InputLine />
+                </InputGroup>
 
-                                <InputGroup className="textarea-group">
-                                    <TextArea
-                                        name="message"
-                                        value={formState.message}
-                                        onChange={handleChange}
-                                        required
-                                    />
-                                    <InputLabel className={formState.message ? 'active' : ''}>Mensaje</InputLabel>
-                                    <InputLine />
-                                </InputGroup>
+                <InputGroup className="textarea-group">
+                  <TextArea
+                    name="message"
+                    value={formState.message}
+                    onChange={handleChange}
+                    required
+                  />
+                  <InputLabel className={formState.message ? 'active' : ''}>Mensaje</InputLabel>
+                  <InputLine />
+                </InputGroup>
 
-                                <SubmitButton type="submit" disabled={isSubmitting}>
-                                    <ButtonText>
-                                        {isSubmitting ? 'ENVIANDO...' : isSuccess ? '¡ENVIADO CON ÉXITO!' : 'ENVIAR MENSAJE'}
-                                    </ButtonText>
-                                    <ArrowRight size={20} />
-                                    <ButtonHoverEffect />
-                                </SubmitButton>
-                            </StyledForm>
-                        </FormWrapper>
-                    </FormColumn>
-                </Layout>
-            </Container>
-        </Section>
-    );
+                <SubmitButton type="submit" disabled={isSubmitting}>
+                  <ButtonText>
+                    {isSubmitting ? 'ENVIANDO...' : isSuccess ? '¡ENVIADO CON ÉXITO!' : 'ENVIAR MENSAJE'}
+                  </ButtonText>
+                  <ArrowRight size={20} />
+                  <ButtonHoverEffect />
+                </SubmitButton>
+              </StyledForm>
+            </FormWrapper>
+          </FormColumn>
+        </Layout>
+      </Container>
+    </Section>
+  );
 }
 
 /* ─── Styled Components ─────────────────────────────────────────── */

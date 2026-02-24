@@ -82,7 +82,7 @@ const Section = styled.section`
   height: 100svh;
   background-image: url('/content/hero-image.webp');
   background-size: cover;
-  background-position: center , top;
+  background-position: center top;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -93,6 +93,7 @@ const Section = styled.section`
   @media (max-width: 768px) {
     padding: 2rem 1.5rem;
     min-height: 100svh;
+    background-position: 80% center;
   }
 `;
 

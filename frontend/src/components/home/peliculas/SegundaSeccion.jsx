@@ -64,9 +64,9 @@ export default function SegundaSeccionPelicula() {
           </TextSection>
         </ContentContainer>
       </motion.div>
-      <motion.div {...fadeUp} style={{ height: '400px' }}>
+      <motion.div {...fadeUp} style={{ width: '100%' }}>
 
-        <BottomImage src="/content/hero-image.png" alt="Construcción del Sambódromo" />
+        <BottomImage src="/content/corsodromo.webp" alt="Construcción del Sambódromo" />
       </motion.div>
     </Section>
   );
@@ -170,7 +170,7 @@ const Button = styled.button`
 
 const BottomImage = styled.img`
   width: 100%;
-  height: 400px;
+  height: 50vh;
   object-fit: cover;
   filter: grayscale(100%);
 `;
