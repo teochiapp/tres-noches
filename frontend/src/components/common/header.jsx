@@ -66,11 +66,29 @@ const Header = () => {
   }, [location.pathname]);
 
   const navItems = [
-    { name: 'Inicio', path: '/' },
-    { name: 'Quienes Somos', path: '/quienes-somos' },
-    { name: 'Proyectos', path: '/proyectos' },
-    { name: 'Contacto', path: '/contacto' },
+    { name: 'Inicio', path: '#inicio' },
+    { name: 'Quienes Somos', path: '#quienes-somos' },
+    { name: 'Proyectos', path: '#proyectos' },
+    { name: 'Contacto', path: '#contacto' },
   ];
+
+  const handleNavClick = (e, path) => {
+    e.preventDefault();
+    const targetId = path.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const offset = 80; // Offset for fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+    setIsMenuOpen(false);
+  };
 
   return (
     <>
@@ -78,6 +96,7 @@ const Header = () => {
         <Nav>
           <Logo
             to="/"
+            onClick={(e) => handleNavClick(e, '#inicio')}
             style={{ pointerEvents: 'auto', fontSize: logoFontSize, top: logoTop, opacity: logoOpacity }}
             initial={{ opacity: 0, x: -30, filter: "blur(5px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
@@ -104,7 +123,13 @@ const Header = () => {
         <Nav>
           <NavLinks>
             {navItems.map(item => (
-              <NavLink key={item.name} to={item.path}>{item.name}</NavLink>
+              <NavLink
+                key={item.name}
+                to={item.path}
+                onClick={(e) => handleNavClick(e, item.path)}
+              >
+                {item.name}
+              </NavLink>
             ))}
           </NavLinks>
 
@@ -133,7 +158,7 @@ const Header = () => {
                 style={{ fontSize: '1.8rem', padding: '10px' }}
                 key={item.name}
                 to={item.path}
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => handleNavClick(e, item.path)}
               >
                 {item.name}
               </NavLink>

@@ -8,12 +8,26 @@ import { motion } from 'framer-motion';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  const handleNavClick = (e, path) => {
+    e.preventDefault();
+    const targetId = path.replace('#', '');
+    const element = document.getElementById(targetId);
+
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
     <FooterContainer
+      id="contacto"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
@@ -39,9 +53,9 @@ const Footer = () => {
         >
           <NavColumns>
             <Column>
-              <FooterLink to="/" onClick={scrollToTop}>INICIO</FooterLink>
-              <FooterLink to="/quienes-somos" onClick={scrollToTop}>QUIENES SOMOS</FooterLink>
-              <FooterLink to="/proyectos" onClick={scrollToTop}>PROYECTOS</FooterLink>
+              <FooterLink to="#inicio" onClick={(e) => handleNavClick(e, '#inicio')}>INICIO</FooterLink>
+              <FooterLink to="#quienes-somos" onClick={(e) => handleNavClick(e, '#quienes-somos')}>QUIENES SOMOS</FooterLink>
+              <FooterLink to="#proyectos" onClick={(e) => handleNavClick(e, '#proyectos')}>PROYECTOS</FooterLink>
             </Column>
             <Column>
               <ExternalLink href="mailto:hola@tresnoches.com">EMAIL</ExternalLink>
@@ -62,7 +76,7 @@ const Footer = () => {
         <Copyright>
           Desarrollado por <CreditLink href="https://surcodes.com" target="_blank" rel="noopener noreferrer">SurCodes <ArrowUpRight size={14} /></CreditLink>
         </Copyright>
-        <BackToTop onClick={scrollToTop}>VOLVER ARRIBA</BackToTop>
+        <BackToTop onClick={(e) => handleNavClick(e, '#inicio')}>VOLVER ARRIBA</BackToTop>
       </BottomBar>
     </FooterContainer>
   );

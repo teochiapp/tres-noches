@@ -7,7 +7,7 @@ import SplitText from "../common/SplitText";
 const Hero = () => {
 
   return (
-    <HeroSection>
+    <HeroSection id="inicio">
       <ContentSection>
         <Parallax speed={-5} style={{ alignSelf: 'flex-start' }}>
           <LeftText

@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import Hero from '../components/home/Hero';
 import About from '../components/home/About';
-import Services from '../components/home/Services';
-import SeccionPelicula from '../components/home/SeccionPelicula';
-import SegundaSeccionPelicula from '../components/home/SegundaSeccionPelicula';
+import Services from '../components/home/Proyects';
+import SeccionPelicula from '../components/home/peliculas/PrimerSeccion';
+import SegundaSeccionPelicula from '../components/home/peliculas/SegundaSeccion';
+import TerceraSeccionPelicula from '../components/home/peliculas/TerceraSeccion';
+import CuartaSeccionPelicula from '../components/home/peliculas/CuartaSeccion';
 import Contact from '../components/home/Contact';
 
 const HomeContainer = styled.div`
@@ -20,6 +22,8 @@ const Home = () => {
             <Services />
             <SeccionPelicula />
             <SegundaSeccionPelicula />
+            <TerceraSeccionPelicula />
+            <CuartaSeccionPelicula />
             <Contact />
         </HomeContainer>
     );

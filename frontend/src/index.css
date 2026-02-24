@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Elza Thin';
-  src: url('./assets/fonts/fonnts.com-ElzaTrial-Thin.otf') format('opentype');
+  src: url('./assets/fonts/Elza-Pro/Elza-Thin.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: 'Elza';
-  src: url('./assets/fonts/fonnts.com-ElzaTrial-Regular.otf') format('opentype');
+  src: url('./assets/fonts/Elza-Pro/Elza-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: 'Elza Semibold';
-  src: url('./assets/fonts/fonnts.com-ElzaTrial-Semibold.otf') format('opentype');
+  src: url('./assets/fonts/Elza-Pro/Elza-Semibold.otf') format('opentype');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: 'Elza Bold';
-  src: url('./assets/fonts/fonnts.com-ElzaTrial-NarrowBold.otf') format('opentype');
+  src: url('./assets/fonts/Elza-Pro/Elza-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
