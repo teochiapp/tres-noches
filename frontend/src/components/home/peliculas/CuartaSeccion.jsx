@@ -1,8 +1,10 @@
 import { useRef } from 'react';
 import styled from "styled-components";
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export default function CuartaSeccionPelicula() {
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -62,7 +64,7 @@ export default function CuartaSeccionPelicula() {
               </Paragraph>
               <ButtonsContainer>
                 <Button>SUMATE AL PROYECTO</Button>
-                <Button>MÁS INFORMACIÓN</Button>
+                <Button onClick={() => navigate('/proyecto/barrio-canabico')}>MÁS INFORMACIÓN</Button>
               </ButtonsContainer>
             </motion.div>
           </TextSection>
