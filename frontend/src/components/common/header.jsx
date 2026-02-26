@@ -191,7 +191,9 @@ const HeaderContainer = styled.header`
   padding: 20px;
   z-index: 1000;
   transition: all 0.3s ease;
-  background: transparent;
+  background: ${props => props.$scrolled ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
+  backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
+  -webkit-backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
 `;
 
 const Nav = styled.nav`

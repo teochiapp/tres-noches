@@ -369,12 +369,12 @@ const GallerySection = styled.section`
 
 const GalleryImageWrapper = styled(motion.div)`
   width: 100%;
-  height: ${props => props.$isLast ? '100vh' : '80vh'};
+  height: ${props => props.$isLast ? '60vh' : '40vh'};
   position: relative;
   overflow: hidden;
   
   @media (max-width: 768px) {
-    height: ${props => props.$isLast ? '80vh' : '50vh'};
+    height: ${props => props.$isLast ? '40vh' : '40vh'};
   }
 `;
 
