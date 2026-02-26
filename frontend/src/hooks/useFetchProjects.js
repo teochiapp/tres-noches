@@ -20,30 +20,51 @@ export const useFetchProjects = () => {
                 }
 
                 // Group by category
-                // Handling both Strapi v4/v5 response structures defensively
+                // Strapi v5: response is flat — project fields are at the top level,
+                // and relations like `categoria` are returned as plain objects { id, Nombre }
+                // Strapi v4: fields are nested under project.attributes, relations under .data.attributes
                 const grouped = projects.reduce((acc, project) => {
-                    const attrs = project.attributes || project; // v4 has attributes, v5 is flatter in some configs
-                    const catData = attrs.categoria?.data?.attributes || attrs.categoria;
-                    const catName = catData?.Nombre || 'OTROS';
-                    const titulo = attrs.Titulo || 'Sin título';
+                    const attrs = project.attributes || project; // v4 uses .attributes; v5 is flat
 
-                    const titleUpper = catName.toUpperCase();
-                    const existingCat = acc.find(c => c.title === titleUpper);
+                    // v5: categoria = { id, Nombre, ... }  (direct object)
+                    // v4: categoria = { data: { id, attributes: { Nombre, ... } } }
+                    const catV5 = attrs.categoria && typeof attrs.categoria === 'object' && !Array.isArray(attrs.categoria) && attrs.categoria.Nombre
+                        ? attrs.categoria
+                        : null;
+                    const catV4 = attrs.categoria?.data?.attributes ?? null;
+                    const catName = (catV5?.Nombre || catV4?.Nombre || 'OTROS').toUpperCase();
+                    const titulo = attrs.Titulo || 'Sin título';
+                    const id = project.documentId || project.id;
+
+                    const existingCat = acc.find(c => c.title === catName);
 
                     if (existingCat) {
-                        existingCat.items.push(titulo);
+                        existingCat.items.push({ titulo, id });
                     } else {
                         acc.push({
-                            title: titleUpper,
-                            items: [titulo]
+                            title: catName,
+                            items: [{ titulo, id }]
                         });
                     }
                     return acc;
                 }, []);
 
-                // Sort categories if needed (e.g. alphabetical or specific order)
-                // For now, just set what we have
-                setCategories(grouped);
+                // Sort categories based on a specific order
+                const order = ['PELÍCULAS', 'IMPACTO', 'EVENTOS'];
+                const sorted = grouped.sort((a, b) => {
+                    const indexA = order.indexOf(a.title);
+                    const indexB = order.indexOf(b.title);
+
+                    // If both are in the order list, follow the list
+                    if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+                    // If only one is in the list, that one comes first
+                    if (indexA !== -1) return -1;
+                    if (indexB !== -1) return 1;
+                    // Otherwise, alphabetical
+                    return a.title.localeCompare(b.title);
+                });
+
+                setCategories(sorted);
                 setLoading(false);
             } catch (err) {
                 console.error("Error fetching projects from Strapi:", err);

@@ -1,171 +1,166 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-
-const projectsData = {
-    "corsodromo": {
-        title: "EL CORSÓDROMO",
-        subtitle: "CONSTRUCCIÓN DEL SAMBÓDROMO",
-        description: "Estamos construyendo el espacio que esa tradición del carnaval merece. En alianza con inversores privados, el municipio y la provincia, estamos desarrollando el primer corsódromo de Concepción de las Sierras. Un proyecto que generará; empleo, turismo, identidad y futuro.",
-        longDescription: "Buscamos inversores y colaboradores que crean en el poder transformador de la cultura. Con la participación de la comunidad y un diseño arquitectónico innovador, este espacio será el corazón de las festividades locales y un centro de atracción turística de primer nivel. Un hito estructural que potenciará el desarrollo regional y marcará un antes y un después en nuestra forma de celebrar.",
-        heroImage: "/content/corsodromo.webp",
-        gallery: [
-            "/content/corsodromo.webp",
-        ],
-        accentColor: "#EF511D"
-    },
-    "barrio-canabico": {
-        title: "EL BARRIO CANÁBICO",
-        subtitle: "DE UNA PELICULA A UN PAÍS",
-        description: "Una iniciativa disruptiva e innovadora que nace a partir de una película y busca transformar la realidad de toda una comunidad mediante la implementación pionera de conceptos sustentables.",
-        longDescription: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quo cumque exercitationem porro itaque est? Error alias consequatur officiis, ducimus quasi ipsam excepturi saepe sapiente id dolore ab, iste ipsa accusamus corrupti amet at. Este proyecto busca no solo impactar culturalmente sino también establecer un nuevo modelo productivo y social.",
-        heroImage: "/content/decoration-single-heads.png", // Usando las imagenes que ya tienen
-        gallery: [
-            "/content/decoration-heads.png",
-
-        ],
-        accentColor: "#ec4899"
-    },
-    "default": {
-        title: "TRES NOCHES AL AÑO",
-        subtitle: "CONOCE MÁS SOBRE LA PELÍCULA",
-        description: "Un viaje profundo a las tradiciones y la cultura de nuestra región, retratado de manera íntima y espectacular.",
-        longDescription: "Esta película captura la esencia del carnaval y la vida de quienes lo hacen posible. Un trabajo documental y de ficción que te sumergirá en las historias más cautivantes de nuestros protagonistas. Cada escena está pensada para transmitir el calor, la pasión y el color de nuestra gente.",
-        heroImage: "/content/hero.jpg",
-        gallery: [
-            "/content/hero.jpg",
-        ],
-        accentColor: "rgba(255, 255, 255, 0.8)"
-    }
-};
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API_URL } from '../api/config';
 
 export default function SingleMovie() {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const containerRef = useRef(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const containerRef = useRef(null);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    const project = projectsData[id] || projectsData["default"];
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [id]);
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
-    const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
-    const fadeUp = {
-        initial: { opacity: 0, y: 60 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: "-100px" },
-        transition: { duration: 0.8, ease: "easeOut" }
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get(`${API_URL}/api/proyectos/${id}?populate=*`);
+        setProject(response.data.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching project details:", err);
+        setError(err);
+        setLoading(false);
+      }
     };
 
-    const staggerContainer = {
-        initial: {},
-        whileInView: {
-            transition: { staggerChildren: 0.2, delayChildren: 0.1 }
-        },
-        viewport: { once: true }
-    };
+    if (id) {
+      fetchProject();
+    }
+    window.scrollTo(0, 0);
+  }, [id]);
 
-    return (
-        <PageContainer ref={containerRef}>
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
-            {/* Botón de volver flotante */}
-            <BackButton onClick={() => navigate(-1)}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 12H5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12 19L5 12L12 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                VOLVER
-            </BackButton>
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-            {/* Hero Section */}
-            <HeroSection>
-                <HeroImageWrapper style={{ y: heroY, opacity: heroOpacity }}>
-                    <HeroImage src={project.heroImage} alt={project.title} />
-                    <HeroOverlay />
-                </HeroImageWrapper>
+  const fadeUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-100px" },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-                <HeroContent
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                >
-                    <SubTitle>{project.subtitle}</SubTitle>
-                    <MainTitle>{project.title}</MainTitle>
-                </HeroContent>
-            </HeroSection>
+  const staggerContainer = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+    },
+    viewport: { once: true }
+  };
 
-            {/* Info Section */}
-            <ContentSection>
-                <ProjectInfo {...fadeUp}>
-                    <Label>Sobre el Proyecto</Label>
-                    <IntroText>{project.description}</IntroText>
-                    <DescriptionText>{project.longDescription}</DescriptionText>
-                </ProjectInfo>
+  if (loading) return <StatusMessage>Cargando proyecto...</StatusMessage>;
+  if (error || !project) return <StatusMessage>Error al cargar el proyecto.</StatusMessage>;
 
-                <StatsSection
-                    variants={staggerContainer}
-                    initial="initial"
-                    whileInView="whileInView"
-                    viewport={{ once: true }}
-                >
-                    <StatBox variants={fadeUp}>
-                        <StatNum>2026</StatNum>
-                        <StatLabel>AÑO DE LANZAMIENTO</StatLabel>
-                    </StatBox>
-                    <StatBox variants={fadeUp}>
-                        <StatNum>DOC</StatNum>
-                        <StatLabel>FORMATO</StatLabel>
-                    </StatBox>
-                    <StatBox variants={fadeUp}>
-                        <StatNum>ARG</StatNum>
-                        <StatLabel>ORIGEN</StatLabel>
-                    </StatBox>
-                </StatsSection>
-            </ContentSection>
+  // Helpers to extract data based on Strapi structure
+  const attrs = project.attributes || project;
+  const title = attrs.Titulo || "Sin título";
+  const subtitle = attrs.Subtitulo || "";
 
-            {/* Gallery Section */}
-            <GallerySection>
-                {project.gallery.map((img, index) => {
-                    const isLast = index === project.gallery.length - 1;
-                    return (
-                        <GalleryImageWrapper
-                            key={index}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
-                            $isLast={isLast}
-                        >
-                            <GalleryImage src={img} alt={`${project.title} gallery ${index}`} />
-                            {isLast && (
-                                <>
-                                    <GalleryOverlay />
-                                    <CtaContent>
-                                        <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
-                                            <CtaButton>
-                                                SUMATE AL PROYECTO
-                                            </CtaButton>
-                                        </motion.div>
-                                    </CtaContent>
-                                </>
-                            )}
-                        </GalleryImageWrapper>
-                    );
-                })}
-            </GallerySection>
-        </PageContainer>
-    );
+  // Support for both rich text blocks (v4/v5) and plain text
+  const description = typeof attrs.Descripcion === 'string'
+    ? attrs.Descripcion
+    : attrs.Descripcion?.[0]?.children?.[0]?.text || "Sin descripción disponible.";
+
+  // Support for both v4 (.data.attributes.url) and v5 (.url) media structures
+  const portData = attrs.Portada?.data?.attributes || attrs.Portada;
+  const heroImage = portData?.url ? (portData.url.startsWith('http') ? portData.url : `${API_URL}${portData.url}`) : "/content/hero-image.webp";
+
+  return (
+    <PageContainer ref={containerRef}>
+      <BackButton onClick={() => navigate(-1)}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12 19L5 12L12 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        VOLVER
+      </BackButton>
+
+      <HeroSection>
+        <HeroImageWrapper style={{ y: heroY, opacity: heroOpacity }}>
+          <HeroImage src={heroImage} alt={title} />
+          <HeroOverlay />
+        </HeroImageWrapper>
+
+        <HeroContent
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+        >
+          <SubTitle>{subtitle}</SubTitle>
+          <MainTitle>{title}</MainTitle>
+        </HeroContent>
+      </HeroSection>
+
+      <ContentSection>
+        <ProjectInfo {...fadeUp}>
+          <Label>Sobre el Proyecto</Label>
+          <IntroText>{description}</IntroText>
+          <DescriptionText>{attrs.longDescription || "Información detallada próximamente."}</DescriptionText>
+        </ProjectInfo>
+
+        <StatsSection
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true }}
+        >
+          <StatBox variants={fadeUp}>
+            <StatNum>2026</StatNum>
+            <StatLabel>AÑO DE LANZAMIENTO</StatLabel>
+          </StatBox>
+          <StatBox variants={fadeUp}>
+            <StatNum>DOC</StatNum>
+            <StatLabel>FORMATO</StatLabel>
+          </StatBox>
+          <StatBox variants={fadeUp}>
+            <StatNum>ARG</StatNum>
+            <StatLabel>ORIGEN</StatLabel>
+          </StatBox>
+        </StatsSection>
+      </ContentSection>
+
+      <GallerySection>
+        {/* For now, just show the hero image as part of the gallery if no other gallery items exist */}
+        <GalleryImageWrapper
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          $isLast={true}
+        >
+          <GalleryImage src={heroImage} alt={title} />
+          <GalleryOverlay />
+          <CtaContent>
+            <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
+              <CtaButton onClick={() => navigate('/#contacto')}>
+                SUMATE AL PROYECTO
+              </CtaButton>
+            </motion.div>
+          </CtaContent>
+        </GalleryImageWrapper>
+      </GallerySection>
+    </PageContainer>
+  );
 }
+
+const StatusMessage = styled.div`
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    color: #fff;
+    font-family: var(--font-main);
+`;
 
 // ============== ESTILOS ============== //
 

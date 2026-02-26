@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import styled from "styled-components";
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useFetchProjects } from '../../hooks/useFetchProjects';
 
 // Fallback static data
@@ -52,7 +53,11 @@ export default function Services() {
               <CategoryTitle>{cat.title}</CategoryTitle>
               <ItemList>
                 {cat.items.map((item) => (
-                  <Item key={item}>{item}</Item>
+                  <Item key={item.id || (typeof item === 'string' ? item : item.titulo)}>
+                    <ProjectLink to={item.id ? `/proyecto/${item.id}` : '#'}>
+                      {item.titulo || item}
+                    </ProjectLink>
+                  </Item>
                 ))}
               </ItemList>
             </CategoryBlock>
@@ -151,15 +156,20 @@ const ItemList = styled.ul`
 `;
 
 const Item = styled.li`
-    font-family: var(--font-main);
-  font-size: clamp(1rem, 1.5vw, 2.5rem);
+  padding: 0.15rem 0;
+`;
+
+const ProjectLink = styled(Link)`
+  text-decoration: none;
+  font-family: var(--font-main);
+  font-size: clamp(1.2rem, 1.8vw, 2.5rem);
   font-weight: 400;
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.75);
   text-transform: uppercase;
-  cursor: default;
+  cursor: pointer;
   transition: color 0.25s ease, letter-spacing 0.25s ease;
-  padding: 0.15rem 0;
+  display: block;
 
   &:hover {
     color: #fff;

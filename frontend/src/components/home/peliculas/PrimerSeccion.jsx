@@ -140,6 +140,7 @@ const FilmTitle = styled.p`
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.1;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.95);
 `;
 
 const FilmSub = styled.p`
@@ -150,6 +151,7 @@ const FilmSub = styled.p`
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 0.2rem;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.9);
 `;
 
 /* ── BOTTOM ────────────────────────────────── */
@@ -183,6 +185,7 @@ const ProjectSmall = styled.p`
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,1);
 `;
 
 const ProjectBig = styled.h2`
@@ -193,6 +196,7 @@ const ProjectBig = styled.h2`
   text-transform: uppercase;
   line-height: 1;
   letter-spacing: -0.01em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 1px 6px rgba(0,0,0,1);
 `;
 
 const BottomRight = styled.div`
@@ -222,4 +226,5 @@ const Description = styled.p`
   color: var(--primary);
   line-height: 1.55;
   letter-spacing: 0.01em;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.9);
 `;
