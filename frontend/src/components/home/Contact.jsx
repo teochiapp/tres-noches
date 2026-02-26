@@ -91,7 +91,7 @@ export default function Contact() {
                     <IconWrapper><Mail size={24} /></IconWrapper>
                     <ItemContent>
                       <ItemLabel>Email</ItemLabel>
-                      <ItemText>contacto@tresnoches.com</ItemText>
+                      <ItemText>cine@tresnoches.com.ar</ItemText>
                     </ItemContent>
                   </ContactItem>
                 </motion.div>
@@ -101,7 +101,7 @@ export default function Contact() {
                     <IconWrapper><Phone size={24} /></IconWrapper>
                     <ItemContent>
                       <ItemLabel>Teléfono</ItemLabel>
-                      <ItemText>+54 9 11 1234-5678</ItemText>
+                      <ItemText>+54 9 11 6999 3829</ItemText>
                     </ItemContent>
                   </ContactItem>
                 </motion.div>
