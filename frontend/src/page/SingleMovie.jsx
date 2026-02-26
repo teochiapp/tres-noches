@@ -134,28 +134,35 @@ export default function SingleMovie() {
 
             {/* Gallery Section */}
             <GallerySection>
-                {project.gallery.map((img, index) => (
-                    <GalleryImageWrapper
-                        key={index}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
-                    >
-                        <GalleryImage src={img} alt={`${project.title} gallery ${index}`} />
-                    </GalleryImageWrapper>
-                ))}
+                {project.gallery.map((img, index) => {
+                    const isLast = index === project.gallery.length - 1;
+                    return (
+                        <GalleryImageWrapper
+                            key={index}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+                            $isLast={isLast}
+                        >
+                            <GalleryImage src={img} alt={`${project.title} gallery ${index}`} />
+                            {isLast && (
+                                <>
+                                    <GalleryOverlay />
+                                    <CtaContent>
+                                        <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
+                                            <CtaButton>
+                                                SUMATE AL PROYECTO
+                                            </CtaButton>
+                                        </motion.div>
+                                    </CtaContent>
+                                </>
+                            )}
+                        </GalleryImageWrapper>
+                    );
+                })}
             </GallerySection>
-
-            {/* CTA Section */}
-            <CtaSection>
-                <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
-                    <CtaButton>
-                        SUMATE AL PROYECTO
-                    </CtaButton>
-                </motion.div>
-            </CtaSection>
         </PageContainer>
     );
 }
@@ -355,27 +362,19 @@ const StatLabel = styled.span`
 `;
 
 const GallerySection = styled.section`
-  padding: 0 10% 8rem;
-  max-width: 1600px;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4rem;
-  
-  @media (max-width: 768px) {
-    padding: 0 5% 4rem;
-    gap: 2rem;
-  }
 `;
 
 const GalleryImageWrapper = styled(motion.div)`
   width: 100%;
-  height: 70vh;
-  border-radius: 12px;
+  height: ${props => props.$isLast ? '100vh' : '80vh'};
+  position: relative;
   overflow: hidden;
   
   @media (max-width: 768px) {
-    height: 40vh;
+    height: ${props => props.$isLast ? '80vh' : '50vh'};
   }
 `;
 
@@ -390,12 +389,29 @@ const GalleryImage = styled.img`
   }
 `;
 
-const CtaSection = styled.section`
-  padding: 8rem 5%;
+const GalleryOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Capa oscura para que el texto sea legible */
+  z-index: 1;
+`;
+
+const CtaContent = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 0 5%;
 `;
 
 const CtaTitle = styled.h2`
@@ -404,6 +420,7 @@ const CtaTitle = styled.h2`
   text-transform: uppercase;
   margin-bottom: 2rem;
   letter-spacing: -0.02em;
+  color: #fff;
 `;
 
 const CtaButton = styled.button`
