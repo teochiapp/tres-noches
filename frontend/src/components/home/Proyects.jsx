@@ -7,7 +7,7 @@ import { useFetchProjects } from '../../hooks/useFetchProjects';
 const staticCategories = [
   {
     title: "PELÍCULAS",
-    items: ["TRES NOCHES AL AÑO", "UN MUNDO MEJOR: MI PAÍS"],
+    items: ["TRES NOCHES AL AÑO", "UN MUNDO PERFECTO: MI PAÍS"],
   },
   {
     title: "IMPACTO",

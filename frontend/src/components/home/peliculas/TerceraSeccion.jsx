@@ -45,7 +45,7 @@ export default function TerceraSeccionPelicula() {
 
           {/* ── FILM LABEL ─────────────────────────── */}
           <FilmLabel>
-            <FilmTitle>UN MUNDO FELIZ: MI PAIS</FilmTitle>
+            <FilmTitle>UN MUNDO PERFECTO: MI PAIS</FilmTitle>
             <FilmSub>LARGOMETRAJE DOCUMENTAL</FilmSub>
           </FilmLabel>
         </motion.div>

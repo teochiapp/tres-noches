@@ -116,7 +116,7 @@ const MainTitle = styled.h2`
 `;
 
 const SubTitle = styled.h3`
-  font-family: var(--font-main);
+  font-family: var(--font-thin);
   font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   font-weight: 300;
   color: #fff;
