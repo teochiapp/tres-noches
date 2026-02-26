@@ -89,6 +89,7 @@ const FooterContainer = styled(motion.footer)`
   color: #fff;
   padding: 100px 4vw 40px;
   width: 100%;
+  min-heigth:100vh;
   display: flex;
   flex-direction: column;
   border-top: 1px solid rgba(255, 255, 255, 0.1);

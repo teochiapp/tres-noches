@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [atBottom, setAtBottom] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
   const location = useLocation();
@@ -47,6 +48,11 @@ const Header = () => {
     };
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      const scrollPosition = window.innerHeight + window.scrollY;
+      const documentHeight = document.documentElement.scrollHeight;
+      // Consider "bottom" if within 100px of the footer
+      setAtBottom(scrollPosition >= documentHeight - 100);
     };
     const updateHeight = () => setPageHeight(document.documentElement.scrollHeight);
 
@@ -119,7 +125,7 @@ const Header = () => {
         </Nav>
       </LogoWrapper>
 
-      <HeaderContainer $scrolled={scrolled}>
+      <HeaderContainer $scrolled={scrolled} $atBottom={atBottom}>
         <Nav>
           <NavLinks>
             {navItems.map(item => (
@@ -191,9 +197,9 @@ const HeaderContainer = styled.header`
   padding: 20px;
   z-index: 1000;
   transition: all 0.3s ease;
-  background: ${props => props.$scrolled ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
-  backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
-  -webkit-backdrop-filter: ${props => props.$scrolled ? 'blur(12px)' : 'none'};
+  background: ${props => props.$scrolled && !props.$atBottom ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
+  backdrop-filter: ${props => props.$scrolled && !props.$atBottom ? 'blur(12px)' : 'none'};
+  -webkit-backdrop-filter: ${props => props.$scrolled && !props.$atBottom ? 'blur(12px)' : 'none'};
 `;
 
 const Nav = styled.nav`
