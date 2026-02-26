@@ -158,7 +158,7 @@ const ContentRight = styled.div`
 `;
 
 const Paragraph = styled.p`
-  font-family: 'Courier New', Courier, monospace; /* Monospace para ese look técnico de la imagen */
+  font-family: var(--font-semibold); /* Monospace para ese look técnico de la imagen */
   font-size: 18px;
   line-height: 1.2em;
   color: var(--text-secondary);
@@ -172,7 +172,7 @@ const Paragraph = styled.p`
 `;
 
 const ActionLink = styled.a`
-  font-family: 'Courier New', Courier, monospace;
+  font-family: var(--font-semibold);
   font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;

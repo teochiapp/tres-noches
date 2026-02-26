@@ -72,6 +72,7 @@ const Section = styled.section`
     padding: 3rem 4rem 6rem;
     position: relative;
     display: flex;
+    
 
   @media (max-width: 1440px) {
     padding: 2.5rem 1.5rem 4rem;
@@ -130,7 +131,7 @@ const CategoryBlock = styled.div`
 `;
 
 const CategoryTitle = styled.h2`
-  font-family: var(--font-alt);
+  font-family: var(--font-bold);
   font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 900;
   color: #fff;
@@ -150,7 +151,7 @@ const ItemList = styled.ul`
 `;
 
 const Item = styled.li`
-    font-family: var(--font-alt);
+    font-family: var(--font-main);
   font-size: clamp(1rem, 1.5vw, 2.5rem);
   font-weight: 400;
   letter-spacing: 0.12em;

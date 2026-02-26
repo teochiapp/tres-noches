@@ -116,7 +116,7 @@ const MainTitle = styled.h2`
 `;
 
 const SubTitle = styled.h3`
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: clamp(1.2rem, 2.5vw, 2.2rem);
   font-weight: 300;
   color: #fff;
@@ -139,7 +139,7 @@ const TextSection = styled.div`
 `;
 
 const Paragraph = styled.p`
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: clamp(1rem, 1.5vw, 21px);
   font-weight: 700;
   color: #fff;
@@ -160,7 +160,7 @@ const ButtonsContainer = styled.div`
 const Button = styled.button`
   background-color: #333333;
   color: #fff;
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: 1.2rem;
   font-weight: 700;
   padding: 1.2rem 2.2rem;

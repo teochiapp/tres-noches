@@ -133,7 +133,7 @@ const FilmLabel = styled.div`
 `;
 
 const FilmTitle = styled.p`
-  font-family: var(--font-alt);
+  font-family: var(--font-bold);
   font-size: clamp(1.4rem, 3vw, 4rem);
   font-weight: 900;
   color: var(--primary);
@@ -177,7 +177,7 @@ const BottomLeft = styled.div`
 `;
 
 const ProjectSmall = styled.p`
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: clamp(2.1rem, 5vw, 2.5rem);
   font-weight: 900;
   color: #fff;
@@ -216,7 +216,7 @@ const BottomRight = styled.div`
 `;
 
 const Description = styled.p`
-  font-family: var(--font-alt);
+  font-family: var(--font-semibold);
   font-size: clamp(1rem, 1.8vw, 1.35rem);
   font-weight: 700;
   color: var(--primary);
