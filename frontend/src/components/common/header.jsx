@@ -147,8 +147,6 @@ const Header = () => {
             $isSingle={isSingleProject}
             style={isSingleProject ? {
               pointerEvents: 'auto',
-              fontSize: isMobile ? '2.5rem' : '3.1rem',
-              top: isMobile ? '-2px' : '-10px',
               opacity: logoOpacity
             } : {
               pointerEvents: 'auto',
@@ -159,10 +157,10 @@ const Header = () => {
             initial={!isSingleProject ? { opacity: 0, x: -30, filter: "blur(5px)" } : {}}
             animate={!isSingleProject ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
             whileHover={{
-              scale: 1.05,
+              scale: isSingleProject ? 1 : 1.05,
               transition: { duration: 0.4, ease: "backOut" }
             }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={{ scale: isSingleProject ? 1 : 0.98 }}
             transition={!isSingleProject ? {
               duration: 1.2,
               ease: [0.23, 1, 0.32, 1]
@@ -274,7 +272,20 @@ const Logo = styled(motion(Link))`
   z-index: 100;
   
   /* Reset Any Motion Transform that gets stuck on fast scroll */
-  transform: ${props => props.$isSingle && 'none !important'};
+  ${props => props.$isSingle && `
+    transform: none !important;
+    font-size: 3.1rem !important;
+    top: -10px !important;
+    
+    @media (max-width: 1024px) {
+      font-size: 2.5rem !important;
+      top: -2px !important;
+    }
+    
+    @media (max-width: 768px) {
+      font-size: 2rem !important;
+    }
+  `}
   
   span {
     padding-left: 0.8em;
