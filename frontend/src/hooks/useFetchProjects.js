@@ -34,16 +34,16 @@ export const useFetchProjects = () => {
                     const catV4 = attrs.categoria?.data?.attributes ?? null;
                     const catName = (catV5?.Nombre || catV4?.Nombre || 'OTROS').toUpperCase();
                     const titulo = attrs.Titulo || 'Sin título';
-                    const id = project.documentId || project.id;
+                    const slug = attrs.Slug || project.documentId || project.id;
 
                     const existingCat = acc.find(c => c.title === catName);
 
                     if (existingCat) {
-                        existingCat.items.push({ titulo, id });
+                        existingCat.items.push({ titulo, slug });
                     } else {
                         acc.push({
                             title: catName,
-                            items: [{ titulo, id }]
+                            items: [{ titulo, slug }]
                         });
                     }
                     return acc;

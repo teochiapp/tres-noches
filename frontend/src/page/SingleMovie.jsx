@@ -6,150 +6,159 @@ import axios from 'axios';
 import { API_URL } from '../api/config';
 
 export default function SingleMovie() {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const containerRef = useRef(null);
-    const [project, setProject] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const { slug } = useParams();
+  const navigate = useNavigate();
+  const containerRef = useRef(null);
+  const [project, setProject] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchProject = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get(`${API_URL}/api/proyectos/${id}?populate=*`);
-                setProject(response.data.data);
-                setLoading(false);
-            } catch (err) {
-                console.error("Error fetching project details:", err);
-                setError(err);
-                setLoading(false);
-            }
-        };
-
-        if (id) {
-            fetchProject();
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        setLoading(true);
+        // Buscar por Slug usando filtros de Strapi
+        const response = await axios.get(`${API_URL}/api/proyectos?filters[Slug][$eq]=${slug}&populate=*`);
+        const results = response.data.data;
+        if (!results || results.length === 0) {
+          setError(new Error('Proyecto no encontrado'));
+          setLoading(false);
+          return;
         }
-        window.scrollTo(0, 0);
-    }, [id]);
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end end"]
-    });
-
-    const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-    const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
-    const fadeUp = {
-        initial: { opacity: 0, y: 60 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, margin: "-100px" },
-        transition: { duration: 0.8, ease: "easeOut" }
+        setProject(results[0]);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching project details:", err);
+        setError(err);
+        setLoading(false);
+      }
     };
 
-    const staggerContainer = {
-        initial: {},
-        whileInView: {
-            transition: { staggerChildren: 0.2, delayChildren: 0.1 }
-        },
-        viewport: { once: true }
-    };
+    if (slug) {
+      fetchProject();
+    }
+    window.scrollTo(0, 0);
+  }, [slug]);
 
-    if (loading) return <StatusMessage>Cargando proyecto...</StatusMessage>;
-    if (error || !project) return <StatusMessage>Error al cargar el proyecto.</StatusMessage>;
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
 
-    // Helpers to extract data based on Strapi structure
-    const attrs = project.attributes || project;
-    const title = attrs.Titulo || "Sin título";
-    const subtitle = attrs.Subtitulo || "";
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-    // Support for both rich text blocks (v4/v5) and plain text
-    const description = typeof attrs.Descripcion === 'string'
-        ? attrs.Descripcion
-        : attrs.Descripcion?.[0]?.children?.[0]?.text || "Sin descripción disponible.";
+  const fadeUp = {
+    initial: { opacity: 0, y: 60 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-100px" },
+    transition: { duration: 0.8, ease: "easeOut" }
+  };
 
-    // Support for both v4 (.data.attributes.url) and v5 (.url) media structures
-    const portData = attrs.Portada?.data?.attributes || attrs.Portada;
-    const heroImage = portData?.url ? (portData.url.startsWith('http') ? portData.url : `${API_URL}${portData.url}`) : "/content/hero-image.webp";
+  const staggerContainer = {
+    initial: {},
+    whileInView: {
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
+    },
+    viewport: { once: true }
+  };
 
-    return (
-        <PageContainer ref={containerRef}>
-            <BackButton onClick={() => navigate(-1)}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 12H5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M12 19L5 12L12 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                VOLVER
-            </BackButton>
+  if (loading) return <StatusMessage>Cargando proyecto...</StatusMessage>;
+  if (error || !project) return <StatusMessage>Error al cargar el proyecto.</StatusMessage>;
 
-            <HeroSection>
-                <HeroImageWrapper style={{ y: heroY, opacity: heroOpacity }}>
-                    <HeroImage src={heroImage} alt={title} />
-                    <HeroOverlay />
-                </HeroImageWrapper>
+  // Helpers to extract data based on Strapi structure
+  const attrs = project.attributes || project;
+  const title = attrs.Titulo || "Sin título";
+  const subtitle = attrs.Subtitulo || "";
+  const fecha = attrs.Fecha || "Próximamente";
+  const displaySlug = attrs.Slug || slug;
 
-                <HeroContent
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-                >
-                    <SubTitle>{subtitle}</SubTitle>
-                    <MainTitle>{title}</MainTitle>
-                </HeroContent>
-            </HeroSection>
+  // Support for both rich text blocks (v4/v5) and plain text
+  const description = typeof attrs.Descripcion === 'string'
+    ? attrs.Descripcion
+    : attrs.Descripcion?.[0]?.children?.[0]?.text || "Sin descripción disponible.";
 
-            <ContentSection>
-                <ProjectInfo {...fadeUp}>
-                    <Label>Sobre el Proyecto</Label>
-                    <IntroText>{description}</IntroText>
-                    <DescriptionText>{attrs.longDescription || "Información detallada próximamente."}</DescriptionText>
-                </ProjectInfo>
+  // Support for both v4 (.data.attributes.url) and v5 (.url) media structures
+  const portData = attrs.Portada?.data?.attributes || attrs.Portada;
+  const heroImage = portData?.url ? (portData.url.startsWith('http') ? portData.url : `${API_URL}${portData.url}`) : "/content/hero-image.webp";
 
-                <StatsSection
-                    variants={staggerContainer}
-                    initial="initial"
-                    whileInView="whileInView"
-                    viewport={{ once: true }}
-                >
-                    <StatBox variants={fadeUp}>
-                        <StatNum>2026</StatNum>
-                        <StatLabel>AÑO DE LANZAMIENTO</StatLabel>
-                    </StatBox>
-                    <StatBox variants={fadeUp}>
-                        <StatNum>DOC</StatNum>
-                        <StatLabel>FORMATO</StatLabel>
-                    </StatBox>
-                    <StatBox variants={fadeUp}>
-                        <StatNum>ARG</StatNum>
-                        <StatLabel>ORIGEN</StatLabel>
-                    </StatBox>
-                </StatsSection>
-            </ContentSection>
+  return (
+    <PageContainer ref={containerRef}>
+      <BackButton onClick={() => navigate(-1)}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12 19L5 12L12 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        VOLVER
+      </BackButton>
 
-            <GallerySection>
-                {/* For now, just show the hero image as part of the gallery if no other gallery items exist */}
-                <GalleryImageWrapper
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    $isLast={true}
-                >
-                    <GalleryImage src={heroImage} alt={title} />
-                    <GalleryOverlay />
-                    <CtaContent>
-                        <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
-                            <CtaButton onClick={() => navigate('/#contacto')}>
-                                SUMATE AL PROYECTO
-                            </CtaButton>
-                        </motion.div>
-                    </CtaContent>
-                </GalleryImageWrapper>
-            </GallerySection>
-        </PageContainer>
-    );
+      <HeroSection>
+        <HeroImageWrapper style={{ y: heroY, opacity: heroOpacity }}>
+          <HeroImage src={heroImage} alt={title} />
+          <HeroOverlay />
+        </HeroImageWrapper>
+
+        <HeroContent
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+        >
+          <SubTitle>{subtitle}</SubTitle>
+          <MainTitle>{title}</MainTitle>
+        </HeroContent>
+      </HeroSection>
+
+      <ContentSection>
+        <ProjectInfo {...fadeUp}>
+          <Label>Sobre el Proyecto</Label>
+          <IntroText>{subtitle}</IntroText>
+          <DescriptionText>{description}</DescriptionText>
+        </ProjectInfo>
+
+        <StatsSection
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="whileInView"
+          viewport={{ once: true }}
+        >
+          <StatBox variants={fadeUp}>
+            <StatNum>{fecha}</StatNum>
+            <StatLabel>FECHA / AÑO</StatLabel>
+          </StatBox>
+          <StatBox variants={fadeUp}>
+            <StatNum>DOC</StatNum>
+            <StatLabel>FORMATO</StatLabel>
+          </StatBox>
+          <StatBox variants={fadeUp}>
+            <StatNum>ARG</StatNum>
+            <StatLabel>ORIGEN</StatLabel>
+          </StatBox>
+        </StatsSection>
+      </ContentSection>
+
+      <GallerySection>
+        {/* For now, just show the hero image as part of the gallery if no other gallery items exist */}
+        <GalleryImageWrapper
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          $isLast={true}
+        >
+          <GalleryImage src={heroImage} alt={title} />
+          <GalleryOverlay />
+          <CtaContent>
+            <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
+              <CtaButton onClick={() => navigate('/#contacto')}>
+                SUMATE AL PROYECTO
+              </CtaButton>
+            </motion.div>
+          </CtaContent>
+        </GalleryImageWrapper>
+      </GallerySection>
+    </PageContainer>
+  );
 }
 
 const StatusMessage = styled.div`

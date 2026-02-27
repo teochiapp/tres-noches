@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useRef } from 'react';
 import styled from "styled-components";
 import { motion, useScroll, useTransform } from 'framer-motion';
@@ -44,7 +45,7 @@ export default function TerceraSeccionPelicula() {
 
 
           {/* ── FILM LABEL ─────────────────────────── */}
-          <FilmLabel>
+          <FilmLabel as={Link} to="/proyecto/un-mundo-mejor-mi-pais">
             <FilmTitle>UN MUNDO PERFECTO: MI PAIS</FilmTitle>
             <FilmSub>LARGOMETRAJE DOCUMENTAL</FilmSub>
           </FilmLabel>
@@ -128,6 +129,13 @@ const FilmLabel = styled.div`
   position: relative;
   z-index: 1;
   margin-top: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const FilmTitle = styled.p`

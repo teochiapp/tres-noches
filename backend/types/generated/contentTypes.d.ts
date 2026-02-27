@@ -477,6 +477,7 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     Descripcion: Schema.Attribute.Blocks;
+    Fecha: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -488,6 +489,7 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
       ['Primera', 'Segunda', 'Tercera', 'Cuarta']
     >;
     publishedAt: Schema.Attribute.DateTime;
+    Slug: Schema.Attribute.String;
     Subtitulo: Schema.Attribute.String;
     Titulo: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

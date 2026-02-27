@@ -8,15 +8,23 @@ import { useFetchProjects } from '../../hooks/useFetchProjects';
 const staticCategories = [
   {
     title: "PELÍCULAS",
-    items: ["TRES NOCHES AL AÑO", "UN MUNDO PERFECTO: MI PAÍS"],
+    items: [
+      { titulo: "TRES NOCHES AL AÑO", slug: "tres-noches-al-ano" },
+      { titulo: "UN MUNDO PERFECTO: MI PAÍS", slug: "un-mundo-mejor-mi-pais" }
+    ],
   },
   {
     title: "IMPACTO",
-    items: ["EL CORSÓDROMO", "UN BARRIO CANÁBICO"],
+    items: [
+      { titulo: "EL CORSÓDROMO", slug: "el-corsodromo" },
+      { titulo: "UN BARRIO CANÁBICO", slug: "un-barrio-canabico" }
+    ],
   },
   {
     title: "EVENTOS",
-    items: ["LA FIESTA"],
+    items: [
+      { titulo: "LA FIESTA", slug: "la-fiesta" }
+    ],
   },
 ];
 
@@ -53,8 +61,8 @@ export default function Services() {
               <CategoryTitle>{cat.title}</CategoryTitle>
               <ItemList>
                 {cat.items.map((item) => (
-                  <Item key={item.id || (typeof item === 'string' ? item : item.titulo)}>
-                    <ProjectLink to={item.id ? `/proyecto/${item.id}` : '#'}>
+                  <Item key={item.slug || (typeof item === 'string' ? item : item.titulo)}>
+                    <ProjectLink to={item.slug ? `/proyecto/${item.slug}` : '#'}>
                       {item.titulo || item}
                     </ProjectLink>
                   </Item>

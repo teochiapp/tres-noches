@@ -14,8 +14,16 @@
     "Titulo": {
       "type": "string"
     },
+    "Subtitulo": {
+      "type": "string"
+    },
     "Descripcion": {
       "type": "blocks"
+    },
+    "categoria": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::categoria.categoria"
     },
     "Portada": {
       "type": "media",
@@ -27,14 +35,6 @@
         "audios"
       ]
     },
-    "Subtitulo": {
-      "type": "string"
-    },
-    "categoria": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::categoria.categoria"
-    },
     "Posicion": {
       "type": "enumeration",
       "enum": [
@@ -43,6 +43,12 @@
         "Tercera",
         "Cuarta"
       ]
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "Fecha": {
+      "type": "string"
     }
   }
 }
