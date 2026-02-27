@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 
 const Header = () => {
@@ -11,6 +11,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
   const location = useLocation();
+  const navigate = useNavigate();
   const { scrollY } = useScroll();
   const smoothScrollY = useSpring(scrollY, {
     stiffness: 100,
@@ -82,7 +83,35 @@ const Header = () => {
 
   const handleNavClick = (e, path) => {
     e.preventDefault();
+    setIsMenuOpen(false);
+
+    if (location.pathname !== '/') {
+      navigate('/' + path);
+      // Wait for page transition then scroll
+      setTimeout(() => {
+        const targetId = path.replace('#', '');
+        if (targetId === 'inicio') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        const element = document.getElementById(targetId);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          window.scrollTo({
+            top: elementPosition + window.pageYOffset - offset,
+            behavior: 'smooth'
+          });
+        }
+      }, 300);
+      return;
+    }
+
     const targetId = path.replace('#', '');
+    if (targetId === 'inicio') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     const element = document.getElementById(targetId);
 
     if (element) {
@@ -95,7 +124,17 @@ const Header = () => {
         behavior: 'smooth'
       });
     }
+  };
+
+  const handleLogoClick = (e) => {
+    e.preventDefault();
     setIsMenuOpen(false);
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+      setTimeout(() => window.scrollTo(0, 0), 100);
+    }
   };
 
   return (
@@ -104,30 +143,32 @@ const Header = () => {
         <Nav>
           <Logo
             to="/"
-            onClick={(e) => handleNavClick(e, '#inicio')}
-            style={{
+            onClick={handleLogoClick}
+            $isSingle={isSingleProject}
+            style={isSingleProject ? {
               pointerEvents: 'auto',
-              fontSize: isSingleProject ? (isMobile ? (window.innerWidth <= 768 ? '2rem' : '2.5rem') : '3.1rem') : logoFontSize,
-              top: isSingleProject ? (isMobile ? (window.innerWidth <= 768 ? '-2px' : '-5px') : '-10px') : logoTop,
+              fontSize: isMobile ? '2.5rem' : '3.1rem',
+              top: isMobile ? '-2px' : '-10px',
+              opacity: logoOpacity
+            } : {
+              pointerEvents: 'auto',
+              fontSize: logoFontSize,
+              top: logoTop,
               opacity: logoOpacity
             }}
-            initial={{ opacity: 0, x: -30, filter: "blur(5px)" }}
-            animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            initial={!isSingleProject ? { opacity: 0, x: -30, filter: "blur(5px)" } : {}}
+            animate={!isSingleProject ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
             whileHover={{
               scale: 1.05,
               transition: { duration: 0.4, ease: "backOut" }
             }}
             whileTap={{ scale: 0.98 }}
-            transition={{
+            transition={!isSingleProject ? {
               duration: 1.2,
               ease: [0.23, 1, 0.32, 1]
-            }}
+            } : {}}
           >
-            Tres <motion.span
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
-            >Noches</motion.span>
+            Tres <span>Noches</span>
           </Logo>
         </Nav>
       </LogoWrapper>
@@ -231,6 +272,9 @@ const Logo = styled(motion(Link))`
   text-transform: uppercase;
   letter-spacing: -2px;
   z-index: 100;
+  
+  /* Reset Any Motion Transform that gets stuck on fast scroll */
+  transform: ${props => props.$isSingle && 'none !important'};
   
   span {
     padding-left: 0.8em;

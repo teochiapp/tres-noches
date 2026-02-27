@@ -13,6 +13,21 @@ const fadeIn = {
 
 
 export default function AboutUS() {
+  const handleScrollToContact = (e) => {
+    e.preventDefault();
+    const element = document.getElementById('contacto');
+    if (element) {
+      const offset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <Section id="quienes-somos">
       <Parallax speed={-5}>
@@ -37,8 +52,8 @@ export default function AboutUS() {
                 Narrativas que movilizan a toda una comunidad. Historias que construyen futuro. Producimos contenido, experiencias y cambio real.
               </Paragraph>
 
-              <ActionLink href="#">
-                Hacemos que las cosas pasen.
+              <ActionLink href="#contacto" onClick={handleScrollToContact}>
+                Hagamos que las cosas pasen.
               </ActionLink>
             </ContentRight>
           </motion.div>
