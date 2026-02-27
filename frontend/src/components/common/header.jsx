@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Menu, X, Rocket } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 
@@ -17,6 +17,8 @@ const Header = () => {
     damping: 30,
     restDelta: 0.001
   });
+
+  const isSingleProject = location.pathname.startsWith('/proyecto/');
 
   const logoFontSize = useTransform(
     smoothScrollY,
@@ -103,7 +105,12 @@ const Header = () => {
           <Logo
             to="/"
             onClick={(e) => handleNavClick(e, '#inicio')}
-            style={{ pointerEvents: 'auto', fontSize: logoFontSize, top: logoTop, opacity: logoOpacity }}
+            style={{
+              pointerEvents: 'auto',
+              fontSize: isSingleProject ? (isMobile ? (window.innerWidth <= 768 ? '2rem' : '2.5rem') : '3.1rem') : logoFontSize,
+              top: isSingleProject ? (isMobile ? (window.innerWidth <= 768 ? '-2px' : '-5px') : '-10px') : logoTop,
+              opacity: logoOpacity
+            }}
             initial={{ opacity: 0, x: -30, filter: "blur(5px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             whileHover={{
@@ -125,7 +132,7 @@ const Header = () => {
         </Nav>
       </LogoWrapper>
 
-      <HeaderContainer $scrolled={scrolled} $atBottom={atBottom}>
+      <HeaderContainer $scrolled={isSingleProject || scrolled} $atBottom={atBottom}>
         <Nav>
           <NavLinks>
             {navItems.map(item => (
@@ -184,7 +191,7 @@ const LogoWrapper = styled.div`
   left: 0;
   width: 100%;
   padding: 20px;
-  z-index: 1001;
+  z-index: 10000;
   pointer-events: none;
   mix-blend-mode: difference;
 `;
@@ -197,9 +204,9 @@ const HeaderContainer = styled.header`
   padding: 20px;
   z-index: 1000;
   transition: all 0.3s ease;
-  background: ${props => props.$scrolled && !props.$atBottom ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
-  backdrop-filter: ${props => props.$scrolled && !props.$atBottom ? 'blur(12px)' : 'none'};
-  -webkit-backdrop-filter: ${props => props.$scrolled && !props.$atBottom ? 'blur(12px)' : 'none'};
+  background: ${props => (props.$scrolled && !props.$atBottom) ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
+  backdrop-filter: ${props => (props.$scrolled && !props.$atBottom) ? 'blur(12px)' : 'none'};
+  -webkit-backdrop-filter: ${props => (props.$scrolled && !props.$atBottom) ? 'blur(12px)' : 'none'};
 `;
 
 const Nav = styled.nav`
@@ -223,7 +230,7 @@ const Logo = styled(motion(Link))`
   color: white;
   text-transform: uppercase;
   letter-spacing: -2px;
-  z-index: 10;
+  z-index: 100;
   
   span {
     padding-left: 0.8em;
