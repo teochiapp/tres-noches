@@ -149,6 +149,10 @@ const HeroImage = styled.img`
   height: 100%;
   object-fit: cover;
   display: block;
+
+  @media (max-width: 768px) {
+    object-position: left;
+  }
 `;
 
 const ImageOverlay = styled.div`

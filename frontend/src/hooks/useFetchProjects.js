@@ -10,7 +10,22 @@ export const useFetchProjects = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${API_URL}/api/proyectos?populate=*`);
+                let response;
+                const urlBase = `${API_URL}/api/proyectos?populate=*`;
+
+                try {
+                    // Intentamos traerlo ordenado por la API primero
+                    response = await axios.get(`${urlBase}&sort[0]=Orden:asc`);
+                } catch (err) {
+                    // Si el servidor da error 400, es porque 'Orden' no existe en esa DB
+                    if (err.response && err.response.status === 400) {
+                        console.warn("Propiedad 'Orden' no encontrada en la API, reintentando sin sort...");
+                        response = await axios.get(urlBase);
+                    } else {
+                        throw err; // Si es otro error (500, etc), lo lanzamos al catch principal
+                    }
+                }
+
                 const projects = response.data.data;
 
                 if (!projects) {
