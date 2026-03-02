@@ -80,7 +80,8 @@ export default function SingleMovie() {
 
   // Support for both v4 (.data.attributes.url) and v5 (.url) media structures
   const portData = attrs.Portada?.data?.attributes || attrs.Portada;
-  const heroImage = portData?.url ? (portData.url.startsWith('http') ? portData.url : `${API_URL}${portData.url}`) : "/content/hero-image.webp";
+  const heroMediaUrl = portData?.url ? (portData.url.startsWith('http') ? portData.url : `${API_URL}${portData.url}`) : "/content/hero-image.webp";
+  const isVideo = portData?.mime?.startsWith('video/') || (portData?.url && portData.url.match(/\.(mp4|webm|ogg)$/i)) || false;
 
   return (
     <PageContainer ref={containerRef}>
@@ -94,7 +95,13 @@ export default function SingleMovie() {
 
       <HeroSection>
         <HeroImageWrapper style={{ y: heroY, opacity: heroOpacity }}>
-          <HeroImage src={heroImage} alt={title} />
+          {isVideo ? (
+            <HeroVideo autoPlay muted loop playsInline>
+              <source src={heroMediaUrl} type={portData?.mime || "video/mp4"} />
+            </HeroVideo>
+          ) : (
+            <HeroImage src={heroMediaUrl} alt={title} />
+          )}
           <HeroOverlay />
         </HeroImageWrapper>
 
@@ -145,7 +152,13 @@ export default function SingleMovie() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           $isLast={true}
         >
-          <GalleryImage src={heroImage} alt={title} />
+          {isVideo ? (
+            <GalleryVideo autoPlay muted loop playsInline>
+              <source src={heroMediaUrl} type={portData?.mime || "video/mp4"} />
+            </GalleryVideo>
+          ) : (
+            <GalleryImage src={heroMediaUrl} alt={title} />
+          )}
           <GalleryOverlay />
           <CtaContent>
             <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -242,6 +255,13 @@ const HeroImageWrapper = styled(motion.div)`
 `;
 
 const HeroImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(110%);
+`;
+
+const HeroVideo = styled.video`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -385,6 +405,17 @@ const GalleryImageWrapper = styled(motion.div)`
 `;
 
 const GalleryImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const GalleryVideo = styled.video`
   width: 100%;
   height: 100%;
   object-fit: cover;
