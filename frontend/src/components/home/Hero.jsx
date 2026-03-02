@@ -30,11 +30,7 @@ const Hero = () => {
 
       <RightTextContainer>
         <Parallax speed={2}>
-          <RightText
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
+          <RightText>
             <SplitText
               text="EMPEZAMOS DOCUMENTANDO HISTORIAS, TERMINAMOS TRANSFORMANDO TERRITORIOS."
               delay={30}
@@ -42,7 +38,8 @@ const Hero = () => {
               splitType="chars"
               from={{ opacity: 0, y: 40 }}
               to={{ opacity: 1, y: 0 }}
-              threshold={0.1}
+              threshold={0.01}
+              rootMargin="0px"
               textAlign="left"
             />
           </RightText>
@@ -133,7 +130,7 @@ const Symbol = styled.span`
   margin: 5px 0;
 `;
 
-const RightText = styled(motion.h1)`
+const RightText = styled.h1`
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 600;
   line-height: 1.2;
