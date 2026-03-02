@@ -141,9 +141,8 @@ const FilmLabel = styled.div`
 `;
 
 const FilmTitle = styled.p`
-  font-family: var(--font-bold);
+  font-family: var(--font-condensed-black);
   font-size: clamp(1.4rem, 3vw, 4rem);
-  font-weight: 900;
   color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.02em;
@@ -152,9 +151,8 @@ const FilmTitle = styled.p`
 `;
 
 const FilmSub = styled.p`
-  font-family: var(--font-main);
+  font-family: var(--font-narrow);
   font-size: clamp(1rem, 2vw, 2rem);
-  font-weight: 400;
   color: var(--primary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -187,9 +185,8 @@ const BottomLeft = styled.div`
 `;
 
 const ProjectSmall = styled.p`
-  font-family: var(--font-main);
+  font-family: var(--font-bold);
   font-size: clamp(2.1rem, 5vw, 2.5rem);
-  font-weight: 900;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -199,7 +196,6 @@ const ProjectSmall = styled.p`
 const ProjectBig = styled.h2`
   font-family: var(--font-bold);
   font-size: clamp(2.2rem, 5vw, 4rem);
-  font-weight: 900;
   color: #fff;
   text-transform: uppercase;
   line-height: 1;
@@ -228,9 +224,8 @@ const BottomRight = styled.div`
 `;
 
 const Description = styled.p`
-  font-family: var(--font-semibold);
+  font-family: var(--font-black);
   font-size: clamp(1rem, 1.8vw, 1.35rem);
-  font-weight: 700;
   color: var(--primary);
   line-height: 1.55;
   letter-spacing: 0.01em;

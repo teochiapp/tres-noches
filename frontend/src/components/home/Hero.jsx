@@ -111,12 +111,12 @@ const RightTextContainer = styled.div`
 `;
 
 const LeftText = styled(motion.div)`
-  font-family: var(--font-google);
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 1.2;
-  color: #aaa;
-  letter-spacing: 0.02em;
+  font-size: 1.2rem;
+  font-weight: 300;
+  font-family: var(--font-light);
+  line-height: 1.4;
+  color: #888;
+  letter-spacing: 0.05em;
   text-transform: none;
 
   @media (max-width: 768px) {
@@ -134,10 +134,10 @@ const Symbol = styled.span`
 `;
 
 const RightText = styled(motion.h1)`
-  font-family: var(--font-google);
-  font-size: clamp(1rem, 1.8vw, 1.6rem);
-  font-weight: 500;
-  line-height: 1.4;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  font-family: var(--font-condensed-medium);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: left;

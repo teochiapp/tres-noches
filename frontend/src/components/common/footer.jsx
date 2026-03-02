@@ -100,9 +100,8 @@ const FooterContainer = styled(motion.footer)`
 `;
 
 const BigLogoSection = styled(motion.div)`
-  font-family: var(--font-bold);
+  font-family: var(--font-condensed-black);
   font-size: clamp(8rem, 20vw, 18rem);
-  font-weight: 900;
   line-height: 0.8;
   letter-spacing: -0.05em;
   text-transform: uppercase;
@@ -147,9 +146,8 @@ const Column = styled.div`
 `;
 
 const FooterLink = styled(Link)`
-  font-family: var(--font-alt);
+  font-family: var(--font-light);
   font-size: 1.2rem;
-  font-weight: 500;
   color: #fff;
   text-decoration: none;
   padding: 2px 0;
@@ -162,9 +160,8 @@ const FooterLink = styled(Link)`
 `;
 
 const ExternalLink = styled.a`
-  font-family: var(--font-alt);
+  font-family: var(--font-light);
   font-size: 1.1rem;
-  font-weight: 500;
   color: #fff;
   text-decoration: none;
   padding: 2px 0;
@@ -192,9 +189,8 @@ const BottomBar = styled(motion.div)`
 `;
 
 const Copyright = styled.span`
-  font-family: var(--font-alt);
+  font-family: var(--font-light);
   font-size: 0.8rem;
-  font-weight: 500;
   text-transform: uppercase;
   opacity: 0.5;
   flex: 1;
@@ -215,7 +211,6 @@ const CreditLink = styled.a`
   gap: 4px;
   color: inherit;
   text-decoration: none;
-  font-weight: 700;
   opacity: 1;
   transition: opacity 0.3s ease;
 
@@ -226,9 +221,8 @@ const CreditLink = styled.a`
 `;
 
 const BackToTop = styled.button`
-  font-family: var(--font-alt);
+  font-family: var(--font-light);
   font-size: 0.8rem;
-  font-weight: 600;
   color: #fff;
   background: none;
   border: none;
