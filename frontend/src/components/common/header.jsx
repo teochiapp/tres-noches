@@ -19,7 +19,7 @@ const Header = () => {
     restDelta: 0.001
   });
 
-  const isSingleProject = location.pathname.startsWith('/proyecto/');
+  const isSubPage = location.pathname !== '/';
 
   const logoFontSize = useTransform(
     smoothScrollY,
@@ -156,8 +156,8 @@ const Header = () => {
           <Logo
             to="/"
             onClick={handleLogoClick}
-            $isSingle={isSingleProject}
-            style={isSingleProject ? {
+            $isSubPage={isSubPage}
+            style={isSubPage ? {
               pointerEvents: 'auto',
               opacity: logoOpacity
             } : {
@@ -166,14 +166,14 @@ const Header = () => {
               top: logoTop,
               opacity: logoOpacity
             }}
-            initial={isSingleProject ? { opacity: 1, x: 0, filter: "none" } : { opacity: 0, x: -30, filter: "blur(5px)" }}
-            animate={isSingleProject ? { opacity: 1, x: 0, filter: "none" } : { opacity: 1, x: 0, filter: "none" }}
+            initial={isSubPage ? { opacity: 1, x: 0, filter: "none" } : { opacity: 0, x: -30, filter: "blur(5px)" }}
+            animate={isSubPage ? { opacity: 1, x: 0, filter: "none" } : { opacity: 1, x: 0, filter: "none" }}
             whileHover={{
-              scale: isSingleProject ? 1 : 1.05,
+              scale: isSubPage ? 1 : 1.05,
               transition: { duration: 0.4, ease: "backOut" }
             }}
-            whileTap={{ scale: isSingleProject ? 1 : 0.98 }}
-            transition={isSingleProject ? { duration: 0 } : {
+            whileTap={{ scale: isSubPage ? 1 : 0.98 }}
+            transition={isSubPage ? { duration: 0 } : {
               duration: 1.2,
               ease: [0.23, 1, 0.32, 1]
             }}
@@ -183,7 +183,7 @@ const Header = () => {
         </Nav>
       </LogoWrapper>
 
-      <HeaderContainer $scrolled={isSingleProject || scrolled} $atBottom={atBottom}>
+      <HeaderContainer $scrolled={isSubPage || scrolled} $atBottom={atBottom}>
         <Nav>
           <NavLinks>
             {navItems.map(item => (
@@ -282,7 +282,7 @@ const Logo = styled(motion(Link))`
   
   
   /* Reset Any Motion Transform that gets stuck on fast scroll */
-  ${props => props.$isSingle && `
+  ${props => props.$isSubPage && `
     transform: none !important;
     font-size: 3.1rem !important;
     top: -10px !important;
