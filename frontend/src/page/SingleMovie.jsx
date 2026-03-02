@@ -133,10 +133,6 @@ export default function SingleMovie() {
             <StatLabel>FECHA / AÑO</StatLabel>
           </StatBox>
           <StatBox variants={fadeUp}>
-            <StatNum>DOC</StatNum>
-            <StatLabel>FORMATO</StatLabel>
-          </StatBox>
-          <StatBox variants={fadeUp}>
             <StatNum>ARG</StatNum>
             <StatLabel>ORIGEN</StatLabel>
           </StatBox>
@@ -250,7 +246,7 @@ const HeroImageWrapper = styled(motion.div)`
   top: 0;
   left: 0;
   width: 100%;
-  height: 120%;
+  height: 100%;
   z-index: 0;
 `;
 

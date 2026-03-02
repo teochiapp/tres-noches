@@ -5,22 +5,31 @@ import { Parallax } from 'react-scroll-parallax';
 import SplitText from "../common/SplitText";
 
 const Hero = () => {
-
   return (
     <HeroSection id="inicio">
-      <ContentSection>
-        <Parallax speed={-5} style={{ alignSelf: 'flex-start' }}>
+      <BackgroundWrapper>
+        <Parallax speed={-10} style={{ height: '120%' }}>
+          <HeroImage src="/content/hero-alt-image.webp" alt="Tres Noches Hero" />
+        </Parallax>
+        <ImageOverlay />
+      </BackgroundWrapper>
+
+      <LeftTextContainer>
+        <Parallax speed={-2}>
           <LeftText
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Productora Audiovisual<br />
+            Productora <br />Audiovisual<br />
             <Symbol>+</Symbol><br />
             Impacto
           </LeftText>
         </Parallax>
-        <Parallax speed={5} style={{ alignSelf: 'flex-start' }}>
+      </LeftTextContainer>
+
+      <RightTextContainer>
+        <Parallax speed={2}>
           <RightText
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -38,16 +47,7 @@ const Hero = () => {
             />
           </RightText>
         </Parallax>
-      </ContentSection>
-      <ImageSection>
-        <Parallax speed={-10} style={{ width: '100%', height: '115%', marginTop: '-5%' }}>
-          <HeroImage
-            src="/content/hero-image.webp"
-            alt="Carnival Expression"
-          />
-        </Parallax>
-        <ImageOverlay />
-      </ImageSection>
+      </RightTextContainer>
     </HeroSection>
   );
 };
@@ -57,43 +57,71 @@ export default Hero;
 const HeroSection = styled.section`
   background: black;
   color: white;
-  min-height: 80vh;
+  height: 100vh;
+  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
-  position: relative;
   overflow: hidden;
 `;
 
-const ContentSection = styled.div`
-  display: grid;
-  grid-template-columns: 1.5fr 2.5fr;
-  align-items: flex-start;
-  height: auto;
-  min-height: 35vh;
-  padding: 200px 50px 0;
-  max-width: 1800px;
+const BackgroundWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  margin: 0 auto;
+  height: 65%;
+  z-index: 1;
+  overflow: hidden;
 
   @media (max-width: 768px) {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 120px 24px 32px;
-    gap: 32px;
+    height: 100%;
+  }
+`;
+
+
+
+const LeftTextContainer = styled.div`
+  position: absolute;
+  bottom: 45%; 
+  left: 50px;
+  z-index: 5;
+
+  @media (max-width: 768px) {
+    bottom: auto;
+    top: 35vh;
+    left: 24px;
+  }
+`;
+
+const RightTextContainer = styled.div`
+  position: absolute;
+  bottom: 80px;
+  right: 0px;
+  max-width: 900px;
+  z-index: 5; /* Above background */
+  
+  @media (max-width: 768px) {
+    position: absolute;
+    bottom: 40px;
+    left: 24px;
+    right: 24px;
+    max-width: none;
   }
 `;
 
 const LeftText = styled(motion.div)`
-  font-size: 1.2rem;
-  font-weight: 300;
-  line-height: 1.4;
-  color: #888;
-  letter-spacing: 0.05em;
+  font-family: var(--font-google);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #aaa;
+  letter-spacing: 0.02em;
   text-transform: none;
 
-    @media (max-width: 768px) {
-    padding: 10px 0 20px 0;
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    color: white;
   }
 `;
 
@@ -106,28 +134,16 @@ const Symbol = styled.span`
 `;
 
 const RightText = styled(motion.h1)`
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 600;
-  line-height: 1.2;
+  font-family: var(--font-google);
+  font-size: clamp(1rem, 1.8vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.4;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: left;
-  max-width: 1200px;
 
   @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-`;
-
-const ImageSection = styled(motion.div)`
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  margin-top: 20px;
-  height: 80vh;
-
-  @media (max-width: 768px) {
-    height: 45vh;
+    font-size: 1.3rem;
   }
 `;
 
@@ -135,7 +151,6 @@ const HeroImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: grayscale(100%) contrast(1.1);
   display: block;
 `;
 
@@ -145,6 +160,22 @@ const ImageOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, black 0%, transparent 15%, transparent 85%, black 100%);
+  background: linear-gradient(to bottom, 
+    black 0%, 
+    rgba(0, 0, 0, 0.8) 10%,
+    transparent 25%, 
+    transparent 75%, 
+    black 100%
+  );
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    background: linear-gradient(to bottom, 
+      black 0%, 
+      rgba(0, 0, 0, 0.9) 25%,
+      transparent 50%, 
+      transparent 80%, 
+      black 100%
+    );
+  }
 `;

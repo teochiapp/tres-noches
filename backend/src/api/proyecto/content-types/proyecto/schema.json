@@ -35,20 +35,14 @@
         "audios"
       ]
     },
-    "Posicion": {
-      "type": "enumeration",
-      "enum": [
-        "Primera",
-        "Segunda",
-        "Tercera",
-        "Cuarta"
-      ]
-    },
     "Slug": {
       "type": "string"
     },
     "Fecha": {
       "type": "string"
+    },
+    "Orden": {
+      "type": "integer"
     }
   }
 }

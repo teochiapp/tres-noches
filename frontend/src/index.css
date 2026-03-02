@@ -31,6 +31,7 @@
 }
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/google-sans');
 
 :root {
   --primary: #EF511D;
@@ -48,6 +49,7 @@
   --font-semibold: 'Elza Semibold', 'Segoe UI Semibold', 'Inter', system-ui, -apple-system, sans-serif;
   --font-thin: 'Elza Thin', 'Segoe UI Light', 'HelveticaNeue-Light', 'Inter', system-ui, -apple-system, sans-serif;
   --font-alt: "IBM Plex Sans", sans-serif;
+  --font-google: 'Google Sans', sans-serif;
 }
 
 * {

@@ -26,7 +26,7 @@ const Header = () => {
     [0, 250],
     isMobile ?
       (window.innerWidth <= 768 ? ['3.5rem', '2rem'] : ['4.5rem', '2.5rem']) :
-      ['5.6rem', '3rem']
+      ['14vw', '2.5rem']
   );
   const logoTop = useTransform(
     smoothScrollY,
@@ -73,6 +73,18 @@ const Header = () => {
       clearTimeout(timer);
     };
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
 
   const navItems = [
     { name: 'Inicio', path: '#inicio' },
@@ -154,17 +166,17 @@ const Header = () => {
               top: logoTop,
               opacity: logoOpacity
             }}
-            initial={!isSingleProject ? { opacity: 0, x: -30, filter: "blur(5px)" } : {}}
-            animate={!isSingleProject ? { opacity: 1, x: 0, filter: "blur(0px)" } : {}}
+            initial={isSingleProject ? { opacity: 1, x: 0, filter: "none" } : { opacity: 0, x: -30, filter: "blur(5px)" }}
+            animate={isSingleProject ? { opacity: 1, x: 0, filter: "none" } : { opacity: 1, x: 0, filter: "none" }}
             whileHover={{
               scale: isSingleProject ? 1 : 1.05,
               transition: { duration: 0.4, ease: "backOut" }
             }}
             whileTap={{ scale: isSingleProject ? 1 : 0.98 }}
-            transition={!isSingleProject ? {
+            transition={isSingleProject ? { duration: 0 } : {
               duration: 1.2,
               ease: [0.23, 1, 0.32, 1]
-            } : {}}
+            }}
           >
             Tres <span>Noches</span>
           </Logo>
@@ -232,7 +244,6 @@ const LogoWrapper = styled.div`
   padding: 20px;
   z-index: 10000;
   pointer-events: none;
-  mix-blend-mode: difference;
 `;
 
 const HeaderContainer = styled.header`
@@ -243,9 +254,6 @@ const HeaderContainer = styled.header`
   padding: 20px;
   z-index: 1000;
   transition: all 0.3s ease;
-  background: ${props => (props.$scrolled && !props.$atBottom) ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
-  backdrop-filter: ${props => (props.$scrolled && !props.$atBottom) ? 'blur(12px)' : 'none'};
-  -webkit-backdrop-filter: ${props => (props.$scrolled && !props.$atBottom) ? 'blur(12px)' : 'none'};
 `;
 
 const Nav = styled.nav`
@@ -270,6 +278,8 @@ const Logo = styled(motion(Link))`
   text-transform: uppercase;
   letter-spacing: -2px;
   z-index: 100;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  
   
   /* Reset Any Motion Transform that gets stuck on fast scroll */
   ${props => props.$isSingle && `
@@ -288,7 +298,7 @@ const Logo = styled(motion(Link))`
   `}
   
   span {
-    padding-left: 0.8em;
+    padding-left: 1.5em;
   }
 `;
 

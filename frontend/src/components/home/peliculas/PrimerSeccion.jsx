@@ -118,7 +118,7 @@ const Overlay = styled.div`
   background: linear-gradient(
     135deg,
     rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0.55) 50%,
+    rgba(0, 0, 0, 0.45) 50%,
     rgba(0, 0, 0, 0.72) 100%
   );
   z-index: 0;
@@ -148,7 +148,7 @@ const FilmTitle = styled.p`
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.1;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.95);
+  text-shadow: 0 2px 16px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.95);
 `;
 
 const FilmSub = styled.p`
@@ -159,7 +159,7 @@ const FilmSub = styled.p`
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 0.2rem;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.9);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.9);
 `;
 
 /* ── BOTTOM ────────────────────────────────── */
@@ -234,5 +234,5 @@ const Description = styled.p`
   color: var(--primary);
   line-height: 1.55;
   letter-spacing: 0.01em;
-  text-shadow: 0 1px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.9);
+  text-shadow: 0 1px 10px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.9);
 `;

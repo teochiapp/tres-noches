@@ -93,6 +93,10 @@ const FooterContainer = styled(motion.footer)`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    min-height: 40vh;
+  }
 `;
 
 const BigLogoSection = styled(motion.div)`

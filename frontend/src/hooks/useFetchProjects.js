@@ -10,7 +10,7 @@ export const useFetchProjects = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${API_URL}/api/proyectos?populate=*`);
+                const response = await axios.get(`${API_URL}/api/proyectos?populate=*&sort[0]=Orden:asc`);
                 const projects = response.data.data;
 
                 if (!projects) {
@@ -35,15 +35,16 @@ export const useFetchProjects = () => {
                     const catName = (catV5?.Nombre || catV4?.Nombre || 'OTROS').toUpperCase();
                     const titulo = attrs.Titulo || 'Sin título';
                     const slug = attrs.Slug || project.documentId || project.id;
+                    const orden = attrs.Orden ?? 999;
 
                     const existingCat = acc.find(c => c.title === catName);
 
                     if (existingCat) {
-                        existingCat.items.push({ titulo, slug });
+                        existingCat.items.push({ titulo, slug, orden });
                     } else {
                         acc.push({
                             title: catName,
-                            items: [{ titulo, slug }]
+                            items: [{ titulo, slug, orden }]
                         });
                     }
                     return acc;
@@ -62,6 +63,11 @@ export const useFetchProjects = () => {
                     if (indexB !== -1) return 1;
                     // Otherwise, alphabetical
                     return a.title.localeCompare(b.title);
+                });
+
+                // Sort items within each category by Orden
+                sorted.forEach(cat => {
+                    cat.items.sort((a, b) => a.orden - b.orden);
                 });
 
                 setCategories(sorted);

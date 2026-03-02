@@ -484,10 +484,8 @@ export interface ApiProyectoProyecto extends Struct.CollectionTypeSchema {
       'api::proyecto.proyecto'
     > &
       Schema.Attribute.Private;
+    Orden: Schema.Attribute.Integer;
     Portada: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    Posicion: Schema.Attribute.Enumeration<
-      ['Primera', 'Segunda', 'Tercera', 'Cuarta']
-    >;
     publishedAt: Schema.Attribute.DateTime;
     Slug: Schema.Attribute.String;
     Subtitulo: Schema.Attribute.String;
