@@ -100,7 +100,7 @@ const RightTextContainer = styled.div`
   
   @media (max-width: 768px) {
     position: absolute;
-    bottom: 40px;
+    top: 20vh;
     left: 24px;
     right: 24px;
     max-width: none;

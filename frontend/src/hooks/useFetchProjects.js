@@ -10,7 +10,7 @@ export const useFetchProjects = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`${API_URL}/api/proyectos?populate=*&sort[0]=Orden:asc`);
+                const response = await axios.get(`${API_URL}/api/proyectos?populate=*`);
                 const projects = response.data.data;
 
                 if (!projects) {
