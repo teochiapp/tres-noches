@@ -150,8 +150,10 @@ const FilmTitle = styled.p`
 
 const FilmSub = styled.p`
   font-family: var(--font-narrow);
-  font-size: clamp(1rem, 2vw, 2rem);
+    font-size: clamp(1rem, 2vw, 2.2rem);
   color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin-top: 0.2rem;
@@ -182,14 +184,6 @@ const BottomLeft = styled.div`
   gap: 0.1rem;
 `;
 
-const ProjectSmall = styled.p`
-  font-family: var(--font-main);
-  font-size: clamp(2.1rem, 5vw, 2.5rem);
-  font-weight: 900;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-`;
 
 const ProjectBig = styled.h2`
   font-family: var(--font-bold);

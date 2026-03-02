@@ -118,7 +118,9 @@ const MainTitle = styled.h2`
 
 const SubTitle = styled.h3`
   font-family: var(--font-condensed-thin);
-  font-size: clamp(1.2rem, 2.5vw, 2.2rem);
+    font-size: clamp(1rem, 2vw, 2.4rem);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.05em;

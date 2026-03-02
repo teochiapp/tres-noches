@@ -46,10 +46,12 @@ export default function AboutUS() {
           <motion.div {...fadeIn}>
             <ContentRight style={{ maxWidth: '100%' }}>
               <Paragraph>
-                Cada película que hacemos abre la puerta a proyectos más grandes. Documentales que se convierten en infraestructura cultural.
+                Cada película que hacemos abre la puerta a proyectos más grandes.
+                Documentales que se convierten en infraestructura cultural.
               </Paragraph>
               <Paragraph>
-                Narrativas que movilizan a toda una comunidad. Historias que construyen futuro. Producimos contenido, experiencias y cambio real.
+                Narrativas que movilizan a toda una comunidad.
+                Historias que construyen futuro. Producimos contenido, experiencias y cambio real.
               </Paragraph>
 
               <ActionLink href="#contacto" onClick={handleScrollToContact}>

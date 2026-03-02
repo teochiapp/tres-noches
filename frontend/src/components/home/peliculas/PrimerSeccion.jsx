@@ -152,10 +152,10 @@ const FilmTitle = styled.p`
 
 const FilmSub = styled.p`
   font-family: var(--font-narrow);
-  font-size: clamp(1rem, 2vw, 2rem);
+  font-size: clamp(1rem, 2vw, 2.2rem);
   color: var(--primary);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12em;
   margin-top: 0.2rem;
   text-shadow: 0 2px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.9);
 `;

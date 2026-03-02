@@ -319,7 +319,7 @@ const NavLink = styled(Link)`
   color: var(--primary);
   letter-spacing: 1px;
   position: relative;
-  font-family: var(-font-condensed-black);
+  font-family: var(--font-condensed-black);
   padding: 5px 0;
 
   &::after {
