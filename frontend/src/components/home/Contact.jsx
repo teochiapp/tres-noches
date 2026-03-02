@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Mail, MapPin, Phone, ArrowRight } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 export default function Contact() {
   const containerRef = useRef(null);
@@ -30,13 +31,31 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simular envío para demostración
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormState({ name: '', email: '', subject: '', message: '' });
-      setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+
+    const templateParams = {
+      from_name: formState.name,
+      from_email: formState.email,
+      subject: formState.subject,
+      message: formState.message,
+    };
+
+    emailjs.send(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID,
+      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+      templateParams,
+      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+    )
+      .then((response) => {
+        console.log('SUCCESS!', response.status, response.text);
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        setFormState({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setIsSuccess(false), 5000);
+      }, (err) => {
+        console.error('FAILED...', err);
+        setIsSubmitting(false);
+        alert('Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
+      });
   };
 
   const fadeIn = {
