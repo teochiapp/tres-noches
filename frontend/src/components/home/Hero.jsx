@@ -87,6 +87,7 @@ const ContentSection = styled.div`
 const LeftText = styled(motion.div)`
   font-size: 1.2rem;
   font-weight: 300;
+  font-family: var(--font-light);
   line-height: 1.4;
   color: #888;
   letter-spacing: 0.05em;
@@ -109,6 +110,7 @@ const RightText = styled(motion.h1)`
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   font-weight: 600;
   line-height: 1.2;
+  font-family: var(--font-condensed-medium);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   text-align: left;

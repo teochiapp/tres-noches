@@ -144,9 +144,8 @@ const CategoryBlock = styled.div`
 `;
 
 const CategoryTitle = styled.h2`
-  font-family: var(--font-bold);
+  font-family: var(--font-condensed-black);
   font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 900;
   color: #fff;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -169,9 +168,8 @@ const Item = styled.li`
 
 const ProjectLink = styled(Link)`
   text-decoration: none;
-  font-family: var(--font-main);
+  font-family: var(--font-light);
   font-size: clamp(1.2rem, 1.8vw, 2.5rem);
-  font-weight: 400;
   letter-spacing: 0.12em;
   color: rgba(255, 255, 255, 0.75);
   text-transform: uppercase;

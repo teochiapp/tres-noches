@@ -263,7 +263,7 @@ const Logo = styled(motion(Link))`
   left: 0;
   display: flex;
   flex-direction: column;
-  font-family: var(--font-semibold);
+  font-family: var(--font-condensed-black);
   font-weight: 900;
   line-height: 0.8;
   color: white;
@@ -309,6 +309,7 @@ const NavLink = styled(Link)`
   color: var(--primary);
   letter-spacing: 1px;
   position: relative;
+  font-family: var(-font-condensed-black);
   padding: 5px 0;
 
   &::after {
