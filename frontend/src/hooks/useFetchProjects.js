@@ -14,12 +14,10 @@ export const useFetchProjects = () => {
                 const urlBase = `${API_URL}/api/proyectos?populate=*`;
 
                 try {
-                    // Intentamos traerlo ordenado por la API primero
-                    response = await axios.get(`${urlBase}&sort[0]=Orden:asc`);
+                    response = await axios.get(`${urlBase}&sort[0]=orden:asc`);
                 } catch (err) {
-                    // Si el servidor da error 400, es porque 'Orden' no existe en esa DB
                     if (err.response && err.response.status === 400) {
-                        console.warn("Propiedad 'Orden' no encontrada en la API, reintentando sin sort...");
+                        console.warn("Propiedad 'orden' no encontrada en la API, reintentando sin sort...");
                         response = await axios.get(urlBase);
                     } else {
                         throw err; // Si es otro error (500, etc), lo lanzamos al catch principal
@@ -80,9 +78,15 @@ export const useFetchProjects = () => {
                     return a.title.localeCompare(b.title);
                 });
 
-                // Sort items within each category by Orden
+                // Sort items within each category by Orden, then by priority/title
                 sorted.forEach(cat => {
-                    cat.items.sort((a, b) => a.orden - b.orden);
+                    cat.items.sort((a, b) => {
+                        if (a.orden !== b.orden) return a.orden - b.orden;
+                        // Prioridad específica para "TRES NOCHES AL AÑO"
+                        if (a.titulo.toUpperCase() === "TRES NOCHES AL AÑO") return -1;
+                        if (b.titulo.toUpperCase() === "TRES NOCHES AL AÑO") return 1;
+                        return a.titulo.localeCompare(b.titulo);
+                    });
                 });
 
                 setCategories(sorted);
