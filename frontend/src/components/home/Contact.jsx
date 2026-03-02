@@ -279,7 +279,7 @@ const InfoColumn = styled.div`
 `;
 
 const MainTitle = styled.h2`
-  font-family: var(--font-bold);
+  font-family: var(--font-black);
   font-size: clamp(3.5rem, 6vw, 6rem);
   font-weight: 900;
   color: #fff;
@@ -290,7 +290,7 @@ const MainTitle = styled.h2`
 `;
 
 const SubTitle = styled.h3`
-  font-family: var(--font-main);
+  font-family: var(--font-semibold);
   font-size: clamp(1rem, 2vw, 1.5rem);
   color: var(--primary);
   text-transform: uppercase;
@@ -299,7 +299,7 @@ const SubTitle = styled.h3`
 `;
 
 const Paragraph = styled.p`
-  font-family: var(--font-alt);
+  font-family: var(--font-light);
   font-size: clamp(1.1rem, 1.5vw, 1.25rem);
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.6;
@@ -350,7 +350,7 @@ const ItemContent = styled.div`
 `;
 
 const ItemLabel = styled.span`
-  font-family: var(--font-main);
+  font-family: var(--font-semibold);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -358,7 +358,7 @@ const ItemLabel = styled.span`
 `;
 
 const ItemText = styled.span`
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: 1.2rem;
   color: #fff;
   font-weight: 500;
@@ -380,7 +380,7 @@ const FormWrapper = styled.div`
 `;
 
 const FormTitle = styled.h4`
-  font-family: var(--font-semibold);
+  font-family: var(--font-bold);
   font-size: 1.5rem;
   color: #fff;
   margin-bottom: 3rem;
@@ -407,7 +407,7 @@ const InputLabel = styled.label`
   position: absolute;
   left: 0;
   top: 1rem;
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: 1.1rem;
   color: rgba(255, 255, 255, 0.4);
   pointer-events: none;
@@ -428,7 +428,7 @@ const Input = styled.input`
   background: transparent;
   border: none;
   padding: 1rem 0;
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: 1.1rem;
   color: #fff;
 
@@ -451,7 +451,7 @@ const TextArea = styled.textarea`
   background: transparent;
   border: none;
   padding: 1rem 0;
-  font-family: var(--font-alt);
+  font-family: var(--font-main);
   font-size: 1.1rem;
   color: #fff;
   min-height: 120px;
@@ -506,7 +506,7 @@ const SubmitButton = styled.button`
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
-  font-family: var(--font-semibold);
+  font-family: var(--font-bold);
   font-size: 1.1rem;
   letter-spacing: 0.05em;
   margin-top: 1rem;
