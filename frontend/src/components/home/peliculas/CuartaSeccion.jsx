@@ -117,9 +117,8 @@ const Header = styled.div`
 `;
 
 const MainTitle = styled.h2`
-  font-family: var(--font-bold);
+  font-family: var(--font-condensed-black);
   font-size: clamp(1.8rem, 4vw, 3.5rem);
-  font-weight: 900;
   color: #fff;
   text-transform: uppercase;
   line-height: 1;
@@ -127,9 +126,8 @@ const MainTitle = styled.h2`
 `;
 
 const SubTitle = styled.h3`
-  font-family: var(--font-main);
+  font-family: var(--font-condensed-thin);
   font-size: clamp(1.2rem, 2.5vw, 2.2rem);
-  font-weight: 300;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -150,9 +148,8 @@ const TextSection = styled.div`
 `;
 
 const Paragraph = styled.p`
-  font-family: var(--font-main);
+  font-family: var(--font-black);
   font-size: clamp(1rem, 1.5vw, 21px);
-  font-weight: 700;
   color: #fff;
   line-height: 1.4;
 `;
@@ -171,9 +168,8 @@ const ButtonsContainer = styled.div`
 const Button = styled.button`
   background-color: #333333;
   color: #fff;
-  font-family: var(--font-main);
+  font-family: var(--font-condensed-black);
   font-size: 1.2rem;
-  font-weight: 700;
   padding: 1.2rem 2.2rem;
   text-transform: uppercase;
   transition: background-color 0.3s ease;

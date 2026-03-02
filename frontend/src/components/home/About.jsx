@@ -78,9 +78,8 @@ const Section = styled.section`
 
 // Texto principal grande
 const Headline = styled.h1`
-  font-family: var(--font-bold);
+  font-family: var(--font-condensed-black);
   font-size: 5rem;
-  font-weight: 800;
   text-transform: uppercase;
   line-height: 80px;
   letter-spacing: 0px;
@@ -158,7 +157,7 @@ const ContentRight = styled.div`
 `;
 
 const Paragraph = styled.p`
-  font-family: var(--font-semibold); /* Monospace para ese look técnico de la imagen */
+  font-family: var(--font-narrow-light); /* Monospace para ese look técnico de la imagen */
   font-size: 18px;
   line-height: 1.2em;
   color: var(--text-secondary);
@@ -172,9 +171,8 @@ const Paragraph = styled.p`
 `;
 
 const ActionLink = styled.a`
-  font-family: var(--font-semibold);
+  font-family: var(--font-narrow-bold);
   font-size: 20px;
-  font-weight: 700;
   text-transform: uppercase;
   color: var(--text-primary);
   text-decoration: none;

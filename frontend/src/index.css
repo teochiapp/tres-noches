@@ -30,6 +30,70 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Elza Condensed Black';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Condensed_Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Condensed Medium';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Condensed_Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Light';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Narrow Light';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Narrow_Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Narrow Bold';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Narrow_Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Black';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Narrow';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Narrow.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Elza Condensed Thin';
+  src: url('../public/assets/fonts/Elza/fonnts.com-Elza_Condensed_Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap');
 
 :root {
@@ -47,6 +111,14 @@
   --font-bold: 'Elza Bold', 'Segoe UI Bold', 'Arial Bold', 'Inter', system-ui, -apple-system, sans-serif;
   --font-semibold: 'Elza Semibold', 'Segoe UI Semibold', 'Inter', system-ui, -apple-system, sans-serif;
   --font-thin: 'Elza Thin', 'Segoe UI Light', 'HelveticaNeue-Light', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-condensed-black: 'Elza Condensed Black', 'Arial Narrow', sans-serif;
+  --font-condensed-medium: 'Elza Condensed Medium', 'Arial Narrow', sans-serif;
+  --font-light: 'Elza Light', 'Segoe UI Light', 'HelveticaNeue-Light', sans-serif;
+  --font-narrow-light: 'Elza Narrow Light', 'Arial Narrow', sans-serif;
+  --font-narrow-bold: 'Elza Narrow Bold', 'Arial Narrow', sans-serif;
+  --font-narrow: 'Elza Narrow', 'Arial Narrow', sans-serif;
+  --font-black: 'Elza Black', 'Arial Black', sans-serif;
+  --font-condensed-thin: 'Elza Condensed Thin', 'Arial Narrow', sans-serif;
   --font-alt: "IBM Plex Sans", sans-serif;
 }
 
