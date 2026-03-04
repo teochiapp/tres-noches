@@ -336,7 +336,7 @@ const Label = styled.span`
 
 const IntroText = styled.p`
   font-family: var(--font-main);
-  font-size: clamp(1.5rem, 2.5vw, 2.8rem);
+  font-size: clamp(1.7rem, 2.5vw, 2.8rem);
   font-weight: 700;
   line-height: 1.2;
   color: #fff;
@@ -344,7 +344,8 @@ const IntroText = styled.p`
 
 const DescriptionText = styled.p`
   font-family: var(--font-thin);
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size: clamp(1.4rem, 1.5vw, 2rem);
+  font-weight: 600;
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.7);
   max-width: 90%;
