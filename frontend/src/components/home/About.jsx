@@ -175,7 +175,7 @@ const ContentRight = styled.div`
 
 const Paragraph = styled.p`
   font-family: var(--font-narrow-light); /* Monospace para ese look técnico de la imagen */
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.2em;
   color: var(--text-secondary);
   text-transform: uppercase;
@@ -189,7 +189,7 @@ const Paragraph = styled.p`
 
 const ActionLink = styled.a`
   font-family: var(--font-narrow-bold);
-  font-size: 20px;
+  font-size: 22px;
   text-transform: uppercase;
   color: var(--text-primary);
   text-decoration: none;
