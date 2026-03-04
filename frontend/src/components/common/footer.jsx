@@ -58,7 +58,7 @@ const Footer = () => {
               <FooterLink to="#proyectos" onClick={(e) => handleNavClick(e, '#proyectos')}>PROYECTOS</FooterLink>
             </Column>
             <Column>
-              <ExternalLink href="mailto:cine@tresnoches.com.ar">EMAIL</ExternalLink>
+              <ExternalLink href="https://mail.google.com/mail/?view=cm&to=cine@tresnoches.com.ar" target="_blank" rel="noopener noreferrer">EMAIL</ExternalLink>
               <ExternalLink href="https://www.instagram.com/tresnochesproductora/" target="_blank" rel="noopener noreferrer">INSTAGRAM</ExternalLink>
               <ExternalLink href="https://wa.me/5491169993829" target="_blank" rel="noopener noreferrer">WHATSAPP</ExternalLink>
             </Column>
