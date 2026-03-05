@@ -76,7 +76,9 @@ export default function SingleMovie() {
   // Support for both rich text blocks (v4/v5) and plain text
   const description = typeof attrs.Descripcion === 'string'
     ? attrs.Descripcion
-    : attrs.Descripcion?.[0]?.children?.[0]?.text || "Sin descripción disponible.";
+    : Array.isArray(attrs.Descripcion)
+      ? attrs.Descripcion.map(block => block.children?.map(child => child.text).join('')).join('\n\n')
+      : "Sin descripción disponible.";
 
   // Support for both v4 (.data.attributes.url) and v5 (.url) media structures
   const portData = attrs.Portada?.data?.attributes || attrs.Portada;
@@ -359,6 +361,7 @@ const DescriptionText = styled.p`
   line-height: 1.8;
   color: rgba(255, 255, 255, 0.7);
   max-width: 90%;
+  white-space: pre-wrap;
 `;
 
 const StatsSection = styled(motion.div)`
