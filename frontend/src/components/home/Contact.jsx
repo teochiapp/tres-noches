@@ -98,7 +98,7 @@ export default function Contact() {
 
               <motion.div variants={fadeRight}>
                 <Paragraph>
-                  Si tenés una historia que merece ser contada, o la convicción de que el cine puede transformar la realidad, escribinos.
+                  Si tenés una historia que merece ser contada, o la convicción de que el cine puede transformar la realidad, escribinos.<br />
                   También si querés sumarte como colaborador, inversor, o simplemente conocer más sobre nuestros proyectos.
                 </Paragraph>
               </motion.div>
