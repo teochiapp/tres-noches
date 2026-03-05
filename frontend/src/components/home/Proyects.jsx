@@ -104,10 +104,13 @@ const Section = styled.section`
 `;
 const Label = styled.span`
   font-family: var(--font-alt);
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.7rem;
+  position: absolute;
+  top: 5vh;
+  left: 3vw;
+  letter-spacing: 0.1em;
+  font-family: var(--font-condensed-black);
+  color: var(--primary);
   text-transform: none;
   margin-bottom: 3rem;
   display: block;

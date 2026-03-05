@@ -19,11 +19,11 @@ const Home = () => {
         <HomeContainer>
             <Hero />
             <About />
-            <Services />
             <SeccionPelicula />
             <SegundaSeccionPelicula />
             <TerceraSeccionPelicula />
             <CuartaSeccionPelicula />
+            <Services />
             <Contact />
         </HomeContainer>
     );

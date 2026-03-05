@@ -98,9 +98,8 @@ export default function Contact() {
 
               <motion.div variants={fadeRight}>
                 <Paragraph>
-                  Buscamos visionarios, inversores y colaboradores que crean
-                  en el poder transformador de la cultura. Sé parte de la construcción
-                  del primer corsódromo y de proyectos que dejan huella.
+                  Si tenés una historia que merece ser contada, o la convicción de que el cine puede transformar la realidad, escribinos.
+                  También si querés sumarte como colaborador, inversor, o simplemente conocer más sobre nuestros proyectos.
                 </Paragraph>
               </motion.div>
 
@@ -203,7 +202,7 @@ export default function Contact() {
           </Layout>
         </motion.div>
       </Container>
-    </Section>
+    </Section >
   );
 }
 

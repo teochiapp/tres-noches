@@ -83,6 +83,14 @@ export default function SingleMovie() {
   const heroMediaUrl = portData?.url ? (portData.url.startsWith('http') ? portData.url : `${API_URL}${portData.url}`) : "/content/hero-image.webp";
   const isVideo = portData?.mime?.startsWith('video/') || (portData?.url && portData.url.match(/\.(mp4|webm|ogg)$/i)) || false;
 
+  // Extract category to conditionally render sections
+  const catV5 = attrs.categoria && typeof attrs.categoria === 'object' && !Array.isArray(attrs.categoria) && attrs.categoria.Nombre
+    ? attrs.categoria
+    : null;
+  const catV4 = attrs.categoria?.data?.attributes ?? null;
+  const catName = (catV5?.Nombre || catV4?.Nombre || 'OTROS').toUpperCase();
+  const isImpacto = catName === 'IMPACTO';
+
   return (
     <PageContainer ref={containerRef}>
       <BackButton onClick={() => navigate(-1)}>
@@ -139,33 +147,35 @@ export default function SingleMovie() {
         </StatsSection>
       </ContentSection>
 
-      <GallerySection>
-        {/* For now, just show the hero image as part of the gallery if no other gallery items exist */}
-        <GalleryImageWrapper
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          $isLast={true}
-        >
-          {isVideo ? (
-            <GalleryVideo autoPlay muted loop playsInline>
-              <source src={heroMediaUrl} type={portData?.mime || "video/mp4"} />
-            </GalleryVideo>
-          ) : (
-            <GalleryImage src={heroMediaUrl} alt={title} />
-          )}
-          <GalleryOverlay />
-          <CtaContent>
-            <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
-              <CtaButton onClick={() => navigate('/#contacto')}>
-                SUMATE AL PROYECTO
-              </CtaButton>
-            </motion.div>
-          </CtaContent>
-        </GalleryImageWrapper>
-      </GallerySection>
+      {isImpacto && (
+        <GallerySection>
+          {/* For now, just show the hero image as part of the gallery if no other gallery items exist */}
+          <GalleryImageWrapper
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            $isLast={true}
+          >
+            {isVideo ? (
+              <GalleryVideo autoPlay muted loop playsInline>
+                <source src={heroMediaUrl} type={portData?.mime || "video/mp4"} />
+              </GalleryVideo>
+            ) : (
+              <GalleryImage src={heroMediaUrl} alt={title} />
+            )}
+            <GalleryOverlay />
+            <CtaContent>
+              <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
+                <CtaButton onClick={() => navigate('/#contacto')}>
+                  SUMATE AL PROYECTO
+                </CtaButton>
+              </motion.div>
+            </CtaContent>
+          </GalleryImageWrapper>
+        </GallerySection>
+      )}
     </PageContainer>
   );
 }

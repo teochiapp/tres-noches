@@ -108,12 +108,11 @@ const RightTextContainer = styled.div`
 `;
 
 const LeftText = styled(motion.div)`
-  font-size: 1.4rem;
-  font-weight: 500;
-  font-family: var(--font-light);
+  font-size: 1.5rem;
   line-height: 1.2;
-  color: rgba(255, 255, 255, 0.8);
-  letter-spacing: 0.05em;
+  color: var(--primary);
+  letter-spacing: 0.07em;
+  font-family: var(--font-condensed-black);
   text-transform: none;
 
   @media (max-width: 768px) {

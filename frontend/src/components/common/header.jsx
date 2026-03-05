@@ -298,7 +298,7 @@ const Logo = styled(motion(Link))`
   `}
   
   span {
-    padding-left: 1.5em;
+    padding-left: 1em;
   }
 `;
 
