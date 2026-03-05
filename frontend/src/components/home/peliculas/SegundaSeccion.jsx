@@ -53,11 +53,7 @@ export default function SegundaSeccionPelicula() {
           <TextSection>
             <motion.div {...fadeRight}>
               <Paragraph>
-                Estamos construyendo el espacio que esa tradición del carnaval merece.
-                En alianza con inversores privados, el municipio y la provincia, estamos desarrollando
-                el primer corsódromo de Concepción de las Sierras.
-                Un proyecto que generará; empleo, turismo, identidad y futuro.
-                Buscamos inversores y colaboradores que crean en el poder transformador de la cultura.
+                En alianza con inversores privados, el municipio y la provincia, estamos desarrollando el primer corsódromo de Concepción de las Sierras. Un proyecto que generará; empleo, turismo, identidad y futuro. Buscamos inversores y colaboradores que crean en el poder transformador de la cultura.
               </Paragraph>
               <ButtonsContainer>
                 <Button>SUMATE AL PROYECTO</Button>

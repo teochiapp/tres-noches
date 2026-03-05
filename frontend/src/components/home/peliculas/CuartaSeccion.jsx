@@ -59,8 +59,7 @@ export default function CuartaSeccionPelicula() {
           <TextSection>
             <motion.div {...fadeRight}>
               <Paragraph>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Quo cumque exercitationem porro itaque est? Error alias consequatur officiis, ducimus quasi ipsam excepturi saepe sapiente id dolore ab, iste ipsa accusamus corrupti amet at.
+                Mi país es un proyecto de impacto social y cultural que explora la viabilidad de un espacio cannábico autónomo en Argentina. Una comunidad que integra vivienda, producción, investigación y cultura, conectando productores, universidades, inversores, asociaciones civiles y organizaciones internacionales para construir, desde el territorio, un nuevo modelo de convivencia.
               </Paragraph>
               <ButtonsContainer>
                 <Button>SUMATE AL PROYECTO</Button>
@@ -136,11 +135,12 @@ const SubTitle = styled.h3`
 
 const TextSection = styled.div`
   align-self: flex-end;
-  max-width: 850px;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  padding: 5px 10px;
 
   @media (max-width: 1024px) {
     align-self: flex-start;
@@ -151,7 +151,7 @@ const Paragraph = styled.p`
   font-family: var(--font-black);
   font-size: clamp(1rem, 1.5vw, 21px);
   color: #fff;
-  line-height: 1.4;
+  line-height: 1.6;
 `;
 
 const ButtonsContainer = styled.div`

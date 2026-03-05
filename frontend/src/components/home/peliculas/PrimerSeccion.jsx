@@ -60,14 +60,10 @@ export default function SeccionPelicula() {
           <motion.div {...fadeRight}>
             <BottomRight>
               <Description>
-                Gran parte de la comunidad de algunas ciudades de Misiones como
-                Concepción de la Sierra, San Javier y San Ignacio, se moviliza
-                durante todo el año para disfrutar de las tres noches del Carnaval.
+                En la provincia de Misiones, durante tres noches al año, los brillos y las plumas danzan al compás de la Escola do Samba en el clímax de una celebración que exige el trabajo arduo y apasionado de cientos de personas dedicadas al diseño, la música, los trajes y la organización durante los 362 días restantes.
               </Description>
               <Description>
-                Plumas, música, baile y alegría reflejan el esfuerzo, la
-                perseverancia y, sobre todo, la inigualable pasión de los
-                integrantes de las comparsas.
+                Tres Noches al Año sigue múltiples historias individuales para retratar la pasión desbordante detrás de cada comparsa: la que desafía obstáculos económicos, culturales y religiosos con una convicción simple y poderosa —que la alegría, el disfrute y la risa pertenecen a todos
               </Description>
             </BottomRight>
           </motion.div>

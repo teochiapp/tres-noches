@@ -61,15 +61,7 @@ export default function TerceraSeccionPelicula() {
           <motion.div {...fadeRight}>
             <BottomRight>
               <Description>
-                Nuestra próxima película documenta un proyecto pionero:
-                el desarrollo del primer barrio cannábico de Latinoamérica.
-                Un ecosistema integral de producción, investigación, vivienda
-                y comunidad en torno al cannabis medicinal e industrial.
-              </Description>
-              <Description>
-                La película sigue este proceso histórico mientras trabajamos
-                con inversores y organismos públicos para hacer realidad esta
-                visión transformadora.
+                Nuestra próxima película documenta un proyecto pionero: el desarrollo del primer barrio cannábico de Latinoamérica. Un ecosistema integral de producción, investigación, vivienda y cultura en torno al cannabis medicinal e industrial. Pero el proyecto va más allá del tecnicismo legal para llevar a cabo esta odisea:es un grupo de personas reales que, con sus contradicciones, sus locuras y su creatividad, fundan un nuevo país —Mi País— con la ilusión de ofrecer una visión diferente del mundo en que vivimos.
               </Description>
             </BottomRight>
           </motion.div>
