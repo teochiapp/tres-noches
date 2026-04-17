@@ -17,7 +17,7 @@ const staticCategories = [
     title: "IMPACTO",
     items: [
       { titulo: "EL CORSÓDROMO", slug: "el-corsodromo" },
-      { titulo: "Mi pais", slug: "mi-pais" }
+      { titulo: "Mi Pais", slug: "mi-pais" }
     ],
   },
   {
