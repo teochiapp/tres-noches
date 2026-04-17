@@ -55,13 +55,19 @@ export default function TerceraSeccionPelicula() {
         <BottomRow>
           <motion.div {...fadeIn}>
             <BottomLeft>
-              <ProjectBig>BARRIO CANNÁBICO</ProjectBig>
+              <ProjectBig>UN MUNDO PERFECTO</ProjectBig>
             </BottomLeft>
           </motion.div>
           <motion.div {...fadeRight}>
             <BottomRight>
               <Description>
-                Nuestra próxima película documenta un proyecto pionero: el desarrollo del primer barrio cannábico de Latinoamérica. Un ecosistema integral de producción, investigación, vivienda y cultura en torno al cannabis medicinal e industrial. Pero el proyecto va más allá del tecnicismo legal para llevar a cabo esta odisea:es un grupo de personas reales que, con sus contradicciones, sus locuras y su creatividad, fundan un nuevo país —Mi País— con la ilusión de ofrecer una visión diferente del mundo en que vivimos.
+                Algo se está moviendo. Existe una incomodidad que ya no es fácil ignorar. No es solo el costo de vida, el tránsito, el exceso de información, ni el ruido. Es algo más profundo y más difícil de nombrar: la sensación de que el espacio se terminó. Que ya no entramos. Que el modelo que heredamos —crecer, producir, consumir, acumular— llegó a un límite que empieza a sentirse en el cuerpo, en la agenda, en la cuenta bancaria, en el aire.
+              </Description>
+              <Description>
+                Y en ese contexto, aparece un deseo que parecía olvidado: volver a la tierra.
+              </Description>
+              <Description>
+                Un grupo de personas reales que, con sus contradicciones, sus locuras y su creatividad, fundan un nuevo país —Mi País— con la ilusión de ofrecer una visión diferente del mundo en que vivimos.
               </Description>
             </BottomRight>
           </motion.div>
@@ -191,7 +197,7 @@ const BottomRight = styled.div`
   max-width: 1050px;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   padding-right: 100px;
 
   @media (max-width: 1600px) {
@@ -205,13 +211,22 @@ const BottomRight = styled.div`
     max-width: 500px;
     padding-right: 0px;
   }
+  @media (max-width: 768px) {
+    max-width: 100%;
+    padding-right: 0;
+  }
 `;
 
 const Description = styled.p`
   font-family: var(--font-bold);
-  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-size: clamp(0.88rem, 1.5vw, 1.25rem);
   color: var(--primary);
-  line-height: 1.55;
+  line-height: 1.6;
   letter-spacing: 0.01em;
   text-shadow: 0 1px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.9);
+
+  @media (max-width: 768px) {
+    font-size: clamp(0.82rem, 3.8vw, 1rem);
+    line-height: 1.55;
+  }
 `;

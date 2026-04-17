@@ -63,7 +63,7 @@ export default function SeccionPelicula() {
                 En la provincia de Misiones, durante tres noches al año, los brillos y las plumas danzan al compás de la Escola do Samba en el clímax de una celebración que exige el trabajo arduo y apasionado de cientos de personas dedicadas al diseño, la música, los trajes y la organización durante los 362 días restantes.
               </Description>
               <Description>
-                Tres Noches al Año sigue múltiples historias individuales para retratar la pasión desbordante detrás de cada comparsa: la que desafía obstáculos económicos, culturales y religiosos con una convicción simple y poderosa —que la alegría, el disfrute y la risa pertenecen a todos
+                <span>Tres Noches al Año</span> sigue múltiples historias individuales para retratar la pasión desbordante detrás de cada comparsa: la que desafía obstáculos económicos, culturales y religiosos con una convicción simple y poderosa —que la alegría, el disfrute y la risa pertenecen a todos.
               </Description>
             </BottomRight>
           </motion.div>
@@ -226,4 +226,8 @@ const Description = styled.p`
   line-height: 1.55;
   letter-spacing: 0.01em;
   text-shadow: 0 1px 10px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.9);
+
+  span {
+    font-style: italic;
+  }
 `;

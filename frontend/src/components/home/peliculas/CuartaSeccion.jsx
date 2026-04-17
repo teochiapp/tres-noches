@@ -43,7 +43,7 @@ export default function CuartaSeccionPelicula() {
 
   return (
     <Section ref={containerRef}>
-      <motion.div style={{ y: yParallax }}>
+      <motion.div style={{ y: yParallax, position: 'relative', zIndex: 2 }}>
         <ContentContainer>
           <ImageTop
             src="/content/decoration-single-heads.png"
@@ -53,13 +53,19 @@ export default function CuartaSeccionPelicula() {
           <Header>
             <motion.div {...fadeIn}>
               <MainTitle>DE UNA PELICULA A UN PAÍS</MainTitle>
-              <SubTitle>EL BARRIO CANÁBICO</SubTitle>
+              <SubTitle>IMPACTO MI PAÍS </SubTitle>
             </motion.div>
           </Header>
           <TextSection>
-            <motion.div {...fadeRight}>
+            <motion.div {...fadeRight} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <Paragraph>
-                Mi país es un proyecto de impacto social y cultural que explora la viabilidad de un espacio cannábico autónomo en Argentina. Una comunidad que integra vivienda, producción, investigación y cultura, conectando productores, universidades, inversores, asociaciones civiles y organizaciones internacionales para construir, desde el territorio, un nuevo modelo de convivencia.
+                Nuestra próxima película documenta desde adentro un experimento social único: la fundación de una nueva "nación" que intenta dar respuesta a lo que creemos son las limitaciones estructurales del sistema actual. Sin salirnos de sus reglas, buscamos conformar un colectivo capaz de preguntarse si es posible hacer las cosas de otra manera.
+              </Paragraph>
+              <Paragraph>
+                “Mi país” cuenta con territorio, habitantes, y un propósito en común: volver a la tierra y que cada individuo pueda desarrollar sus capacidades y proyectos.
+              </Paragraph>
+              <Paragraph>
+                Es una experiencia de impacto: una comunidad que integra desarrollo, vivienda, producción, investigación y cultura.
               </Paragraph>
               <ButtonsContainer>
                 <Button>SUMATE AL PROYECTO</Button>
@@ -149,15 +155,22 @@ const TextSection = styled.div`
 
 const Paragraph = styled.p`
   font-family: var(--font-black);
-  font-size: clamp(1rem, 1.5vw, 21px);
+  font-size: clamp(0.88rem, 1.5vw, 1.25rem);
   color: #fff;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: clamp(0.82rem, 3.8vw, 1rem);
+    line-height: 1.55;
+  }
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 1.5rem;
   margin-top: 2rem;
+  position: relative;
+  z-index: 10;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -183,7 +196,7 @@ const Button = styled.button`
 const BottomImage = styled(motion.img)`
   width: 100%;
   height: 380px;
-  margin: -120px 0 20px;
+  margin: -200px 0 20px;
   object-fit: contain;
 
     @media (max-width: 768px) {
