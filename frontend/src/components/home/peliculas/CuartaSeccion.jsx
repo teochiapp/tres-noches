@@ -45,11 +45,6 @@ export default function CuartaSeccionPelicula() {
     <Section ref={containerRef}>
       <motion.div style={{ y: yParallax, position: 'relative', zIndex: 2 }}>
         <ContentContainer>
-          <ImageTop
-            src="/content/decoration-single-heads.png"
-            alt="Construcción del Sambódromo"
-            style={{ y: yImageTop }}
-          />
           <Header>
             <motion.div {...fadeIn}>
               <MainTitle>DE UNA PELICULA A UN PAÍS</MainTitle>

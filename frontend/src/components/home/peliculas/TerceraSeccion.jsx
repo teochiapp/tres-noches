@@ -46,7 +46,7 @@ export default function TerceraSeccionPelicula() {
 
           {/* ── FILM LABEL ─────────────────────────── */}
           <FilmLabel as={Link} to="/proyecto/un-mundo-mejor-mi-pais">
-            <FilmTitle>UN MUNDO PERFECTO: MI PAIS</FilmTitle>
+            <FilmTitle>UN MUNDO PERFECTO: MI PAÍS</FilmTitle>
             <FilmSub>LARGOMETRAJE DOCUMENTAL</FilmSub>
           </FilmLabel>
         </motion.div>
