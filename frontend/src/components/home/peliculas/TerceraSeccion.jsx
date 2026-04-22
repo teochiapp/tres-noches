@@ -219,10 +219,9 @@ const BottomRight = styled.div`
 
 const Description = styled.p`
   font-family: var(--font-bold);
-  font-size: clamp(0.88rem, 1.5vw, 1.25rem);
+  font-size: clamp(0.88rem, 1.5vw, 1.15rem);
   color: var(--primary);
-  line-height: 1.6;
-  letter-spacing: 0.01em;
+  line-height: 1.4;
   text-shadow: 0 1px 10px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.9);
 
   @media (max-width: 768px) {

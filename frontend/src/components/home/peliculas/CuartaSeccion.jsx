@@ -64,18 +64,11 @@ export default function CuartaSeccionPelicula() {
               </Paragraph>
               <ButtonsContainer>
                 <Button>SUMATE AL PROYECTO</Button>
-                <Button onClick={() => navigate('/proyecto/barrio-canabico')}>MÁS INFORMACIÓN</Button>
+                <Button onClick={() => navigate('/proyecto/mi-pais')}>MÁS INFORMACIÓN</Button>
               </ButtonsContainer>
             </motion.div>
           </TextSection>
         </ContentContainer>
-      </motion.div>
-      <motion.div {...fadeUp}>
-        <BottomImage
-          src="/content/decoration-heads.png"
-          alt="Construcción del Sambódromo"
-          style={{ y: yImageBottom }}
-        />
       </motion.div>
     </Section>
   );
