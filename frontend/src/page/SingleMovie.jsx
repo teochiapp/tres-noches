@@ -93,6 +93,21 @@ export default function SingleMovie() {
   const catName = (catV5?.Nombre || catV4?.Nombre || 'OTROS').toUpperCase();
   const isImpacto = catName === 'IMPACTO';
 
+  const handleContactClick = () => {
+    navigate('/#contacto');
+    setTimeout(() => {
+      const element = document.getElementById('contacto');
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        window.scrollTo({
+          top: elementPosition + window.pageYOffset - offset,
+          behavior: 'smooth'
+        });
+      }
+    }, 300);
+  };
+
   return (
     <PageContainer ref={containerRef}>
       <BackButton onClick={() => navigate(-1)}>
@@ -170,7 +185,7 @@ export default function SingleMovie() {
             <CtaContent>
               <motion.div {...fadeUp} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <CtaTitle>SÉ PARTE DE LA HISTORIA</CtaTitle>
-                <CtaButton onClick={() => navigate('/#contacto')}>
+                <CtaButton onClick={handleContactClick}>
                   SUMATE AL PROYECTO
                 </CtaButton>
               </motion.div>
