@@ -119,7 +119,7 @@ export default function Contact() {
                     <IconWrapper><Phone size={24} /></IconWrapper>
                     <ItemContent>
                       <ItemLabel>Teléfono</ItemLabel>
-                      <ItemText>+54 9 11 6999 3829</ItemText>
+                      <ItemText>+54 9 11 3421 4066</ItemText>
                     </ItemContent>
                   </ContactItem>
                 </motion.div>
